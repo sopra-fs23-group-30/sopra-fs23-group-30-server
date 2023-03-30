@@ -1,44 +1,44 @@
 package ch.uzh.ifi.hase.soprafs23.rest.mapper;
 
-import ch.uzh.ifi.hase.soprafs23.entity.User;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.UserGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.UserPostDTO;
+import ch.uzh.ifi.hase.soprafs23.entity.Profile;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePostDTO;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-03-29T17:06:15+0200",
+    date = "2023-03-30T16:11:54+0200",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 17.0.5 (Amazon.com Inc.)"
 )
 public class DTOMapperImpl implements DTOMapper {
 
     @Override
-    public User convertUserPostDTOtoEntity(UserPostDTO userPostDTO) {
-        if ( userPostDTO == null ) {
+    public Profile convertUserPostDTOtoEntity(ProfilePostDTO profilePostDTO) {
+        if ( profilePostDTO == null ) {
             return null;
         }
 
-        User user = new User();
+        Profile profile = new Profile();
 
-        user.setName( userPostDTO.getName() );
-        user.setUsername( userPostDTO.getUsername() );
+        profile.setName( profilePostDTO.getName() );
+        profile.setUsername( profilePostDTO.getUsername() );
 
-        return user;
+        return profile;
     }
 
     @Override
-    public UserGetDTO convertEntityToUserGetDTO(User user) {
-        if ( user == null ) {
+    public ProfileGetDTO convertEntityToUserGetDTO(Profile profile) {
+        if ( profile == null ) {
             return null;
         }
 
-        UserGetDTO userGetDTO = new UserGetDTO();
+        ProfileGetDTO profileGetDTO = new ProfileGetDTO();
 
-        userGetDTO.setName( user.getName() );
-        userGetDTO.setId( user.getId() );
-        userGetDTO.setUsername( user.getUsername() );
-        userGetDTO.setStatus( user.getStatus() );
+        profileGetDTO.setName( profile.getName() );
+        profileGetDTO.setId( profile.getId() );
+        profileGetDTO.setUsername( profile.getUsername() );
+        profileGetDTO.setStatus( profile.getStatus() );
 
-        return userGetDTO;
+        return profileGetDTO;
     }
 }

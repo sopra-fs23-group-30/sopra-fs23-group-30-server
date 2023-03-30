@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ProfileServiceIntegrationTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ProfileServiceIntegrationTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/ch.uzh.ifi.hase.soprafs23.service.html">ch.uzh.ifi.hase.soprafs23.service</a> &gt; ProfileServiceIntegrationTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.127s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">createUser_duplicateUsername_throwsException()</td>
+<td class="success">0.052s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">createUser_validInputs_success()</td>
+<td class="success">0.075s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2023-03-30 16:13:26.491  INFO 22024 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest], using SpringBootContextLoader
+2023-03-30 16:13:26.492  INFO 22024 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-03-30 16:13:26.492  INFO 22024 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest]: ProfileServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-03-30 16:13:26.503  INFO 22024 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ch.uzh.ifi.hase.soprafs23.Application for test class ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest
+2023-03-30 16:13:26.508  INFO 22024 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2023-03-30 16:13:26.508  INFO 22024 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@16a553f9, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@44f9e70f, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@1e22c706, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@147faaa8, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@28791945, org.springframework.test.context.support.DirtiesContextTestExecutionListener@233352da, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2b21bb4d, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@42627e6b, org.springframework.test.context.event.EventPublishingTestExecutionListener@22b1f453, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@1badd75d, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3d70ecb6, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@6cb04c55, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@410e2efc, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@34ec0ebf, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@ec351c8]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.4.13)
+
+2023-03-30 16:13:26.538  INFO 22024 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : Starting ProfileServiceIntegrationTest using Java 17.0.5 on DESKTOP-49P1IUG with PID 22024 (started by makes in C:\Github\sopra-fs23-group-30-server)
+2023-03-30 16:13:26.539  INFO 22024 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : No active profile set, falling back to default profiles: default
+2023-03-30 16:13:26.769  INFO 22024 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-30 16:13:26.788  INFO 22024 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 1 JPA repository interfaces.
+2023-03-30 16:13:26.837  INFO 22024 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2023-03-30 16:13:26.917  INFO 22024 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:ff3a4e01-f46f-4902-9052-5e91f9edd4d1;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2023-03-30 16:13:26.974  INFO 22024 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-30 16:13:26.984  INFO 22024 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+Hibernate: create table profile (id numeric(19,0) identity not null, name varchar(255) not null, status int not null, token varchar(255) not null, username varchar(255) not null, primary key (id))
+Hibernate: alter table profile drop constraint UK_4kdnrln4rw0jhg49lq5qm158i
+Hibernate: alter table profile add constraint UK_4kdnrln4rw0jhg49lq5qm158i unique (token)
+Hibernate: alter table profile drop constraint UK_5em4hwqp4woqsf49dru7fjo80
+Hibernate: alter table profile add constraint UK_5em4hwqp4woqsf49dru7fjo80 unique (username)
+2023-03-30 16:13:27.056  INFO 22024 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-30 16:13:27.056  INFO 22024 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-30 16:13:27.400  WARN 22024 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-30 16:13:27.821  INFO 22024 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : Started ProfileServiceIntegrationTest in 1.31 seconds (JVM running for 10.428)
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.username=?
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.username=?
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.name=?
+Hibernate: insert into profile (name, status, token, username) values (?, ?, ?, ?)
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_
+Hibernate: delete from profile where id=?
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.username=?
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.username=?
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.name=?
+Hibernate: insert into profile (name, status, token, username) values (?, ?, ?, ?)
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.username=?
+Hibernate: select profile0_.id as id1_0_, profile0_.name as name2_0_, profile0_.status as status3_0_, profile0_.token as token4_0_, profile0_.username as username5_0_ from profile profile0_ where profile0_.name=?
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.6</a> at Mar 30, 2023, 4:13:28 PM</p>
+</div>
+</div>
+</body>
+</html>

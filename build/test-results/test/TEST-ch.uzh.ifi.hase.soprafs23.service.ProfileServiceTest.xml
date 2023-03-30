@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ch.uzh.ifi.hase.soprafs23.service.ProfileServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-03-30T14:13:27" hostname="DESKTOP-49P1IUG" time="0.109">
+  <properties/>
+  <testcase name="createUser_validInputs_success()" classname="ch.uzh.ifi.hase.soprafs23.service.ProfileServiceTest" time="0.102"/>
+  <testcase name="createUser_duplicateName_throwsException()" classname="ch.uzh.ifi.hase.soprafs23.service.ProfileServiceTest" time="0.003"/>
+  <testcase name="createUser_duplicateInputs_throwsException()" classname="ch.uzh.ifi.hase.soprafs23.service.ProfileServiceTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
