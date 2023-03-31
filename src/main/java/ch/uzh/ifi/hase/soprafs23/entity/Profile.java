@@ -26,10 +26,22 @@ public class Profile implements Serializable {
   private Long id;
 
   @Column(nullable = false)
-  private String name;
+  private String firstname;
+
+  @Column(nullable = false)
+  private String lastname;
 
   @Column(nullable = false, unique = true)
-  private String username;
+  private String eMail;
+
+  @Column(nullable = false)
+  private String phoneNumber;
+
+  @Column(nullable = false)
+  private String password;
+
+  @Column(nullable = false)
+  private boolean isSearcher;
 
   @Column(nullable = false, unique = true)
   private String token;
@@ -45,20 +57,20 @@ public class Profile implements Serializable {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getFirstname() {
+    return firstname;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
   }
 
-  public String getUsername() {
-    return username;
+  public String getLastname() {
+    return lastname;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setLastname(String lastname) {
+    this.lastname = lastname;
   }
 
   public String getToken() {
@@ -75,5 +87,37 @@ public class Profile implements Serializable {
 
   public void setStatus(ProfileStatus status) {
     this.status = status;
+  }
+
+  public String geteMail() {
+    return eMail;
+  }
+
+  public void seteMail(String eMail) {
+    this.eMail = eMail;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public boolean isSearcher() {
+    return isSearcher;
+  }
+
+  public void setSearcher(boolean searcher) {
+    isSearcher = searcher;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 }

@@ -30,8 +30,8 @@ public class ProfileServiceTest {
     // given
     testProfile = new Profile();
     testProfile.setId(1L);
-    testProfile.setName("testName");
-    testProfile.setUsername("testUsername");
+    testProfile.setFirstname("testName");
+    testProfile.setLastname("testUsername");
 
     // when -> any object is being save in the userRepository -> return the dummy
     // testUser
@@ -48,8 +48,8 @@ public class ProfileServiceTest {
     Mockito.verify(profileRepository, Mockito.times(1)).save(Mockito.any());
 
     assertEquals(testProfile.getId(), createdProfile.getId());
-    assertEquals(testProfile.getName(), createdProfile.getName());
-    assertEquals(testProfile.getUsername(), createdProfile.getUsername());
+    assertEquals(testProfile.getFirstname(), createdProfile.getFirstname());
+    assertEquals(testProfile.getLastname(), createdProfile.getLastname());
     assertNotNull(createdProfile.getToken());
     assertEquals(ProfileStatus.OFFLINE, createdProfile.getStatus());
   }
@@ -60,8 +60,7 @@ public class ProfileServiceTest {
     profileService.createUser(testProfile);
 
     // when -> setup additional mocks for UserRepository
-    Mockito.when(profileRepository.findByName(Mockito.any())).thenReturn(testProfile);
-    Mockito.when(profileRepository.findByUsername(Mockito.any())).thenReturn(null);
+    Mockito.when(profileRepository.findByeMail(Mockito.any())).thenReturn(testProfile);
 
     // then -> attempt to create second user with same user -> check that an error
     // is thrown
@@ -74,8 +73,7 @@ public class ProfileServiceTest {
     profileService.createUser(testProfile);
 
     // when -> setup additional mocks for UserRepository
-    Mockito.when(profileRepository.findByName(Mockito.any())).thenReturn(testProfile);
-    Mockito.when(profileRepository.findByUsername(Mockito.any())).thenReturn(testProfile);
+    Mockito.when(profileRepository.findByeMail(Mockito.any())).thenReturn(testProfile);
 
     // then -> attempt to create second user with same user -> check that an error
     // is thrown
