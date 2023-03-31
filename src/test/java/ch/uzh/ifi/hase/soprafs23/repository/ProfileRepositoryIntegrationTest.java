@@ -27,7 +27,7 @@ public class ProfileRepositoryIntegrationTest {
         Profile profile = new Profile();
         profile.setFirstname("Firstname");
         profile.setLastname("Lastname");
-        profile.seteMail("firstname.lastname@example.ch");
+        profile.setEmail("firstname.lastname@example.ch");
         profile.setPhoneNumber("0781234567");
         profile.setSearcher(false);
         profile.setPassword("OneTwoThreeFour");
@@ -38,13 +38,13 @@ public class ProfileRepositoryIntegrationTest {
         entityManager.flush();
 
         // when
-        Profile found = profileRepository.findByeMail(profile.geteMail());
+        Profile found = profileRepository.findByemail(profile.getEmail());
 
         // then
         assertNotNull(found.getId());
         assertEquals(found.getFirstname(), profile.getFirstname());
         assertEquals(found.getLastname(), profile.getLastname());
-        assertEquals(found.geteMail(), profile.geteMail());
+        assertEquals(found.getEmail(), profile.getEmail());
         assertEquals(found.getPhoneNumber(), profile.getPhoneNumber());
         assertEquals(found.isSearcher(), profile.isSearcher());
         assertEquals(found.getPassword(), profile.getPassword());

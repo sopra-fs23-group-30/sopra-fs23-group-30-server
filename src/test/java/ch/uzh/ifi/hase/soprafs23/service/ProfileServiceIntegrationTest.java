@@ -39,12 +39,12 @@ public class ProfileServiceIntegrationTest {
     @Test
     public void createUser_validInputs_success() {
         // given
-        assertNull(profileRepository.findByeMail("User.Name@example.ch"));
+        assertNull(profileRepository.findByemail("User.Name@example.ch"));
 
         Profile testProfile = new Profile();
         testProfile.setFirstname("User");
         testProfile.setLastname("Name");
-        testProfile.seteMail("User.Name@example.ch");
+        testProfile.setEmail("User.Name@example.ch");
         testProfile.setPhoneNumber("0781234567");
         testProfile.setPassword("OneTwoThreeFour");
         testProfile.setSearcher(false);
@@ -56,7 +56,7 @@ public class ProfileServiceIntegrationTest {
         assertEquals(testProfile.getId(), createdProfile.getId());
         assertEquals(testProfile.getFirstname(), createdProfile.getFirstname());
         assertEquals(testProfile.getLastname(), createdProfile.getLastname());
-        assertEquals(testProfile.geteMail(), createdProfile.geteMail());
+        assertEquals(testProfile.getEmail(), createdProfile.getEmail());
         assertEquals(testProfile.getPhoneNumber(), createdProfile.getPhoneNumber());
         assertEquals(testProfile.getPassword(), createdProfile.getPassword());
         assertEquals(testProfile.isSearcher(), createdProfile.isSearcher());
@@ -66,12 +66,12 @@ public class ProfileServiceIntegrationTest {
 
     @Test
     public void createUser_duplicateUsername_throwsException() {
-        assertNull(profileRepository.findByeMail("User.Name@example.ch"));
+        assertNull(profileRepository.findByemail("User.Name@example.ch"));
 
         Profile testProfile = new Profile();
         testProfile.setFirstname("User");
         testProfile.setLastname("Name");
-        testProfile.seteMail("User.Name@example.ch");
+        testProfile.setEmail("User.Name@example.ch");
         testProfile.setPhoneNumber("0781234567");
         testProfile.setPassword("OneTwoThreeFour");
         testProfile.setSearcher(false);
@@ -83,7 +83,7 @@ public class ProfileServiceIntegrationTest {
         // change the name but forget about the username
         testProfile2.setFirstname("testName2");
         testProfile2.setLastname("testUsername");
-        testProfile2.seteMail(testProfile.geteMail());
+        testProfile2.setEmail(testProfile.getEmail());
         testProfile2.setPhoneNumber("0792345678");
         testProfile2.setPassword("OneTwoThreeFour");
         testProfile2.setSearcher(false);

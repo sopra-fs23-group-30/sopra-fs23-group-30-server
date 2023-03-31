@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.229s</div>
+<div class="counter">0.215s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,12 +79,12 @@
 </thead>
 <tr>
 <td class="success">createUser_duplicateUsername_throwsException()</td>
-<td class="success">0.072s</td>
+<td class="success">0.074s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">createUser_validInputs_success()</td>
-<td class="success">0.157s</td>
+<td class="success">0.141s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -92,12 +92,12 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2023-03-31 11:48:24.077  INFO 27936 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest], using SpringBootContextLoader
-2023-03-31 11:48:24.079  INFO 27936 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2023-03-31 11:48:24.079  INFO 27936 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest]: ProfileServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-03-31 11:48:24.093  INFO 27936 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ch.uzh.ifi.hase.soprafs23.Application for test class ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest
-2023-03-31 11:48:24.098  INFO 27936 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2023-03-31 11:48:24.099  INFO 27936 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1bba2e62, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@502e364, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@239da7e2, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5bef8b67, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@116c6746, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3e7afcc, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4d0bbae5, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6a18b490, org.springframework.test.context.event.EventPublishingTestExecutionListener@18bca8c2, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@261bfdd6, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@36d7b762, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1944391c, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6443784e, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1d4fdc5d, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@16a81431]
+<pre>2023-03-31 14:03:20.081  INFO 25916 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest], using SpringBootContextLoader
+2023-03-31 14:03:20.083  INFO 25916 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-03-31 14:03:20.083  INFO 25916 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest]: ProfileServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-03-31 14:03:20.099  INFO 25916 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration ch.uzh.ifi.hase.soprafs23.Application for test class ch.uzh.ifi.hase.soprafs23.service.ProfileServiceIntegrationTest
+2023-03-31 14:03:20.106  INFO 25916 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2023-03-31 14:03:20.106  INFO 25916 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1bba2e62, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@502e364, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@239da7e2, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5bef8b67, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@116c6746, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3e7afcc, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4d0bbae5, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6a18b490, org.springframework.test.context.event.EventPublishingTestExecutionListener@18bca8c2, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@261bfdd6, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@36d7b762, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1944391c, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6443784e, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1d4fdc5d, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@16a81431]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -107,33 +107,33 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::               (v2.4.13)
 
-2023-03-31 11:48:24.134  INFO 27936 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : Starting ProfileServiceIntegrationTest using Java 17.0.5 on Mathias with PID 27936 (started by makes in C:\Github\sopra-fs23-group-30-server)
-2023-03-31 11:48:24.136  INFO 27936 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : No active profile set, falling back to default profiles: default
-2023-03-31 11:48:24.529  INFO 27936 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-03-31 11:48:24.552  INFO 27936 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 1 JPA repository interfaces.
-2023-03-31 11:48:24.623  INFO 27936 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
-2023-03-31 11:48:24.754  INFO 27936 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:d3839272-e09a-437a-8946-8402c2338966;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
-2023-03-31 11:48:24.828  INFO 27936 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-03-31 11:48:24.837  INFO 27936 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
-Hibernate: create table profile (id numeric(19,0) identity not null, e_mail varchar(255) not null, firstname varchar(255) not null, is_searcher bit not null, lastname varchar(255) not null, password varchar(255) not null, phone_number varchar(255) not null, status int not null, token varchar(255) not null, primary key (id))
-Hibernate: alter table profile drop constraint UK_t16tjh53am02n74xpneogb43o
-Hibernate: alter table profile add constraint UK_t16tjh53am02n74xpneogb43o unique (e_mail)
+2023-03-31 14:03:20.153  INFO 25916 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : Starting ProfileServiceIntegrationTest using Java 17.0.5 on Mathias with PID 25916 (started by makes in C:\Github\sopra-fs23-group-30-server)
+2023-03-31 14:03:20.155  INFO 25916 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : No active profile set, falling back to default profiles: default
+2023-03-31 14:03:20.630  INFO 25916 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-31 14:03:20.661  INFO 25916 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 1 JPA repository interfaces.
+2023-03-31 14:03:20.743  INFO 25916 --- [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2023-03-31 14:03:20.905  INFO 25916 --- [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:8bdf7532-c56c-4606-8928-55994c187348;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2023-03-31 14:03:20.999  INFO 25916 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-31 14:03:21.010  INFO 25916 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.SQLServerDialect
+Hibernate: create table profile (id numeric(19,0) identity not null, email varchar(255) not null, firstname varchar(255) not null, is_searcher bit not null, lastname varchar(255) not null, password varchar(255) not null, phone_number varchar(255) not null, status int not null, token varchar(255) not null, primary key (id))
+Hibernate: alter table profile drop constraint UK_9d5dpsf2ufa6rjbi3y0elkdcd
+Hibernate: alter table profile add constraint UK_9d5dpsf2ufa6rjbi3y0elkdcd unique (email)
 Hibernate: alter table profile drop constraint UK_4kdnrln4rw0jhg49lq5qm158i
 Hibernate: alter table profile add constraint UK_4kdnrln4rw0jhg49lq5qm158i unique (token)
-2023-03-31 11:48:24.924  INFO 27936 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-03-31 11:48:24.925  INFO 27936 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-03-31 11:48:25.404  WARN 27936 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-03-31 11:48:26.057  INFO 27936 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : Started ProfileServiceIntegrationTest in 1.954 seconds (JVM running for 17.899)
-Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_
-Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.e_mail=?
-Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.e_mail=?
-Hibernate: insert into profile (e_mail, firstname, is_searcher, lastname, password, phone_number, status, token) values (?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_
+2023-03-31 14:03:21.085  INFO 25916 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-31 14:03:21.085  INFO 25916 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-31 14:03:21.569  WARN 25916 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-31 14:03:22.268  INFO 25916 --- [    Test worker] .u.i.h.s.s.ProfileServiceIntegrationTest : Started ProfileServiceIntegrationTest in 2.158 seconds (JVM running for 17.705)
+Hibernate: select profile0_.id as id1_0_, profile0_.email as email2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_
+Hibernate: select profile0_.id as id1_0_, profile0_.email as email2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.email=?
+Hibernate: select profile0_.id as id1_0_, profile0_.email as email2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.email=?
+Hibernate: insert into profile (email, firstname, is_searcher, lastname, password, phone_number, status, token) values (?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: select profile0_.id as id1_0_, profile0_.email as email2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_
 Hibernate: delete from profile where id=?
-Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.e_mail=?
-Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.e_mail=?
-Hibernate: insert into profile (e_mail, firstname, is_searcher, lastname, password, phone_number, status, token) values (?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.e_mail=?
+Hibernate: select profile0_.id as id1_0_, profile0_.email as email2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.email=?
+Hibernate: select profile0_.id as id1_0_, profile0_.email as email2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.email=?
+Hibernate: insert into profile (email, firstname, is_searcher, lastname, password, phone_number, status, token) values (?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: select profile0_.id as id1_0_, profile0_.email as email2_0_, profile0_.firstname as firstnam3_0_, profile0_.is_searcher as is_searc4_0_, profile0_.lastname as lastname5_0_, profile0_.password as password6_0_, profile0_.phone_number as phone_nu7_0_, profile0_.status as status8_0_, profile0_.token as token9_0_ from profile profile0_ where profile0_.email=?
 </pre>
 </span>
 </div>
@@ -145,7 +145,7 @@ Hibernate: select profile0_.id as id1_0_, profile0_.e_mail as e_mail2_0_, profil
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6</a> at Mar 31, 2023, 11:48:26 AM</p>
+<a href="http://www.gradle.org">Gradle 7.6</a> at Mar 31, 2023, 2:03:23 PM</p>
 </div>
 </div>
 </body>

@@ -1,14 +1,12 @@
 package ch.uzh.ifi.hase.soprafs23.rest.dto;
 
-import javax.persistence.Column;
-
 public class RegisterProfileDTO {
 
   private String firstname;
 
   private String lastname;
 
-  private String eMail;
+  private String email;
 
   private String phoneNumber;
 
@@ -32,12 +30,12 @@ public class RegisterProfileDTO {
     this.lastname = lastname;
   }
 
-  public String geteMail() {
-    return eMail;
+  public String getEmail() {
+    return email;
   }
 
-  public void seteMail(String eMail) {
-    this.eMail = eMail;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getPhoneNumber() {

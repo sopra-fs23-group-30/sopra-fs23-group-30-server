@@ -24,7 +24,7 @@ public interface DTOMapper {
 
   @Mapping(source = "firstname", target = "firstname")
   @Mapping(source = "lastname", target = "lastname")
-  @Mapping(source = "eMail", target = "eMail")
+  @Mapping(source = "email", target = "email")
   @Mapping(source = "phoneNumber", target = "phoneNumber")
   @Mapping(source = "password", target = "password")
   @Mapping(source = "searcher", target = "searcher")

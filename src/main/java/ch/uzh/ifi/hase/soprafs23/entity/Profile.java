@@ -32,7 +32,7 @@ public class Profile implements Serializable {
   private String lastname;
 
   @Column(nullable = false, unique = true)
-  private String eMail;
+  private String email;
 
   @Column(nullable = false)
   private String phoneNumber;
@@ -89,12 +89,12 @@ public class Profile implements Serializable {
     this.status = status;
   }
 
-  public String geteMail() {
-    return eMail;
+  public String getEmail() {
+    return email;
   }
 
-  public void seteMail(String eMail) {
-    this.eMail = eMail;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getPassword() {

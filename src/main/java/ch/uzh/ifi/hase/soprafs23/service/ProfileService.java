@@ -35,7 +35,7 @@ public class ProfileService {
     public Profile createUser(Profile newProfile) {
         newProfile.setToken(UUID.randomUUID().toString());
         newProfile.setStatus(ProfileStatus.OFFLINE);
-        checkIfUserExists(newProfile);
+        validateRegistration(newProfile);
 
         newProfile = profileRepository.save(newProfile);
         profileRepository.flush();
@@ -49,13 +49,28 @@ public class ProfileService {
      * @throws org.springframework.web.server.ResponseStatusException
      * @see Profile
      */
-    private void checkIfUserExists(Profile profileToBeCreated) {
-        Profile profileByEmail = profileRepository.findByeMail(profileToBeCreated.geteMail());
+    private void validateRegistration(Profile profileToBeCreated) {
+        Profile profileByEmail = profileRepository.findByemail(profileToBeCreated.getEmail());
 
-        String baseErrorMessage = "The %s provided is not unique. Therefore, the user could not be created!";
         if (profileByEmail != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    String.format(baseErrorMessage, "e-mail"));
+                    "The provided e-mail is not unique. Therefore, the profile could not be registered!");
         }
+        else if (!isEmailFormatValid(profileToBeCreated.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "The provided e-mail is not valid. Therefore, the profile could not be registered!");
+        }
+        else if (!isPhoneNumberValid(profileToBeCreated.getPhoneNumber())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "The provided phone number is not valid. Therefore, the profile could not be registered!");
+        }
+    }
+
+    private boolean isEmailFormatValid(String eMail) {
+        return eMail.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
+    }
+
+    private boolean isPhoneNumberValid(String phoneNumber) {
+        return (phoneNumber.matches("[1-9]{0,1}[0-9]{10}"));
     }
 }

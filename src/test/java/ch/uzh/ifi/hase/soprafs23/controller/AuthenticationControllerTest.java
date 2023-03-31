@@ -78,7 +78,7 @@ public class AuthenticationControllerTest {
         profile.setFirstname("Test");
         profile.setLastname("Profile");
         profile.setToken("1");
-        profile.seteMail("test.profile@example.com");
+        profile.setEmail("test.profile@example.com");
         profile.setPhoneNumber("0781234567");
         profile.setPassword("OneTwoThreeFour");
         profile.setSearcher(true);
@@ -87,7 +87,7 @@ public class AuthenticationControllerTest {
         RegisterProfileDTO registerProfileDTO = new RegisterProfileDTO();
         registerProfileDTO.setFirstname("Test");
         registerProfileDTO.setLastname("Profile");
-        registerProfileDTO.seteMail("test.profile@example.com");
+        registerProfileDTO.setEmail("test.profile@example.com");
         registerProfileDTO.setPhoneNumber("0781234567");
         registerProfileDTO.setPassword("OneTwoThreeFour");
         registerProfileDTO.setSearcher(true);
