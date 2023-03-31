@@ -5,8 +5,8 @@ import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
 public class ProfileGetDTO {
 
   private Long id;
-  private String name;
-  private String username;
+  private String firstname;
+  private String lastname;
   private ProfileStatus status;
 
   public Long getId() {
@@ -17,20 +17,20 @@ public class ProfileGetDTO {
     this.id = id;
   }
 
-  public String getName() {
-    return name;
+  public String getFirstname() {
+    return firstname;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
   }
 
-  public String getUsername() {
-    return username;
+  public String getLastname() {
+    return lastname;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setLastname(String lastname) {
+    this.lastname = lastname;
   }
 
   public ProfileStatus getStatus() {

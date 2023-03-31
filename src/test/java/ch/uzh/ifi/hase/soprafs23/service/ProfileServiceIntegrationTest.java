@@ -24,55 +24,71 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class ProfileServiceIntegrationTest {
 
-  @Qualifier("userRepository")
-  @Autowired
-  private ProfileRepository profileRepository;
+    @Qualifier("profileRepository")
+    @Autowired
+    private ProfileRepository profileRepository;
 
-  @Autowired
-  private ProfileService profileService;
+    @Autowired
+    private ProfileService profileService;
 
-  @BeforeEach
-  public void setup() {
-    profileRepository.deleteAll();
-  }
+    @BeforeEach
+    public void setup() {
+        profileRepository.deleteAll();
+    }
 
-  @Test
-  public void createUser_validInputs_success() {
-    // given
-    assertNull(profileRepository.findByUsername("testUsername"));
+    @Test
+    public void createUser_validInputs_success() {
+        // given
+        assertNull(profileRepository.findByemail("User.Name@example.ch"));
 
-    Profile testProfile = new Profile();
-    testProfile.setName("testName");
-    testProfile.setUsername("testUsername");
+        Profile testProfile = new Profile();
+        testProfile.setFirstname("User");
+        testProfile.setLastname("Name");
+        testProfile.setEmail("User.Name@example.ch");
+        testProfile.setPhoneNumber("0781234567");
+        testProfile.setPassword("OneTwoThreeFour");
+        testProfile.setSearcher(false);
 
-    // when
-    Profile createdProfile = profileService.createUser(testProfile);
+        // when
+        Profile createdProfile = profileService.createUser(testProfile);
 
-    // then
-    assertEquals(testProfile.getId(), createdProfile.getId());
-    assertEquals(testProfile.getName(), createdProfile.getName());
-    assertEquals(testProfile.getUsername(), createdProfile.getUsername());
-    assertNotNull(createdProfile.getToken());
-    assertEquals(ProfileStatus.OFFLINE, createdProfile.getStatus());
-  }
+        // then
+        assertEquals(testProfile.getId(), createdProfile.getId());
+        assertEquals(testProfile.getFirstname(), createdProfile.getFirstname());
+        assertEquals(testProfile.getLastname(), createdProfile.getLastname());
+        assertEquals(testProfile.getEmail(), createdProfile.getEmail());
+        assertEquals(testProfile.getPhoneNumber(), createdProfile.getPhoneNumber());
+        assertEquals(testProfile.getPassword(), createdProfile.getPassword());
+        assertEquals(testProfile.isSearcher(), createdProfile.isSearcher());
+        assertNotNull(createdProfile.getToken());
+        assertEquals(ProfileStatus.OFFLINE, createdProfile.getStatus());
+    }
 
-  @Test
-  public void createUser_duplicateUsername_throwsException() {
-    assertNull(profileRepository.findByUsername("testUsername"));
+    @Test
+    public void createUser_duplicateUsername_throwsException() {
+        assertNull(profileRepository.findByemail("User.Name@example.ch"));
 
-    Profile testProfile = new Profile();
-    testProfile.setName("testName");
-    testProfile.setUsername("testUsername");
-    Profile createdProfile = profileService.createUser(testProfile);
+        Profile testProfile = new Profile();
+        testProfile.setFirstname("User");
+        testProfile.setLastname("Name");
+        testProfile.setEmail("User.Name@example.ch");
+        testProfile.setPhoneNumber("0781234567");
+        testProfile.setPassword("OneTwoThreeFour");
+        testProfile.setSearcher(false);
+        Profile createdProfile = profileService.createUser(testProfile);
 
-    // attempt to create second user with same username
-    Profile testProfile2 = new Profile();
+        // attempt to create second user with same username
+        Profile testProfile2 = new Profile();
 
-    // change the name but forget about the username
-    testProfile2.setName("testName2");
-    testProfile2.setUsername("testUsername");
+        // change the name but forget about the username
+        testProfile2.setFirstname("testName2");
+        testProfile2.setLastname("testUsername");
+        testProfile2.setEmail(testProfile.getEmail());
+        testProfile2.setPhoneNumber("0792345678");
+        testProfile2.setPassword("OneTwoThreeFour");
+        testProfile2.setSearcher(false);
 
-    // check that an error is thrown
-    assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile2));
-  }
+        // check that an error is thrown
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile2));
+    }
 }

@@ -15,65 +15,62 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * User Service
- * This class is the "worker" and responsible for all functionality related to
- * the user
- * (e.g., it creates, modifies, deletes, finds). The result will be passed back
- * to the caller.
- */
 @Service
 @Transactional
 public class ProfileService {
 
-  private final Logger log = LoggerFactory.getLogger(ProfileService.class);
+    private final Logger log = LoggerFactory.getLogger(ProfileService.class);
 
-  private final ProfileRepository profileRepository;
+    private final ProfileRepository profileRepository;
 
-  @Autowired
-  public ProfileService(@Qualifier("userRepository") ProfileRepository profileRepository) {
-    this.profileRepository = profileRepository;
-  }
-
-  public List<Profile> getUsers() {
-    return this.profileRepository.findAll();
-  }
-
-  public Profile createUser(Profile newProfile) {
-    newProfile.setToken(UUID.randomUUID().toString());
-    newProfile.setStatus(ProfileStatus.OFFLINE);
-    checkIfUserExists(newProfile);
-    // saves the given entity but data is only persisted in the database once
-    // flush() is called
-    newProfile = profileRepository.save(newProfile);
-    profileRepository.flush();
-
-    log.debug("Created Information for User: {}", newProfile);
-    return newProfile;
-  }
-
-  /**
-   * This is a helper method that will check the uniqueness criteria of the
-   * username and the name
-   * defined in the User entity. The method will do nothing if the input is unique
-   * and throw an error otherwise.
-   *
-   * @param profileToBeCreated
-   * @throws org.springframework.web.server.ResponseStatusException
-   * @see Profile
-   */
-  private void checkIfUserExists(Profile profileToBeCreated) {
-    Profile profileByUsername = profileRepository.findByUsername(profileToBeCreated.getUsername());
-    Profile profileByName = profileRepository.findByName(profileToBeCreated.getName());
-
-    String baseErrorMessage = "The %s provided %s not unique. Therefore, the user could not be created!";
-    if (profileByUsername != null && profileByName != null) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-          String.format(baseErrorMessage, "username and the name", "are"));
-    } else if (profileByUsername != null) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(baseErrorMessage, "username", "is"));
-    } else if (profileByName != null) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format(baseErrorMessage, "name", "is"));
+    @Autowired
+    public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository) {
+        this.profileRepository = profileRepository;
     }
-  }
+
+    public List<Profile> getUsers() {
+        return this.profileRepository.findAll();
+    }
+
+    public Profile createUser(Profile newProfile) {
+        newProfile.setToken(UUID.randomUUID().toString());
+        newProfile.setStatus(ProfileStatus.OFFLINE);
+        validateRegistration(newProfile);
+
+        newProfile = profileRepository.save(newProfile);
+        profileRepository.flush();
+
+        log.debug("Created Information for User: {}", newProfile);
+        return newProfile;
+    }
+
+    /**
+     * @param profileToBeCreated
+     * @throws org.springframework.web.server.ResponseStatusException
+     * @see Profile
+     */
+    private void validateRegistration(Profile profileToBeCreated) {
+        Profile profileByEmail = profileRepository.findByemail(profileToBeCreated.getEmail());
+
+        if (profileByEmail != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "The provided e-mail is not unique. Therefore, the profile could not be registered!");
+        }
+        else if (!isEmailFormatValid(profileToBeCreated.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "The provided e-mail is not valid. Therefore, the profile could not be registered!");
+        }
+        else if (!isPhoneNumberValid(profileToBeCreated.getPhoneNumber())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "The provided phone number is not valid. Therefore, the profile could not be registered!");
+        }
+    }
+
+    private boolean isEmailFormatValid(String eMail) {
+        return eMail.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
+    }
+
+    private boolean isPhoneNumberValid(String phoneNumber) {
+        return (phoneNumber.matches("[1-9]{0,1}[0-9]{10}"));
+    }
 }

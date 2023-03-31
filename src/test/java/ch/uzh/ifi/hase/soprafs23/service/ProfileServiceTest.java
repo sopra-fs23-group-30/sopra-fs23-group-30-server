@@ -15,71 +15,63 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProfileServiceTest {
 
-  @Mock
-  private ProfileRepository profileRepository;
+    @Mock
+    private ProfileRepository profileRepository;
 
-  @InjectMocks
-  private ProfileService profileService;
+    @InjectMocks
+    private ProfileService profileService;
 
-  private Profile testProfile;
+    private Profile testProfile;
 
-  @BeforeEach
-  public void setup() {
-    MockitoAnnotations.openMocks(this);
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
 
-    // given
-    testProfile = new Profile();
-    testProfile.setId(1L);
-    testProfile.setName("testName");
-    testProfile.setUsername("testUsername");
+        testProfile = new Profile();
+        testProfile.setId(1L);
+        testProfile.setFirstname("test");
+        testProfile.setLastname("name");
+        testProfile.setEmail("test.name@example.com");
+        testProfile.setPhoneNumber("0791234567");
+        testProfile.setPassword("OneTwoThree");
+        testProfile.setSearcher(false);
 
-    // when -> any object is being save in the userRepository -> return the dummy
-    // testUser
-    Mockito.when(profileRepository.save(Mockito.any())).thenReturn(testProfile);
-  }
+        Mockito.when(profileRepository.save(Mockito.any())).thenReturn(testProfile);
+    }
 
-  @Test
-  public void createUser_validInputs_success() {
-    // when -> any object is being save in the userRepository -> return the dummy
-    // testUser
-    Profile createdProfile = profileService.createUser(testProfile);
+    @Test
+    public void createUser_validInputs_success() {
+        Profile createdProfile = profileService.createUser(testProfile);
 
-    // then
-    Mockito.verify(profileRepository, Mockito.times(1)).save(Mockito.any());
+        Mockito.verify(profileRepository, Mockito.times(1)).save(Mockito.any());
 
-    assertEquals(testProfile.getId(), createdProfile.getId());
-    assertEquals(testProfile.getName(), createdProfile.getName());
-    assertEquals(testProfile.getUsername(), createdProfile.getUsername());
-    assertNotNull(createdProfile.getToken());
-    assertEquals(ProfileStatus.OFFLINE, createdProfile.getStatus());
-  }
+        assertEquals(testProfile.getId(), createdProfile.getId());
+        assertEquals(testProfile.getFirstname(), createdProfile.getFirstname());
+        assertEquals(testProfile.getLastname(), createdProfile.getLastname());
+        assertEquals(testProfile.getEmail(), createdProfile.getEmail());
+        assertEquals(testProfile.getPhoneNumber(), createdProfile.getPhoneNumber());
+        assertEquals(testProfile.getPassword(), createdProfile.getPassword());
+        assertEquals(testProfile.isSearcher(), createdProfile.isSearcher());
+        assertNotNull(createdProfile.getToken());
+        assertEquals(ProfileStatus.OFFLINE, createdProfile.getStatus());
+    }
 
-  @Test
-  public void createUser_duplicateName_throwsException() {
-    // given -> a first user has already been created
-    profileService.createUser(testProfile);
+    @Test
+    public void createUser_duplicateName_throwsException() {
+        profileService.createUser(testProfile);
 
-    // when -> setup additional mocks for UserRepository
-    Mockito.when(profileRepository.findByName(Mockito.any())).thenReturn(testProfile);
-    Mockito.when(profileRepository.findByUsername(Mockito.any())).thenReturn(null);
+        Mockito.when(profileRepository.findByemail(Mockito.any())).thenReturn(testProfile);
 
-    // then -> attempt to create second user with same user -> check that an error
-    // is thrown
-    assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
-  }
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+    }
 
-  @Test
-  public void createUser_duplicateInputs_throwsException() {
-    // given -> a first user has already been created
-    profileService.createUser(testProfile);
+    @Test
+    public void createUser_duplicateInputs_throwsException() {
+        profileService.createUser(testProfile);
 
-    // when -> setup additional mocks for UserRepository
-    Mockito.when(profileRepository.findByName(Mockito.any())).thenReturn(testProfile);
-    Mockito.when(profileRepository.findByUsername(Mockito.any())).thenReturn(testProfile);
+        Mockito.when(profileRepository.findByemail(Mockito.any())).thenReturn(testProfile);
 
-    // then -> attempt to create second user with same user -> check that an error
-    // is thrown
-    assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
-  }
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+    }
 
 }

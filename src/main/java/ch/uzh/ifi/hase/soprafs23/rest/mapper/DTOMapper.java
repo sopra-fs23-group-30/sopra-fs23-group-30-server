@@ -2,7 +2,7 @@ package ch.uzh.ifi.hase.soprafs23.rest.mapper;
 
 import ch.uzh.ifi.hase.soprafs23.entity.Profile;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterProfileDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -22,13 +22,17 @@ public interface DTOMapper {
 
   DTOMapper INSTANCE = Mappers.getMapper(DTOMapper.class);
 
-  @Mapping(source = "name", target = "name")
-  @Mapping(source = "username", target = "username")
-  Profile convertUserPostDTOtoEntity(ProfilePostDTO profilePostDTO);
+  @Mapping(source = "firstname", target = "firstname")
+  @Mapping(source = "lastname", target = "lastname")
+  @Mapping(source = "email", target = "email")
+  @Mapping(source = "phoneNumber", target = "phoneNumber")
+  @Mapping(source = "password", target = "password")
+  @Mapping(source = "searcher", target = "searcher")
+  Profile convertRegisterProfileDTOtoEntity(RegisterProfileDTO registerProfileDTO);
 
   @Mapping(source = "id", target = "id")
-  @Mapping(source = "name", target = "name")
-  @Mapping(source = "username", target = "username")
+  @Mapping(source = "firstname", target = "firstname")
+  @Mapping(source = "lastname", target = "lastname")
   @Mapping(source = "status", target = "status")
   ProfileGetDTO convertEntityToUserGetDTO(Profile profile);
 }
