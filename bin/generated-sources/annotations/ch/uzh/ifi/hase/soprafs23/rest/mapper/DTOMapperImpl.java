@@ -7,8 +7,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-01T15:41:23+0200",
-    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.33.0.v20230218-1114, environment: Java 17.0.6 (Eclipse Adoptium)"
+    date = "2023-04-02T15:33:50+0200",
+    comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.33.0.v20230213-1046, environment: Java 17.0.6 (Eclipse Adoptium)"
 )
 public class DTOMapperImpl implements DTOMapper {
 
@@ -41,7 +41,6 @@ public class DTOMapperImpl implements DTOMapper {
         profileGetDTO.setFirstname( profile.getFirstname() );
         profileGetDTO.setId( profile.getId() );
         profileGetDTO.setLastname( profile.getLastname() );
-        profileGetDTO.setStatus( profile.getStatus() );
 
         return profileGetDTO;
     }
