@@ -40,9 +40,9 @@ import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 @CrossOrigin
 public class AuthenticationController {
 
-    private final ProfileService profileService;
+	private final ProfileService profileService;
 
-    @Autowired
+	@Autowired
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
@@ -51,41 +51,34 @@ public class AuthenticationController {
 	@Autowired
 	private JwtProfileDetailsService profileDetailsService;
 
-    AuthenticationController(ProfileService profileService) {
-        this.profileService = profileService;
-    }
+	AuthenticationController(ProfileService profileService) {
+		this.profileService = profileService;
+	}
 
-    @PostMapping("/registration")
-    @ResponseStatus(HttpStatus.CREATED)
-    @ResponseBody
-    public ResponseEntity<Map<String, String>> createUser(@RequestBody RegisterProfileDTO registerProfileDTO) {
-        // convert API user to internal representation
-        Profile profileInput = DTOMapper.INSTANCE.convertRegisterProfileDTOtoEntity(registerProfileDTO);
-        // create user
-        Profile createdProfile = profileService.createUser(profileInput);
+	@PostMapping("/registration")
+	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseBody
+	public ResponseEntity<?> createUser(@RequestBody RegisterProfileDTO registerProfileDTO) {
+		Profile profileInput = DTOMapper.INSTANCE.convertRegisterProfileDTOtoEntity(registerProfileDTO);
+		profileService.createUser(profileInput);
 
-        Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("token", createdProfile.getToken());
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(responseBody);
-    }
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.body(null);
+	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-
 		final UserDetails userDetails = profileDetailsService
 				.loadUserByUsername(authenticationRequest.getEmail());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
-
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
-    private void authenticate(String username, String password) throws Exception {
+	private void authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {

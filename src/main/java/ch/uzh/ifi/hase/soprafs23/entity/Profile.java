@@ -43,12 +43,6 @@ public class Profile implements Serializable {
   @Column(nullable = false)
   private boolean isSearcher;
 
-  @Column(nullable = false, unique = true)
-  private String token;
-
-  @Column(nullable = false)
-  private ProfileStatus status;
-
   public Long getId() {
     return id;
   }
@@ -71,22 +65,6 @@ public class Profile implements Serializable {
 
   public void setLastname(String lastname) {
     this.lastname = lastname;
-  }
-
-  public String getToken() {
-    return token;
-  }
-
-  public void setToken(String token) {
-    this.token = token;
-  }
-
-  public ProfileStatus getStatus() {
-    return status;
-  }
-
-  public void setStatus(ProfileStatus status) {
-    this.status = status;
   }
 
   public String getEmail() {

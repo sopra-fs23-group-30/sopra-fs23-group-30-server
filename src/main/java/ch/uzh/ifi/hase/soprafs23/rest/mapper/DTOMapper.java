@@ -33,6 +33,5 @@ public interface DTOMapper {
   @Mapping(source = "id", target = "id")
   @Mapping(source = "firstname", target = "firstname")
   @Mapping(source = "lastname", target = "lastname")
-  @Mapping(source = "status", target = "status")
   ProfileGetDTO convertEntityToUserGetDTO(Profile profile);
 }

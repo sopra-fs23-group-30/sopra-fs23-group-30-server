@@ -34,16 +34,18 @@ public class ProfileService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {
+    public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository,
+            PasswordEncoder passwordEncoder) {
         this.profileRepository = profileRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    // No typo, overriden class is called loadUserByUsername from UserDetailsService (Spring Security)
+    // No typo, overriden class is called loadUserByUsername from UserDetailsService
+    // (Spring Security)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Profile profile = profileRepository.findByEmail(email);
-        if(profile == null) {
+        if (profile == null) {
             log.error("Profile not found");
             throw new UsernameNotFoundException("Profile not found");
         } else {
@@ -51,7 +53,8 @@ public class ProfileService implements UserDetailsService {
         }
         // TODO: Check authorities
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        return new org.springframework.security.core.userdetails.User(profile.getEmail(), profile.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(profile.getEmail(), profile.getPassword(),
+                authorities);
     }
 
     public List<Profile> getUsers() {
@@ -59,15 +62,10 @@ public class ProfileService implements UserDetailsService {
     }
 
     public Profile createUser(Profile newProfile) {
-        newProfile.setToken(UUID.randomUUID().toString());
-        newProfile.setStatus(ProfileStatus.OFFLINE);
         validateRegistration(newProfile);
-
         newProfile.setPassword(passwordEncoder.encode(newProfile.getPassword()));
-
         newProfile = profileRepository.save(newProfile);
         profileRepository.flush();
-
         log.debug("Created Information for User: {}", newProfile);
         return newProfile;
     }
@@ -83,12 +81,10 @@ public class ProfileService implements UserDetailsService {
         if (profileByEmail != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "The provided e-mail is not unique. Therefore, the profile could not be registered!");
-        }
-        else if (!isEmailFormatValid(profileToBeCreated.getEmail())) {
+        } else if (!isEmailFormatValid(profileToBeCreated.getEmail())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "The provided e-mail is not valid. Therefore, the profile could not be registered!");
-        }
-        else if (!isPhoneNumberValid(profileToBeCreated.getPhoneNumber())) {
+        } else if (!isPhoneNumberValid(profileToBeCreated.getPhoneNumber())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "The provided phone number is not valid. Therefore, the profile could not be registered!");
         }
@@ -102,5 +98,4 @@ public class ProfileService implements UserDetailsService {
         return (phoneNumber.matches("[0-9]{0,1}[0-9]{10}"));
     }
 
-    
 }
