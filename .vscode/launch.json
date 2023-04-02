@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<soprafs23>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "ch.uzh.ifi.hase.soprafs23.Application",
+      "projectName": "soprafs23",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

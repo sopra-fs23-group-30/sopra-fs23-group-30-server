@@ -7,25 +7,51 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Primary
 @Transactional
-public class ProfileService {
+public class ProfileService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(ProfileService.class);
 
     private final ProfileRepository profileRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository) {
+    public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository, PasswordEncoder passwordEncoder) {
         this.profileRepository = profileRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    // No typo, overriden class is called loadUserByUsername from UserDetailsService (Spring Security)
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Profile profile = profileRepository.findByEmail(email);
+        if(profile == null) {
+            log.error("Profile not found");
+            throw new UsernameNotFoundException("Profile not found");
+        } else {
+            log.info("Profile found");
+        }
+        // TODO: Check authorities
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        return new org.springframework.security.core.userdetails.User(profile.getEmail(), profile.getPassword(), authorities);
     }
 
     public List<Profile> getUsers() {
@@ -36,6 +62,8 @@ public class ProfileService {
         newProfile.setToken(UUID.randomUUID().toString());
         newProfile.setStatus(ProfileStatus.OFFLINE);
         validateRegistration(newProfile);
+
+        newProfile.setPassword(passwordEncoder.encode(newProfile.getPassword()));
 
         newProfile = profileRepository.save(newProfile);
         profileRepository.flush();
@@ -50,7 +78,7 @@ public class ProfileService {
      * @see Profile
      */
     private void validateRegistration(Profile profileToBeCreated) {
-        Profile profileByEmail = profileRepository.findByemail(profileToBeCreated.getEmail());
+        Profile profileByEmail = profileRepository.findByEmail(profileToBeCreated.getEmail());
 
         if (profileByEmail != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -71,6 +99,8 @@ public class ProfileService {
     }
 
     private boolean isPhoneNumberValid(String phoneNumber) {
-        return (phoneNumber.matches("[1-9]{0,1}[0-9]{10}"));
+        return (phoneNumber.matches("[0-9]{0,1}[0-9]{10}"));
     }
+
+    
 }
