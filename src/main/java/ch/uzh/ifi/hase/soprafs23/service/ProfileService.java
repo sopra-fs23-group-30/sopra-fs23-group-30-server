@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
+import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
 import ch.uzh.ifi.hase.soprafs23.entity.Profile;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
@@ -59,6 +60,10 @@ public class ProfileService implements UserDetailsService {
 
     public List<Profile> getUsers() {
         return this.profileRepository.findAll();
+    }
+
+    public Profile getProfileBySigninCredentials(JwtRequest authenticationRequest) {
+        return this.profileRepository.findByEmail(authenticationRequest.getEmail());
     }
 
     public Profile createUser(Profile newProfile) {

@@ -1,4 +1,5 @@
 package ch.uzh.ifi.hase.soprafs23.config;
+
 import java.util.ArrayList;
 
 import org.springframework.security.core.userdetails.User;
