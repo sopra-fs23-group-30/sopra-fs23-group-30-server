@@ -48,9 +48,6 @@ public class AuthenticationController {
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
-	@Autowired
-	private JwtProfileDetailsService profileDetailsService;
-
 	AuthenticationController(ProfileService profileService) {
 		this.profileService = profileService;
 	}
@@ -71,10 +68,10 @@ public class AuthenticationController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-		final UserDetails userDetails = profileDetailsService
-				.loadUserByUsername(authenticationRequest.getEmail());
+		final Profile profile = profileService
+				.getProfileBySigninCredentials(authenticationRequest);
 
-		final String token = jwtTokenUtil.generateToken(userDetails);
+		final String token = jwtTokenUtil.generateToken(profile);
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
