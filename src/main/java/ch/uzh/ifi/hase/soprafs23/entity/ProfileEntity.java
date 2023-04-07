@@ -101,12 +101,12 @@ public class ProfileEntity implements Serializable {
     this.password = password;
   }
 
-  public boolean isSearcher() {
+  public boolean getIsSearcher() {
     return isSearcher;
   }
 
-  public void setSearcher(boolean searcher) {
-    isSearcher = searcher;
+  public void setIsSearcher(boolean isSearcher) {
+    isSearcher = isSearcher;
   }
 
   public String getPhoneNumber() {

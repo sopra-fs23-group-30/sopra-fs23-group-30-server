@@ -54,11 +54,11 @@ public class RegisterPostDTO {
     this.password = password;
   }
 
-  public boolean isSearcher() {
+  public boolean getIsSearcher() {
     return isSearcher;
   }
 
-  public void setSearcher(boolean searcher) {
+  public void setIsSearcher(boolean searcher) {
     isSearcher = searcher;
   }
 }
