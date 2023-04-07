@@ -4,6 +4,9 @@ import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +77,17 @@ public class ProfileService implements UserDetailsService {
         return foundProfile.get();
     }
 
+    public void updateProfile(UUID id, ProfilePutDTO updatedProfile) {
+        ProfileEntity existingEntity = getProfileById(id);
+        ProfileEntity updatedEntity = DTOMapper.INSTANCE.convertProfilePutDTOToProfileEntity(updatedProfile);
+        updatedEntity.setId(existingEntity.getId());
+        updatedEntity.setEmail(existingEntity.getEmail());
+        updatedEntity.setPassword(existingEntity.getPassword());
+        updatedEntity.setIsSearcher(existingEntity.getIsSearcher());
+
+        this.profileRepository.save(updatedEntity);
+    }
+
     public ProfileEntity getProfileBySigninCredentials(JwtRequest authenticationRequest) {
         return this.profileRepository.findByEmail(authenticationRequest.getEmail());
     }
@@ -114,5 +128,4 @@ public class ProfileService implements UserDetailsService {
     private boolean isPhoneNumberValid(String phoneNumber) {
         return (phoneNumber.matches("[0-9]{0,1}[0-9]{10}"));
     }
-
 }

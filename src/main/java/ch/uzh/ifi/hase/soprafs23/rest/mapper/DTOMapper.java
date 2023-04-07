@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs23.rest.mapper;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterPostDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
@@ -27,9 +28,10 @@ public interface DTOMapper {
   @Mapping(source = "email", target = "email")
   @Mapping(source = "phoneNumber", target = "phoneNumber")
   @Mapping(source = "password", target = "password")
-  @Mapping(source = "searcher", target = "searcher")
+  @Mapping(source = "isSearcher", target = "isSearcher")
   ProfileEntity convertRegisterProfileDTOtoEntity(RegisterPostDTO registerProfileDTO);
 
+  @Mapping(source = "email", target = "email")
   @Mapping(source = "firstname", target = "firstname")
   @Mapping(source = "lastname", target = "lastname")
   @Mapping(source = "birthday", target = "birthday")
@@ -38,4 +40,13 @@ public interface DTOMapper {
   @Mapping(source = "biography", target = "biography")
   @Mapping(source = "futureFlatmatesDescription", target = "futureFlatmatesDescription")
   ProfileGetDTO convertProfileEntityToProfileGetDTO(ProfileEntity profile);
+
+  @Mapping(source = "firstname", target = "firstname")
+  @Mapping(source = "lastname", target = "lastname")
+  @Mapping(source = "birthday", target = "birthday")
+  @Mapping(source = "phoneNumber", target = "phoneNumber")
+  @Mapping(source = "gender", target = "gender")
+  @Mapping(source = "biography", target = "biography")
+  @Mapping(source = "futureFlatmatesDescription", target = "futureFlatmatesDescription")
+  ProfileEntity convertProfilePutDTOToProfileEntity(ProfilePutDTO profile);
 }
