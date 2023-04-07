@@ -1,12 +1,17 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ListingRepository;
@@ -29,6 +34,17 @@ public class ListingService {
         validateListing(newListing);
         this.listingRepository.save(newListing);
         return newListing;
+    }
+
+    public ListingEntity getListingById(UUID id) {
+       Optional<ListingEntity> foundListing = this.listingRepository.findById(id);
+
+       if(!foundListing.isPresent()) {
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
+                   "Fot the provided listing id, no listing was found");
+       }
+
+       return foundListing.get();
     }
 
     /**
