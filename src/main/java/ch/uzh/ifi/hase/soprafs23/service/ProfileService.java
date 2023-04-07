@@ -2,7 +2,7 @@ package ch.uzh.ifi.hase.soprafs23.service;
 
 import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
-import ch.uzh.ifi.hase.soprafs23.entity.Profile;
+import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -45,7 +46,7 @@ public class ProfileService implements UserDetailsService {
     // (Spring Security)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Profile profile = profileRepository.findByEmail(email);
+        ProfileEntity profile = profileRepository.findByEmail(email);
         if (profile == null) {
             log.error("Profile not found");
             throw new UsernameNotFoundException("Profile not found");
@@ -58,15 +59,26 @@ public class ProfileService implements UserDetailsService {
                 authorities);
     }
 
-    public List<Profile> getUsers() {
+    public List<ProfileEntity> getUsers() {
         return this.profileRepository.findAll();
     }
 
-    public Profile getProfileBySigninCredentials(JwtRequest authenticationRequest) {
+    public ProfileEntity getProfileById(UUID id) {
+        Optional<ProfileEntity> foundProfile;
+        foundProfile = this.profileRepository.findById(id);
+
+        if (!foundProfile.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "For the provided profile id, no profile was found");
+        }
+        return foundProfile.get();
+    }
+
+    public ProfileEntity getProfileBySigninCredentials(JwtRequest authenticationRequest) {
         return this.profileRepository.findByEmail(authenticationRequest.getEmail());
     }
 
-    public Profile createUser(Profile newProfile) {
+    public ProfileEntity createUser(ProfileEntity newProfile) {
         validateRegistration(newProfile);
         newProfile.setPassword(passwordEncoder.encode(newProfile.getPassword()));
         newProfile = profileRepository.save(newProfile);
@@ -78,10 +90,10 @@ public class ProfileService implements UserDetailsService {
     /**
      * @param profileToBeCreated
      * @throws org.springframework.web.server.ResponseStatusException
-     * @see Profile
+     * @see ProfileEntity
      */
-    private void validateRegistration(Profile profileToBeCreated) {
-        Profile profileByEmail = profileRepository.findByEmail(profileToBeCreated.getEmail());
+    private void validateRegistration(ProfileEntity profileToBeCreated) {
+        ProfileEntity profileByEmail = profileRepository.findByEmail(profileToBeCreated.getEmail());
 
         if (profileByEmail != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,

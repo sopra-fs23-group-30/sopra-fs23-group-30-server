@@ -1,8 +1,5 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,22 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.uzh.ifi.hase.soprafs23.config.JwtProfileDetailsService;
 import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.config.JwtResponse;
 import ch.uzh.ifi.hase.soprafs23.config.JwtTokenUtil;
-import ch.uzh.ifi.hase.soprafs23.entity.Profile;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterProfileDTO;
+import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 
-/**
- * User Controller
- * This class is responsible for handling all REST request that are related to
- * the user.
- * The controller will receive the request and delegate the execution to the
- * UserService and finally return the result.
- */
 @RestController
 @CrossOrigin
 public class AuthenticationController {
@@ -55,8 +43,8 @@ public class AuthenticationController {
 	@PostMapping("/registration")
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public ResponseEntity<?> createUser(@RequestBody RegisterProfileDTO registerProfileDTO) {
-		Profile profileInput = DTOMapper.INSTANCE.convertRegisterProfileDTOtoEntity(registerProfileDTO);
+	public ResponseEntity<?> createUser(@RequestBody RegisterPostDTO registerProfileDTO) {
+		ProfileEntity profileInput = DTOMapper.INSTANCE.convertRegisterProfileDTOtoEntity(registerProfileDTO);
 		profileService.createUser(profileInput);
 
 		return ResponseEntity
@@ -68,7 +56,7 @@ public class AuthenticationController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
-		final Profile profile = profileService
+		final ProfileEntity profile = profileService
 				.getProfileBySigninCredentials(authenticationRequest);
 
 		final String token = jwtTokenUtil.generateToken(profile);

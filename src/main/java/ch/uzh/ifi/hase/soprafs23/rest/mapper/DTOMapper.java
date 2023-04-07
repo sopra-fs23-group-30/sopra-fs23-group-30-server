@@ -1,8 +1,8 @@
 package ch.uzh.ifi.hase.soprafs23.rest.mapper;
 
-import ch.uzh.ifi.hase.soprafs23.entity.Profile;
+import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterProfileDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterPostDTO;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -28,10 +28,14 @@ public interface DTOMapper {
   @Mapping(source = "phoneNumber", target = "phoneNumber")
   @Mapping(source = "password", target = "password")
   @Mapping(source = "searcher", target = "searcher")
-  Profile convertRegisterProfileDTOtoEntity(RegisterProfileDTO registerProfileDTO);
+  ProfileEntity convertRegisterProfileDTOtoEntity(RegisterPostDTO registerProfileDTO);
 
-  @Mapping(source = "id", target = "id")
   @Mapping(source = "firstname", target = "firstname")
   @Mapping(source = "lastname", target = "lastname")
-  ProfileGetDTO convertEntityToUserGetDTO(Profile profile);
+  @Mapping(source = "birthday", target = "birthday")
+  @Mapping(source = "phoneNumber", target = "phoneNumber")
+  @Mapping(source = "gender", target = "gender")
+  @Mapping(source = "biography", target = "biography")
+  @Mapping(source = "futureFlatmatesDescription", target = "futureFlatmatesDescription")
+  ProfileGetDTO convertProfileEntityToProfileGetDTO(ProfileEntity profile);
 }
