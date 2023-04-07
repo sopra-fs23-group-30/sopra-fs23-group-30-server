@@ -1,21 +1,16 @@
 package ch.uzh.ifi.hase.soprafs23.rest.dto;
 
-import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
+import java.sql.Date;
 
 public class ProfileGetDTO {
 
-  private Long id;
   private String firstname;
   private String lastname;
-  private ProfileStatus status;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
+  private Date birthday;
+  private String phoneNumber;
+  private String gender;
+  private String biography;
+  private String futureFlatmatesDescription;
 
   public String getFirstname() {
     return firstname;
@@ -33,11 +28,43 @@ public class ProfileGetDTO {
     this.lastname = lastname;
   }
 
-  public ProfileStatus getStatus() {
-    return status;
+  public Date getBirthday() {
+    return birthday;
   }
 
-  public void setStatus(ProfileStatus status) {
-    this.status = status;
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
+  }
+
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public String getBiography() {
+    return biography;
+  }
+
+  public void setBiography(String biography) {
+    this.biography = biography;
+  }
+
+  public String getFutureFlatmatesDescription() {
+    return futureFlatmatesDescription;
+  }
+
+  public void setFutureFlatmatesDescription(String futureFlatmatesDescription) {
+    this.futureFlatmatesDescription = futureFlatmatesDescription;
   }
 }

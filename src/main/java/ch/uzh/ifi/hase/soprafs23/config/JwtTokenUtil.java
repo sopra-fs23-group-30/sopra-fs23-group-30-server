@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import ch.uzh.ifi.hase.soprafs23.entity.Profile;
+import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -51,7 +51,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 
 	// generate token for user
-	public String generateToken(Profile profile) {
+	public String generateToken(ProfileEntity profile) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("firstname", profile.getFirstname());
 		claims.put("lastname", profile.getLastname());

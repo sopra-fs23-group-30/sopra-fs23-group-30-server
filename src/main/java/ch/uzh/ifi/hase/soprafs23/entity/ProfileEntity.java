@@ -3,7 +3,12 @@ package ch.uzh.ifi.hase.soprafs23.entity;
 import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.UUID;
 
 /**
  * Internal User Representation
@@ -17,13 +22,14 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "PROFILE")
-public class Profile implements Serializable {
+public class ProfileEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @GeneratedValue
+  @Type(type = "org.hibernate.type.UUIDCharType")
+  private UUID id;
 
   @Column(nullable = false)
   private String firstname;
@@ -43,11 +49,23 @@ public class Profile implements Serializable {
   @Column(nullable = false)
   private boolean isSearcher;
 
-  public Long getId() {
+  @Column(nullable = true)
+  private Date birthday;
+
+  @Column(nullable = true)
+  private String gender;
+
+  @Column(nullable = true)
+  private String biography;
+
+  @Column(nullable = true)
+  private String futureFlatmatesDescription;
+
+  public UUID getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(UUID id) {
     this.id = id;
   }
 
@@ -97,5 +115,37 @@ public class Profile implements Serializable {
 
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
+  }
+
+  public Date getBirthday() {
+    return birthday;
+  }
+
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public String getBiography() {
+    return biography;
+  }
+
+  public void setBiography(String biography) {
+    this.biography = biography;
+  }
+
+  public String getFutureFlatmatesDescription() {
+    return futureFlatmatesDescription;
+  }
+
+  public void setFutureFlatmatesDescription(String futureFlatmatesDescription) {
+    this.futureFlatmatesDescription = futureFlatmatesDescription;
   }
 }
