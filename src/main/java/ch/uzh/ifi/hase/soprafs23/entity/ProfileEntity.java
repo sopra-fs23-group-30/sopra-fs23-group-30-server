@@ -1,25 +1,17 @@
 package ch.uzh.ifi.hase.soprafs23.entity;
 
-import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
-
-import javax.persistence.*;
-
-import org.hibernate.annotations.Type;
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.UUID;
 
-/**
- * Internal User Representation
- * This class composes the internal representation of the user and defines how
- * the user is stored in the database.
- * Every variable will be mapped into a database field with the @Column
- * annotation
- * - nullable = false -> this cannot be left empty
- * - unique = true -> this value must be unqiue across the database -> composes
- * the primary key
- */
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "PROFILE")
 public class ProfileEntity implements Serializable {
@@ -106,7 +98,7 @@ public class ProfileEntity implements Serializable {
   }
 
   public void setIsSearcher(boolean isSearcher) {
-    isSearcher = isSearcher;
+    this.isSearcher = isSearcher;
   }
 
   public String getPhoneNumber() {

@@ -1,6 +1,8 @@
 package ch.uzh.ifi.hase.soprafs23.rest.mapper;
 
+import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterPostDTO;
@@ -49,4 +51,14 @@ public interface DTOMapper {
   @Mapping(source = "biography", target = "biography")
   @Mapping(source = "futureFlatmatesDescription", target = "futureFlatmatesDescription")
   ProfileEntity convertProfilePutDTOToProfileEntity(ProfilePutDTO profile);
+
+  @Mapping(source = "title", target = "title")
+  @Mapping(source = "description", target = "description")
+  @Mapping(source = "streetName", target = "streetName")
+  @Mapping(source = "streetNumber", target = "streetNumber")
+  @Mapping(source = "zipCode", target = "zipCode")
+  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "pricePerMonth", target = "pricePerMonth")
+  @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
+  ListingEntity convertListingPostDTOToListingEntity(ListingPostDTO listing);
 }

@@ -1,11 +1,9 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
-import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
-import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
-import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
-import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +20,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
+import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 
 @Service
 @Primary
@@ -45,8 +43,6 @@ public class ProfileService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // No typo, overriden class is called loadUserByUsername from UserDetailsService
-    // (Spring Security)
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         ProfileEntity profile = profileRepository.findByEmail(email);
@@ -60,10 +56,6 @@ public class ProfileService implements UserDetailsService {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         return new org.springframework.security.core.userdetails.User(profile.getEmail(), profile.getPassword(),
                 authorities);
-    }
-
-    public List<ProfileEntity> getUsers() {
-        return this.profileRepository.findAll();
     }
 
     public ProfileEntity getProfileById(UUID id) {
