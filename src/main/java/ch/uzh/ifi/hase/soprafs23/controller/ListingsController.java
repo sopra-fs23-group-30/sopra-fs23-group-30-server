@@ -4,9 +4,9 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -16,6 +16,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
@@ -49,5 +50,14 @@ public class ListingsController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(null);
+    }
+
+    @GetMapping("/listings/{id}")
+    public ResponseEntity<ListingGetDTO> getListingById(@PathVariable UUID id) {
+        ListingEntity listingEntity = listingService.getListingById(id);
+        ListingGetDTO listingDTO = DTOMapper.INSTANCE.convertListingEntityToListingGetDTO(listingEntity);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(listingDTO);
     }
 }

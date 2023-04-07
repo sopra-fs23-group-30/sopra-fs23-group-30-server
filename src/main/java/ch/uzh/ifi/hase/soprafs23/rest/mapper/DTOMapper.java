@@ -1,13 +1,16 @@
 package ch.uzh.ifi.hase.soprafs23.rest.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
+
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterPostDTO;
-import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
 
 /**
  * DTOMapper
@@ -61,4 +64,16 @@ public interface DTOMapper {
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   ListingEntity convertListingPostDTOToListingEntity(ListingPostDTO listing);
+
+  @Mapping(source = "title", target = "title")
+  @Mapping(source = "description", target = "description")
+  @Mapping(source = "streetName", target = "streetName")
+  @Mapping(source = "streetNumber", target = "streetNumber")
+  @Mapping(source = "zipCode", target = "zipCode")
+  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "pricePerMonth", target = "pricePerMonth")
+  @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
+  @Mapping(source = "lister.firstname", target = "listerFirstname")
+  @Mapping(source = "lister.lastname", target = "listerLastname")
+  ListingGetDTO convertListingEntityToListingGetDTO(ListingEntity listing);
 }
