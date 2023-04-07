@@ -53,10 +53,7 @@ public class JwtTokenUtil implements Serializable {
 	// generate token for user
 	public String generateToken(ProfileEntity profile) {
 		Map<String, Object> claims = new HashMap<>();
-		claims.put("firstname", profile.getFirstname());
-		claims.put("lastname", profile.getLastname());
-		claims.put("email", profile.getEmail());
-		claims.put("isSearcher", profile.getIsSearcher());
+		claims.put("userId", profile.getId());
 		return doGenerateToken(claims, profile.getEmail());
 	}
 
