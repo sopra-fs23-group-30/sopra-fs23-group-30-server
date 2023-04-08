@@ -1,11 +1,9 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
@@ -23,11 +21,8 @@ import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 @Transactional
 public class ListingService {
 
-    private final Logger log = LoggerFactory.getLogger(ListingService.class);
-
     private final ListingRepository listingRepository;
 
-    @Autowired
     public ListingService(@Qualifier("listingRepository") ListingRepository listingRepository) {
         this.listingRepository = listingRepository;
     }
@@ -36,6 +31,10 @@ public class ListingService {
         validateListing(newListing);
         this.listingRepository.save(newListing);
         return newListing;
+    }
+
+    public List<ListingEntity> getListings() {
+        return this.listingRepository.findAll();
     }
 
     public ListingEntity getListingById(UUID id) {
@@ -94,11 +93,12 @@ public class ListingService {
         // }
     }
 
-    private boolean isEmailFormatValid(String eMail) {
-        return eMail.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
-    }
+    // private boolean isEmailFormatValid(String eMail) {
+    // return
+    // eMail.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
+    // }
 
-    private boolean isPhoneNumberValid(String phoneNumber) {
-        return (phoneNumber.matches("[0-9]{0,1}[0-9]{10}"));
-    }
+    // private boolean isPhoneNumberValid(String phoneNumber) {
+    // return (phoneNumber.matches("[0-9]{0,1}[0-9]{10}"));
+    // }
 }

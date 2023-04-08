@@ -1,78 +1,45 @@
-package ch.uzh.ifi.hase.soprafs23.entity;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.Listing;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class ListingDetailsGetDTO {
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
-
-@Entity
-@Table(name = "LISTING")
-public class ListingEntity implements Serializable {
-
-    private static final long serialVersionUID = 2L;
-
-    @Id
-    @GeneratedValue
-    @Type(type = "org.hibernate.type.UUIDCharType")
-    private UUID id;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "listerId", referencedColumnName = "id")
-    private ProfileEntity lister;
-
-    @Column(nullable = false)
     private String title;
-
-    @Column(nullable = false)
     private String description;
-
-    @Column(nullable = false)
     private String streetName;
-
-    @Column(nullable = false)
     private String streetNumber;
-
-    @Column(nullable = false)
     private int zipCode;
-
-    @Column(nullable = false)
     private String cityName;
-
-    @Column(nullable = false)
     private float pricePerMonth;
-
-    @Column(nullable = false)
     private String perfectFlatmateDescription;
-
-    @Column(updatable = false)
-    @CreationTimestamp
     private LocalDateTime creationDate;
+    private String listerFirstname;
+    private String listerLastname;
+    private UUID listerId;
 
-    public UUID getId() {
-        return id;
+    public UUID getListerId() {
+        return listerId;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setListerId(UUID listerId) {
+        this.listerId = listerId;
     }
 
-    public ProfileEntity getLister() {
-        return lister;
+    public String getListerFirstname() {
+        return listerFirstname;
     }
 
-    public void setLister(ProfileEntity lister) {
-        this.lister = lister;
+    public void setListerFirstname(String listerFirstname) {
+        this.listerFirstname = listerFirstname;
+    }
+
+    public String getListerLastname() {
+        return listerLastname;
+    }
+
+    public void setListerLastname(String listerLastname) {
+        this.listerLastname = listerLastname;
     }
 
     public String getTitle() {
@@ -139,11 +106,12 @@ public class ListingEntity implements Serializable {
         this.perfectFlatmateDescription = perfectFlatmateDescription;
     }
 
-    public LocalDateTime getCreationDate() {
+    public LocalDateTime getCreation() {
         return creationDate;
     }
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
+
 }
