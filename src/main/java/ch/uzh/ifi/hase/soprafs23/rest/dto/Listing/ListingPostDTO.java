@@ -1,11 +1,7 @@
-package ch.uzh.ifi.hase.soprafs23.rest.dto;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.Listing;
 
-import java.util.Date;
+public class ListingPostDTO {
 
-public class ListingGetDTO {
-    
-    private String listerFirstname;
-    private String listerLastname;
     private String title;
     private String description;
     private String streetName;
@@ -14,23 +10,6 @@ public class ListingGetDTO {
     private String cityName;
     private float pricePerMonth;
     private String perfectFlatmateDescription;
-    private Date creationDate;
-
-    public String getListerFirstname() {
-        return listerFirstname;
-    }
-
-    public void setListerFirstname(String listerFirstname) {
-        this.listerFirstname = listerFirstname;
-    }
-
-    public String getListerLastname() {
-        return listerLastname;
-    }
-
-    public void setListerLastname(String listerLastname) {
-        this.listerLastname = listerLastname;
-    }
 
     public String getTitle() {
         return title;
@@ -95,13 +74,4 @@ public class ListingGetDTO {
     public void setPerfectFlatmateDescription(String perfectFlatmateDescription) {
         this.perfectFlatmateDescription = perfectFlatmateDescription;
     }
-
-    public Date getCreation() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
 }
