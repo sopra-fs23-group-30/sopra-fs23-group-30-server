@@ -15,6 +15,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ListingRepository;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 
 @Service
 @Primary
@@ -37,14 +39,35 @@ public class ListingService {
     }
 
     public ListingEntity getListingById(UUID id) {
-       Optional<ListingEntity> foundListing = this.listingRepository.findById(id);
+        Optional<ListingEntity> foundListing = this.listingRepository.findById(id);
 
-       if(!foundListing.isPresent()) {
-           throw new ResponseStatusException(HttpStatus.NOT_FOUND, 
-                   "Fot the provided listing id, no listing was found");
-       }
+        if (!foundListing.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Fot the provided listing id, no listing was found");
+        }
 
-       return foundListing.get();
+        return foundListing.get();
+    }
+
+    public void deleteListingById(UUID id) {
+
+        Optional<ListingEntity> foundListing = this.listingRepository.findById(id);
+
+        if (!foundListing.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Fot the provided listing id, no listing was found");
+        }
+
+        listingRepository.delete(foundListing.get());
+    }
+
+    public void updateListing(UUID id, ListingPutDTO updatedListing) {
+        ListingEntity existingEntity = getListingById(id);
+        ListingEntity updatedEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(updatedListing);
+        updatedEntity.setId(existingEntity.getId());
+        updatedEntity.setCreationDate(existingEntity.getCreationDate());
+        updatedEntity.setLister(existingEntity.getLister());
+        this.listingRepository.save(updatedEntity);
     }
 
     /**

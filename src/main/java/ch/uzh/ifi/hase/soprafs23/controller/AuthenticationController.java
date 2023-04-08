@@ -20,7 +20,7 @@ import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.config.JwtResponse;
 import ch.uzh.ifi.hase.soprafs23.config.JwtTokenUtil;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.RegisterPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 

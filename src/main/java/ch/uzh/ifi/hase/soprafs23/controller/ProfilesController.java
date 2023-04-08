@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 

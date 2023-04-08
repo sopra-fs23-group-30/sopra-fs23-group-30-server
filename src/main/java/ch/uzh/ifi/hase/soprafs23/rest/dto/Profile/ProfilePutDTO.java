@@ -1,4 +1,4 @@
-package ch.uzh.ifi.hase.soprafs23.rest.dto;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.Profile;
 
 import java.sql.Date;
 

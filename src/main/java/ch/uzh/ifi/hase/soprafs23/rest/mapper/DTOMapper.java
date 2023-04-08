@@ -6,11 +6,11 @@ import org.mapstruct.factory.Mappers;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ListingGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ListingPostDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfileGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.ProfilePutDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.RegisterPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.RegisterPostDTO;
 
 /**
  * DTOMapper
@@ -75,5 +75,6 @@ public interface DTOMapper {
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "lister.firstname", target = "listerFirstname")
   @Mapping(source = "lister.lastname", target = "listerLastname")
+  @Mapping(source = "creationDate", target = "creationDate")
   ListingGetDTO convertListingEntityToListingGetDTO(ListingEntity listing);
 }

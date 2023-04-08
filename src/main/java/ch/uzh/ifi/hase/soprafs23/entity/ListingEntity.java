@@ -1,6 +1,7 @@
 package ch.uzh.ifi.hase.soprafs23.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -56,8 +58,9 @@ public class ListingEntity implements Serializable {
     @Column(nullable = false)
     private String perfectFlatmateDescription;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
+    @Column(updatable = false)
+    @CreationTimestamp
+    private LocalDateTime creationDate;
 
     public UUID getId() {
         return id;
@@ -148,11 +151,11 @@ public class ListingEntity implements Serializable {
         this.perfectFlatmateDescription = perfectFlatmateDescription;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 }
