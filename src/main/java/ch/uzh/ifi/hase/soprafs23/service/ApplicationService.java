@@ -53,7 +53,10 @@ public class ApplicationService {
     }
 
     public void updateApplication(ApplicationEntity applicationEntity, ApplicationState newState) {
-        // todo: implement Regelwerk
+        if (!applicationEntity.getState().isTransitionValid(newState)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    String.format("Updating a %s state into a %s state is not allowed.", applicationEntity.getState().toString(), newState.toString()));
+        }
         applicationEntity.setState(newState);
         this.applicationRepository.save(applicationEntity);
     }
