@@ -61,7 +61,7 @@ public class ProfileService implements UserDetailsService {
 
         if (!foundProfile.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "For the provided profile id, no profile was found");
+                    "For the provided profile id no profile was found");
         }
         return foundProfile.get();
     }
