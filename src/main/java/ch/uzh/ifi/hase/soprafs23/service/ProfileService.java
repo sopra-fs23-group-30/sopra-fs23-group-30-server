@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
@@ -36,7 +35,6 @@ public class ProfileService implements UserDetailsService {
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
     public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository,
             PasswordEncoder passwordEncoder) {
         this.profileRepository = profileRepository;
@@ -52,7 +50,6 @@ public class ProfileService implements UserDetailsService {
         } else {
             log.info("Profile found");
         }
-        // TODO: Check authorities
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         return new org.springframework.security.core.userdetails.User(profile.getEmail(), profile.getPassword(),
                 authorities);

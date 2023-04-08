@@ -1,35 +1,23 @@
 package ch.uzh.ifi.hase.soprafs23.rest.dto.Listing;
 
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class ListingGetDTO {
 
-    private String listerFirstname;
-    private String listerLastname;
+    private UUID id;
     private String title;
-    private String description;
     private String streetName;
     private String streetNumber;
     private int zipCode;
     private String cityName;
     private float pricePerMonth;
-    private String perfectFlatmateDescription;
-    private LocalDateTime creationDate;
 
-    public String getListerFirstname() {
-        return listerFirstname;
+    public UUID getId() {
+        return id;
     }
 
-    public void setListerFirstname(String listerFirstname) {
-        this.listerFirstname = listerFirstname;
-    }
-
-    public String getListerLastname() {
-        return listerLastname;
-    }
-
-    public void setListerLastname(String listerLastname) {
-        this.listerLastname = listerLastname;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -38,14 +26,6 @@ public class ListingGetDTO {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getStreetName() {
@@ -87,21 +67,4 @@ public class ListingGetDTO {
     public void setPricePerMonth(float pricePerMonth) {
         this.pricePerMonth = pricePerMonth;
     }
-
-    public String getPerfectFlatmateDescription() {
-        return perfectFlatmateDescription;
-    }
-
-    public void setPerfectFlatmateDescription(String perfectFlatmateDescription) {
-        this.perfectFlatmateDescription = perfectFlatmateDescription;
-    }
-
-    public LocalDateTime getCreation() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
 }

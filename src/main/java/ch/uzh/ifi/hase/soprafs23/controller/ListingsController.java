@@ -1,5 +1,7 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -11,13 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
-
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingDetailsGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPutDTO;
@@ -38,15 +37,9 @@ public class ListingsController {
     }
 
     @PostMapping("/listings")
-    public ResponseEntity<?> createListing(@RequestBody ListingPostDTO listingDTO,
-            @RequestHeader("Authorization") String authorization) {
-        String jwtToken = authorization.substring(7);
-
-        DecodedJWT decodedJWT = JWT.decode(jwtToken);
-        String userId = decodedJWT.getClaim("userId").asString();
-
+    public ResponseEntity<?> createListing(@RequestBody ListingPostDTO listingDTO) {
         ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(listingDTO);
-        listingEntity.setLister(profileService.getProfileById(UUID.fromString(userId)));
+        listingEntity.setLister(profileService.getProfileById(listingDTO.getListerId()));
         ListingEntity createdListing = listingService.createListing(listingEntity);
 
         return ResponseEntity
@@ -54,17 +47,30 @@ public class ListingsController {
                 .body(createdListing);
     }
 
+    @GetMapping("/listings")
+    public ResponseEntity<List<ListingGetDTO>> getListingById() {
+        // todo: add filtering
+        List<ListingEntity> listingEntities = listingService.getListings();
+        List<ListingGetDTO> listingDTOs = new ArrayList<ListingGetDTO>();
+        listingEntities
+                .forEach((entity) -> listingDTOs.add(DTOMapper.INSTANCE.convertListingEntityToListingGetDTO(entity)));
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(listingDTOs);
+    }
+
     @GetMapping("/listings/{id}")
-    public ResponseEntity<ListingGetDTO> getListingById(@PathVariable UUID id) {
+    public ResponseEntity<ListingDetailsGetDTO> getListingById(@PathVariable UUID id) {
         ListingEntity listingEntity = listingService.getListingById(id);
-        ListingGetDTO listingDTO = DTOMapper.INSTANCE.convertListingEntityToListingGetDTO(listingEntity);
+        ListingDetailsGetDTO listingDTO = DTOMapper.INSTANCE.convertListingEntityToListingDetailsGetDTO(listingEntity);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(listingDTO);
     }
 
     @DeleteMapping("/listings/{id}")
-    public ResponseEntity<ListingGetDTO> deleteListingById(@PathVariable UUID id) {
+    public ResponseEntity<ListingDetailsGetDTO> deleteListingById(@PathVariable UUID id) {
         listingService.deleteListingById(id);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)

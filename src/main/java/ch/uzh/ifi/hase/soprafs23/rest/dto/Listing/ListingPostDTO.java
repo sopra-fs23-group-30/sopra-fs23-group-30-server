@@ -1,5 +1,7 @@
 package ch.uzh.ifi.hase.soprafs23.rest.dto.Listing;
 
+import java.util.UUID;
+
 public class ListingPostDTO {
 
     private String title;
@@ -10,6 +12,7 @@ public class ListingPostDTO {
     private String cityName;
     private float pricePerMonth;
     private String perfectFlatmateDescription;
+    private UUID listerId;
 
     public String getTitle() {
         return title;
@@ -73,5 +76,13 @@ public class ListingPostDTO {
 
     public void setPerfectFlatmateDescription(String perfectFlatmateDescription) {
         this.perfectFlatmateDescription = perfectFlatmateDescription;
+    }
+
+    public UUID getListerId() {
+        return listerId;
+    }
+
+    public void setListerId(UUID listerId) {
+        this.listerId = listerId;
     }
 }
