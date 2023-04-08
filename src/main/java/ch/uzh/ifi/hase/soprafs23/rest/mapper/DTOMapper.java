@@ -7,6 +7,7 @@ import org.mapstruct.factory.Mappers;
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingDetailsGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingGetDTO;
@@ -110,4 +111,15 @@ public interface DTOMapper {
   @Mapping(target = "id", ignore = true)
   ApplicationEntity convertApplicationPostDTOToApplicationEntity(ApplicationPostDTO applicationDTO);
 
+  
+  @Mapping(source = "id", target = "applicationId")
+  @Mapping(source = "listing.id", target = "listingId")
+  @Mapping(source = "creationDate", target = "creationDate")
+  @Mapping(source = "state", target = "state")
+  @Mapping(source = "listing.title", target = "listingTitle")
+  @Mapping(source = "listing.streetName", target = "listingStreetName")
+  @Mapping(source = "listing.streetNumber", target = "listingStreetNumber")
+  @Mapping(source = "listing.zipCode", target = "listingZipCode")
+  @Mapping(source = "listing.cityName", target = "listingCityName")
+  ApplicationGetDTO convertApplicationEntityToApplicationGetDTO(ApplicationEntity applicationEntity);
 }
