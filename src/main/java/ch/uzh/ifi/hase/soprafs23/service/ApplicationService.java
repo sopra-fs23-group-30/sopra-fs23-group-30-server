@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,5 +47,9 @@ public class ApplicationService {
         // todo: implement Regelwerk
         applicationEntity.setState(newState);
         this.applicationRepository.save(applicationEntity);
+    }
+
+    public List<ApplicationEntity> getAllApplicationsByProfileId(UUID id) {
+        return this.applicationRepository.findByApplicantId(id);
     }
 }

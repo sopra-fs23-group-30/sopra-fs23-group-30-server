@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -12,4 +13,6 @@ import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 public interface ApplicationRepository extends JpaRepository<ApplicationEntity, UUID> {
 
   Optional<ApplicationEntity> findById(UUID id);
+
+  List<ApplicationEntity> findByApplicantId(UUID id);
 }
