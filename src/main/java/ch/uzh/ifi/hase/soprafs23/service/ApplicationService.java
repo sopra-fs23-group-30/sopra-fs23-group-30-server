@@ -27,6 +27,15 @@ public class ApplicationService {
     }
 
     public ApplicationEntity createApplication(ApplicationEntity newApplication) {
+        List<ApplicationEntity> applicationsByListing = applicationRepository.findByListingId(newApplication.getListing().getId());
+
+        applicationsByListing.forEach((application) -> {
+            if (application.getApplicant().getId() == newApplication.getApplicant().getId()) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "For the provided listing and user id there allready exists an application.");
+            }
+        });
+
         newApplication.setState(ApplicationState.PENDING);
         this.applicationRepository.save(newApplication);
         return newApplication;
@@ -37,7 +46,7 @@ public class ApplicationService {
 
         if (!foundApplication.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Fot the provided application id, no application was found");
+                    "For the provided application id no application was found");
         }
 
         return foundApplication.get();
@@ -51,5 +60,9 @@ public class ApplicationService {
 
     public List<ApplicationEntity> getAllApplicationsByProfileId(UUID id) {
         return this.applicationRepository.findByApplicantId(id);
+    }
+
+    public List<ApplicationEntity> getAllApplicationsByListingId(UUID id) {
+        return this.applicationRepository.findByListingId(id);
     }
 }

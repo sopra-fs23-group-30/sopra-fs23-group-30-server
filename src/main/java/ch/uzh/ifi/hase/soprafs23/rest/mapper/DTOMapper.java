@@ -7,10 +7,12 @@ import org.mapstruct.factory.Mappers;
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingDetailsGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingOverviewGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
@@ -122,4 +124,16 @@ public interface DTOMapper {
   @Mapping(source = "listing.zipCode", target = "listingZipCode")
   @Mapping(source = "listing.cityName", target = "listingCityName")
   ApplicationGetDTO convertApplicationEntityToApplicationGetDTO(ApplicationEntity applicationEntity);
+
+  @Mapping(source = "applicant.id", target = "applicantId")
+  @Mapping(source = "id", target = "applicationId")
+  @Mapping(source = "applicant.firstname", target = "firstname")
+  @Mapping(source = "applicant.lastname", target = "lastname")
+  @Mapping(source = "creationDate", target = "applicationDate")
+  ApplicantGetDTO convertApplicationEntityToApplicantGetDTO(ApplicationEntity applicationEntity);
+
+  @Mapping(source = "id", target = "listingId")
+  @Mapping(target = "applicants", ignore = true)
+  @Mapping(source = "title", target = "listingTitle")
+  ListingOverviewGetDTO convertListingEntityToListingOverviewGetDTO(ListingEntity listingEntity);
 }

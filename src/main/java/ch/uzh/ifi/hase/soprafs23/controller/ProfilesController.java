@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
+import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingOverviewGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ApplicationService;
+import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 
 @RestController
@@ -28,10 +32,12 @@ public class ProfilesController {
 
     private final ProfileService profileService;
     private final ApplicationService applicationService;
+    private final ListingService listingService;
 
-    ProfilesController(ProfileService profileService, ApplicationService applicationService) {
+    ProfilesController(ProfileService profileService, ApplicationService applicationService, ListingService listingService) {
         this.profileService = profileService;
         this.applicationService = applicationService;
+        this.listingService = listingService;
     }
 
     @GetMapping("/profiles/{id}")
@@ -58,6 +64,27 @@ public class ProfilesController {
         applicationEntities.forEach((applicationEntity) -> applicationGetDTOs.add(DTOMapper.INSTANCE.convertApplicationEntityToApplicationGetDTO(applicationEntity)));
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(applicationGetDTOs);        
+                .body(applicationGetDTOs);
+    }
+
+    @GetMapping("/profiles/{profileId}/listings")
+    public ResponseEntity<List<ListingOverviewGetDTO>> getListingbyProfileId(@PathVariable UUID profileId) {
+        List<ListingEntity> listingEntities = listingService.getListingByProfileId(profileId);
+        List<ListingOverviewGetDTO> listingOverviewGetDTOs = new ArrayList<>();
+        listingEntities.forEach((listing) -> {
+            ListingOverviewGetDTO listingOverviewGetDTO = DTOMapper.INSTANCE.convertListingEntityToListingOverviewGetDTO(listing);
+            List<ApplicationEntity> applicationEntities = applicationService.getAllApplicationsByListingId(listing.getId());
+            List<ApplicantGetDTO> applicantGetDTOs = new ArrayList<>();
+
+            applicationEntities.forEach((application) -> 
+                        applicantGetDTOs.add(DTOMapper.INSTANCE.convertApplicationEntityToApplicantGetDTO(application)));
+
+            listingOverviewGetDTO.setApplicants(applicantGetDTOs);
+            listingOverviewGetDTOs.add(listingOverviewGetDTO);
+        });
+        
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(listingOverviewGetDTOs);
     }
 }

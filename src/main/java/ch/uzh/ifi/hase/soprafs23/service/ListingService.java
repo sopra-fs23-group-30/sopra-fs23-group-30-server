@@ -48,6 +48,10 @@ public class ListingService {
         return foundListing.get();
     }
 
+    public List<ListingEntity> getListingByProfileId(UUID profileId) {
+        return listingRepository.findByListerId(profileId);
+    }
+
     public void deleteListingById(UUID id) {
 
         Optional<ListingEntity> foundListing = this.listingRepository.findById(id);
