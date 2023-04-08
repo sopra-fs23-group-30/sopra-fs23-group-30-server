@@ -15,4 +15,6 @@ public interface ApplicationRepository extends JpaRepository<ApplicationEntity, 
   Optional<ApplicationEntity> findById(UUID id);
 
   List<ApplicationEntity> findByApplicantId(UUID id);
+
+  List<ApplicationEntity> findByListingId(UUID id);
 }
