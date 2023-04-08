@@ -42,7 +42,7 @@ public class ListingService {
 
         if (!foundListing.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Fot the provided listing id, no listing was found");
+                    "For the provided listing id no listing was found");
         }
 
         return foundListing.get();
@@ -58,7 +58,7 @@ public class ListingService {
 
         if (!foundListing.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Fot the provided listing id, no listing was found");
+                    "For the provided listing id no listing was found");
         }
 
         listingRepository.delete(foundListing.get());
