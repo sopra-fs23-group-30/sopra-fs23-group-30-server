@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
-		httpSecurity.csrf().disable()
+		httpSecurity.csrf().disable().cors().and()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers("/").permitAll().and()
 				.authorizeRequests().antMatchers("/login").permitAll().and().authorizeRequests()
