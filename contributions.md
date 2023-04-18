@@ -1,22 +1,87 @@
 **Sprint 1**
+FE = FrontEnd   BE = BackEnd
 
-**Week 1**
-Rafael: 
-Mika: 
-Mathias:
-Delia:
-Fatih:
+Delia Datsomor:
+- Week 1
+    - [x] #12 FE
+    - [x] #8 FE
+- Week 2
+    - [x] #15 FE
+    - [x] #17 FE
+    - [x] #7 FE 
+    - [x] 18 FE 
+- Week 3
+    - [ ] 78 FE 
+    - [ ] 55 FE
 
-**Week 2**
-Rafael: 
-Mika: 
-Mathias:
-Delia:
-Fatih:
+Rafael:
+- Week 1
+    - [x] #1 FE
+    - [x] #11 FE
+    - [x] #13 FE
+- Week 2
+    - [x] #27 (paired) BE
+    - [x] #33 (paired) BE
+    - [x] #13 (paired) BE
+    - [x] #16 (paired) BE
+    - [x] #7  (paired) BE
+    - [x] #10 (paired) BE
+    - [x] #76 (paired) BE
+    - [x] #56 (paired) BE
+    - [x] #26 (paired) BE
+    - [x] #30 (paired) BE
 
-**Week 3**
-Rafael: 
-Mika: 
+- Week 3
+    - [ ] #52 BE
+    - [ ] #57 BE
+
 Mathias:
-Delia:
+- Week 1
+    - [x] #2 BE
+    - [x] #81 BE
+
+- Week 2
+    - [x] #27 (paired) BE
+    - [x] #33 (paired) BE
+    - [x] #13 (paired) BE
+    - [x] #16 (paired) BE
+    - [x] #7  (paired) BE
+    - [x] #10 (paired) BE
+    - [x] #76 (paired) BE
+    - [x] #56 (paired) BE
+    - [x] #26 (paired) BE
+    - [x] #30 (paired) BE
+- Week 3
+    - [ ] #16 FE (already done)
+    - [ ] #19 BE
+
+Mika:
+- Week 1
+    - [x] #35 BE
+    - [x] #82 BE
+- Week 2
+    - [x] #27 (paired) BE
+    - [x] #33 (paired) BE
+    - [x] #13 (paired) BE
+    - [x] #16 (paired) BE
+    - [x] #7  (paired) BE
+    - [x] #10 (paired) BE
+    - [x] #76 (paired) BE
+    - [x] #56 (paired) BE
+    - [x] #26 (paired) BE
+    - [x] #30 (paired) BE
+- Week 3
+    - [ ] #61 BE
+    - [ ] #64 BE 
+
 Fatih:
+- Week 1
+    - [x] #36 FE
+- Week 2
+    - [x] #19 FE
+    - [x] #9 FE
+    - [x] #25 FE (connected components with backend -> commit on User Story)
+    - [ ] #24 FE 
+- Week 3
+    - [ ] #14 FE
+    - [ ] #53 FE
