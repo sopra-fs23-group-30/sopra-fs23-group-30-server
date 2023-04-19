@@ -9,10 +9,10 @@ Delia Datsomor:
     - [x] #15 FE
     - [x] #17 FE
     - [x] #7 FE 
-    - [x] 18 FE 
+    - [x] #18 FE 
 - Week 3
-    - [ ] 78 FE 
-    - [ ] 55 FE
+    - [ ] #78 FE 
+    - [ ] #55 FE
 
 Rafael:
 - Week 1
@@ -23,15 +23,14 @@ Rafael:
     - [x] #27 (paired) BE
     - [x] #33 (paired) BE
     - [x] #13 (paired) BE
-    - [x] #16 (paired) BE
     - [x] #7  (paired) BE
     - [x] #10 (paired) BE
     - [x] #76 (paired) BE
     - [x] #56 (paired) BE
-    - [x] #26 (paired) BE
-    - [x] #30 (paired) BE
-
 - Week 3
+    - [x] #27 (paired) BE (voraus)
+    - [x] #26 (paired) BE (voraus)
+    - [x] #30 (paired) BE (voraus)
     - [ ] #52 BE
     - [ ] #57 BE
 
@@ -44,16 +43,17 @@ Mathias:
     - [x] #27 (paired) BE
     - [x] #33 (paired) BE
     - [x] #13 (paired) BE
-    - [x] #16 (paired) BE
     - [x] #7  (paired) BE
     - [x] #10 (paired) BE
     - [x] #76 (paired) BE
     - [x] #56 (paired) BE
-    - [x] #26 (paired) BE
-    - [x] #30 (paired) BE
 - Week 3
-    - [ ] #16 FE (already done)
+    - [x] #16 (paired) BE (voraus)
+    - [x] #27 (paired) BE (voraus)
+    - [x] #26 (paired) BE (voraus)
+    - [x] #30 (paired) BE (voraus)
     - [ ] #19 BE
+    - [ ] 
 
 Mika:
 - Week 1
@@ -63,14 +63,14 @@ Mika:
     - [x] #27 (paired) BE
     - [x] #33 (paired) BE
     - [x] #13 (paired) BE
-    - [x] #16 (paired) BE
     - [x] #7  (paired) BE
     - [x] #10 (paired) BE
     - [x] #76 (paired) BE
     - [x] #56 (paired) BE
-    - [x] #26 (paired) BE
-    - [x] #30 (paired) BE
 - Week 3
+    - [x] #27 (paired) BE (voraus)
+    - [x] #26 (paired) BE (voraus)
+    - [x] #30 (paired) BE (voraus)
     - [ ] #61 BE
     - [ ] #64 BE 
 
@@ -81,7 +81,7 @@ Fatih:
     - [x] #19 FE
     - [x] #9 FE
     - [x] #25 FE (connected components with backend -> commit on User Story)
-    - [ ] #24 FE 
+    - [x] #24 FE 
 - Week 3
     - [ ] #14 FE
     - [ ] #53 FE
