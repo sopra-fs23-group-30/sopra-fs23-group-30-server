@@ -84,7 +84,7 @@ class AuthenticationControllerTest {
         }
 
     @Test
-    public void givenEmailNotExisting_whenRegisterUser_thenReturnCreated() throws Exception {
+    void givenEmailNotExisting_whenRegisterUser_thenReturnCreated() throws Exception {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
@@ -117,7 +117,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    public void givenEmailExisting_whenRegisterUser_thenReturnBadRequest() throws Exception {
+    void givenEmailExisting_whenRegisterUser_thenReturnBadRequest() throws Exception {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
@@ -143,7 +143,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    public void givenEmailExisting_whenLoginUser_thenLoginSuccessful() throws Exception {
+    void givenEmailExisting_whenLoginUser_thenLoginSuccessful() throws Exception {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
         String toGenerateToken = "testtoken";
