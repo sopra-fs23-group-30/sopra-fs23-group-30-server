@@ -115,7 +115,7 @@ public class ProfileService implements UserDetailsService {
     }
 
     private boolean isEmailFormatValid(String eMail) {
-        return eMail.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        return eMail.matches("^(.+)@(.+)$");
     }
 
     private boolean isPhoneNumberValid(String phoneNumber) {
