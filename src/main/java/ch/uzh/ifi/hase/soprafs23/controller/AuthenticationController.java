@@ -51,7 +51,7 @@ public class AuthenticationController {
 
 	@PostMapping("/login")
 	public ResponseEntity<Object> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
-			throws Exception {
+			throws DisabledException, BadCredentialsException {
 
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 		final ProfileEntity profile = profileService
