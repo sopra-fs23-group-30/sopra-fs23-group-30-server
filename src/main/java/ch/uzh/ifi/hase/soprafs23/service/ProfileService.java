@@ -119,6 +119,6 @@ public class ProfileService implements UserDetailsService {
     }
 
     private boolean isPhoneNumberValid(String phoneNumber) {
-        return (phoneNumber.matches("\\d?\\d"));
+        return (phoneNumber.matches("(\\+41)\s(\\d{2})\s(\\d{3})\\s(\\d{2})\\s(\\d{2})"));
     }
 }
