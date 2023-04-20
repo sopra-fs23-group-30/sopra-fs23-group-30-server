@@ -1,4 +1,4 @@
-package ch.uzh.ifi.hase.soprafs23.rest.dto.Profile;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.profile;
 
 public class ProfileGetDTO extends ProfilePutDTO {
 

@@ -1,4 +1,4 @@
-package ch.uzh.ifi.hase.soprafs23.rest.dto.Application;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.application;
 
 import ch.uzh.ifi.hase.soprafs23.constant.ApplicationState;
 

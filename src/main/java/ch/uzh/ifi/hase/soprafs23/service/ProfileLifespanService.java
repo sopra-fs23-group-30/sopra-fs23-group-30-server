@@ -12,7 +12,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileLifespanRepository;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileLifespanDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfileLifespanDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 
 @Service
@@ -37,7 +37,7 @@ public class ProfileLifespanService {
     public void updateProfileLifespans(UUID profileId, List<ProfileLifespanDTO> lifespanDTOs) {
 
         List<ProfileLifespanEntity> entities = this.profileLifespanRepository.findByProfileId(profileId);
-        entities.forEach((entity) -> this.profileLifespanRepository.deleteById(entity.getId()));
+        entities.forEach(entity -> this.profileLifespanRepository.deleteById(entity.getId()));
 
         for (ProfileLifespanDTO lifespanDTO : lifespanDTOs) {
             ProfileLifespanEntity profileLifespanEntity = DTOMapper.INSTANCE

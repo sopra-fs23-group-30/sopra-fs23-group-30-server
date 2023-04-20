@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationPostDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationPutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ApplicationService;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
@@ -23,41 +23,42 @@ import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 @CrossOrigin
 public class ApplicationsController {
 
-    private final ApplicationService applicationService;
-    private ProfileService profileService;
-    private ListingService listingService;
+        private final ApplicationService applicationService;
+        private ProfileService profileService;
+        private ListingService listingService;
 
-    ApplicationsController(ApplicationService applicationService, ProfileService profileService,
-            ListingService listingService) {
-        this.applicationService = applicationService;
-        this.profileService = profileService;
-        this.listingService = listingService;
-    }
+        ApplicationsController(ApplicationService applicationService, ProfileService profileService,
+                        ListingService listingService) {
+                this.applicationService = applicationService;
+                this.profileService = profileService;
+                this.listingService = listingService;
+        }
 
-    @PostMapping("/applications")
-    public ResponseEntity<ApplicationEntity> createApplication(@RequestBody ApplicationPostDTO applicationDTO) {
+        @PostMapping("/applications")
+        public ResponseEntity<ApplicationEntity> createApplication(@RequestBody ApplicationPostDTO applicationDTO) {
 
-        ApplicationEntity applicationEntity = DTOMapper.INSTANCE
-                .convertApplicationPostDTOToApplicationEntity(applicationDTO);
-        applicationEntity.setApplicant(profileService.getProfileById(applicationDTO.getApplicantId()));
-        applicationEntity.setListing(listingService.getListingById(applicationDTO.getListingId()));
+                ApplicationEntity applicationEntity = DTOMapper.INSTANCE
+                                .convertApplicationPostDTOToApplicationEntity(applicationDTO);
+                applicationEntity.setApplicant(profileService.getProfileById(applicationDTO.getApplicantId()));
+                applicationEntity.setListing(listingService.getListingById(applicationDTO.getListingId()));
 
-        ApplicationEntity createdApplication = applicationService.createApplication(applicationEntity);
+                ApplicationEntity createdApplication = applicationService.createApplication(applicationEntity);
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(createdApplication);
-    }
+                return ResponseEntity
+                                .status(HttpStatus.CREATED)
+                                .body(createdApplication);
+        }
 
-    @PutMapping("/applications/{id}")
-    public ResponseEntity<?> updateApplication(@PathVariable UUID id, @RequestBody ApplicationPutDTO applicationDTO) {
-        ApplicationEntity applicationEntity = applicationService.getApplicationById(id);
+        @PutMapping("/applications/{id}")
+        public ResponseEntity<Object> updateApplication(@PathVariable UUID id,
+                        @RequestBody ApplicationPutDTO applicationDTO) {
+                ApplicationEntity applicationEntity = applicationService.getApplicationById(id);
 
-        applicationService.updateApplication(applicationEntity,
-                applicationDTO.getNewState());
+                applicationService.updateApplication(applicationEntity,
+                                applicationDTO.getNewState());
 
-        return ResponseEntity
-                .status(HttpStatus.NO_CONTENT)
-                .body(null);
-    }
+                return ResponseEntity
+                                .status(HttpStatus.NO_CONTENT)
+                                .body(null);
+        }
 }

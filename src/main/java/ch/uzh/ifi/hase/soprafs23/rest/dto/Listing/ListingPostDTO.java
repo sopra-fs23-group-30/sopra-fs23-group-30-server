@@ -1,4 +1,4 @@
-package ch.uzh.ifi.hase.soprafs23.rest.dto.Listing;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.listing;
 
 import java.util.UUID;
 

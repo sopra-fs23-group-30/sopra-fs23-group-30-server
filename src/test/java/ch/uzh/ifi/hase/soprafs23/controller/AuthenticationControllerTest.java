@@ -33,7 +33,7 @@ import ch.uzh.ifi.hase.soprafs23.config.JwtRequestFilter;
 import ch.uzh.ifi.hase.soprafs23.config.JwtTokenUtil;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.RegisterPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.RegisterPostDTO;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 

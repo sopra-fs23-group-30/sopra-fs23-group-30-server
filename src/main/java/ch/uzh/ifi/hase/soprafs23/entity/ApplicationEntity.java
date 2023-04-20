@@ -44,7 +44,7 @@ public class ApplicationEntity implements Serializable {
     private LocalDateTime creationDate;
 
     @Enumerated(EnumType.STRING)
-    private ApplicationState State;
+    private ApplicationState state;
 
     public UUID getId() {
         return id;
@@ -79,10 +79,10 @@ public class ApplicationEntity implements Serializable {
     }
 
     public ApplicationState getState() {
-        return State;
+        return state;
     }
 
     public void setState(ApplicationState state) {
-        State = state;
+        this.state = state;
     }
 }

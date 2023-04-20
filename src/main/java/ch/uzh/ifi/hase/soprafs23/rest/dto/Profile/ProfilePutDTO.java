@@ -1,4 +1,4 @@
-package ch.uzh.ifi.hase.soprafs23.rest.dto.Profile;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.profile;
 
 import java.sql.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ public class ProfilePutDTO {
   private String gender;
   private String biography;
   private String futureFlatmatesDescription;
-  public List<ProfileLifespanDTO> lifespans;
+  private List<ProfileLifespanDTO> lifespans;
 
   public List<ProfileLifespanDTO> getLifespans() {
     return lifespans;

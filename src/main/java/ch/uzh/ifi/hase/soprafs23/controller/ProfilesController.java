@@ -18,11 +18,11 @@ import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingOverviewGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileLifespanDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingOverviewGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfileGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfileLifespanDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ApplicationService;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
@@ -52,7 +52,7 @@ public class ProfilesController {
                 ProfileGetDTO profileDTO = DTOMapper.INSTANCE.convertProfileEntityToProfileGetDTO(profileEntity);
                 List<ProfileLifespanEntity> lifespanEntities = profileLifespanService.getAllLifespansByProfileId(id);
                 List<ProfileLifespanDTO> lifespanDtos = new ArrayList<>();
-                lifespanEntities.forEach((lifespanEntity) -> lifespanDtos
+                lifespanEntities.forEach(lifespanEntity -> lifespanDtos
                                 .add(DTOMapper.INSTANCE.convertLifespanEntityToLifespanDTO(lifespanEntity)));
                 profileDTO.setLifespans(lifespanDtos);
 
@@ -62,7 +62,8 @@ public class ProfilesController {
         }
 
         @PutMapping("/profiles/{id}")
-        public ResponseEntity<?> updateProfileByid(@PathVariable UUID id, @RequestBody ProfilePutDTO updatedProfile) {
+        public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id,
+                        @RequestBody ProfilePutDTO updatedProfile) {
                 profileService.updateProfile(id, updatedProfile);
                 return ResponseEntity
                                 .status(HttpStatus.NO_CONTENT)
@@ -74,7 +75,7 @@ public class ProfilesController {
                 List<ApplicationEntity> applicationEntities = applicationService
                                 .getAllApplicationsByProfileId(profileId);
                 List<ApplicationGetDTO> applicationGetDTOs = new ArrayList<>();
-                applicationEntities.forEach((applicationEntity) -> applicationGetDTOs
+                applicationEntities.forEach(applicationEntity -> applicationGetDTOs
                                 .add(DTOMapper.INSTANCE
                                                 .convertApplicationEntityToApplicationGetDTO(applicationEntity)));
                 return ResponseEntity
@@ -86,14 +87,14 @@ public class ProfilesController {
         public ResponseEntity<List<ListingOverviewGetDTO>> getListingbyProfileId(@PathVariable UUID profileId) {
                 List<ListingEntity> listingEntities = listingService.getListingByProfileId(profileId);
                 List<ListingOverviewGetDTO> listingOverviewGetDTOs = new ArrayList<>();
-                listingEntities.forEach((listing) -> {
+                listingEntities.forEach(listing -> {
                         ListingOverviewGetDTO listingOverviewGetDTO = DTOMapper.INSTANCE
                                         .convertListingEntityToListingOverviewGetDTO(listing);
                         List<ApplicationEntity> applicationEntities = applicationService
                                         .getAllApplicationsByListingId(listing.getId());
                         List<ApplicantGetDTO> applicantGetDTOs = new ArrayList<>();
 
-                        applicationEntities.forEach((application) -> applicantGetDTOs
+                        applicationEntities.forEach(application -> applicantGetDTOs
                                         .add(DTOMapper.INSTANCE
                                                         .convertApplicationEntityToApplicantGetDTO(application)));
 

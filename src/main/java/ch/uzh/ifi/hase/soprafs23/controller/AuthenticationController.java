@@ -9,8 +9,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +17,7 @@ import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.config.JwtResponse;
 import ch.uzh.ifi.hase.soprafs23.config.JwtTokenUtil;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.RegisterPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.RegisterPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 
@@ -43,17 +41,17 @@ public class AuthenticationController {
 	@PostMapping("/registration")
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public ResponseEntity<?> createUser(@RequestBody RegisterPostDTO registerProfileDTO) {
+	public ResponseEntity<Object> createUser(@RequestBody RegisterPostDTO registerProfileDTO) {
 		ProfileEntity profileInput = DTOMapper.INSTANCE.convertRegisterProfileDTOtoEntity(registerProfileDTO);
 		profileService.createUser(profileInput);
-
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(null);
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+	@PostMapping("/login")
+	public ResponseEntity<Object> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
+			throws Exception {
 
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 		final ProfileEntity profile = profileService
@@ -67,9 +65,9 @@ public class AuthenticationController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {
-			throw new Exception("USER_DISABLED", e);
+			throw new DisabledException("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {
-			throw new Exception("INVALID_CREDENTIALS", e);
+			throw new BadCredentialsException("INVALID_CREDENTIALS", e);
 		}
 	}
 }

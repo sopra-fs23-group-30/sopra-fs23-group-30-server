@@ -1,4 +1,4 @@
-package ch.uzh.ifi.hase.soprafs23.rest.dto.Application;
+package ch.uzh.ifi.hase.soprafs23.rest.dto.application;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

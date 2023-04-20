@@ -9,16 +9,16 @@ import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationPostDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingDetailsGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingOverviewGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPostDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileLifespanDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.RegisterPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingOverviewGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfileGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfileLifespanDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfilePutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.RegisterPostDTO;
 
 /**
  * DTOMapper

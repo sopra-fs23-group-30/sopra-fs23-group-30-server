@@ -54,7 +54,7 @@ public class JwtTokenUtil implements Serializable {
 		return doGenerateToken(claims, profile.getEmail());
 	}
 
-	@Deprecated
+	@Deprecated(since = "4.2", forRemoval = true)
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))

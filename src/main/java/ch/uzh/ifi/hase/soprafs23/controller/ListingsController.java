@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingDetailsGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPostDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
@@ -37,7 +37,7 @@ public class ListingsController {
     }
 
     @PostMapping("/listings")
-    public ResponseEntity<?> createListing(@RequestBody ListingPostDTO listingDTO) {
+    public ResponseEntity<Object> createListing(@RequestBody ListingPostDTO listingDTO) {
         ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(listingDTO);
         listingEntity.setLister(profileService.getProfileById(listingDTO.getListerId()));
         ListingEntity createdListing = listingService.createListing(listingEntity);
@@ -49,11 +49,10 @@ public class ListingsController {
 
     @GetMapping("/listings")
     public ResponseEntity<List<ListingGetDTO>> getListingById() {
-        // todo: add filtering
         List<ListingEntity> listingEntities = listingService.getListings();
-        List<ListingGetDTO> listingDTOs = new ArrayList<ListingGetDTO>();
+        List<ListingGetDTO> listingDTOs = new ArrayList<>();
         listingEntities
-                .forEach((entity) -> listingDTOs.add(DTOMapper.INSTANCE.convertListingEntityToListingGetDTO(entity)));
+                .forEach(entity -> listingDTOs.add(DTOMapper.INSTANCE.convertListingEntityToListingGetDTO(entity)));
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -78,7 +77,7 @@ public class ListingsController {
     }
 
     @PutMapping("/listings/{id}")
-    public ResponseEntity<?> updateProfileByid(@PathVariable UUID id, @RequestBody ListingPutDTO updatedListing) {
+    public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id, @RequestBody ListingPutDTO updatedListing) {
         listingService.updateListing(id, updatedListing);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)

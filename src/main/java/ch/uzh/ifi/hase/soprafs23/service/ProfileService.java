@@ -22,7 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 
 @Service
@@ -78,7 +78,7 @@ public class ProfileService implements UserDetailsService {
         updatedEntity.setIsSearcher(existingEntity.getIsSearcher());
         this.profileRepository.save(updatedEntity);
 
-        profileLifespanService.updateProfileLifespans(id, updatedProfile.lifespans);
+        profileLifespanService.updateProfileLifespans(id, updatedProfile.getLifespans());
     }
 
     public ProfileEntity getProfileBySigninCredentials(JwtRequest authenticationRequest) {
@@ -119,6 +119,6 @@ public class ProfileService implements UserDetailsService {
     }
 
     private boolean isPhoneNumberValid(String phoneNumber) {
-        return (phoneNumber.matches("[0-9]{0,1}[0-9]{10}"));
+        return (phoneNumber.matches("\\d?\\d"));
     }
 }
