@@ -7,6 +7,7 @@ import org.mapstruct.factory.Mappers;
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Application.ApplicationPostDTO;
@@ -15,6 +16,7 @@ import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingOverviewGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Listing.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfileLifespanDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.Profile.RegisterPostDTO;
 
@@ -55,6 +57,7 @@ public interface DTOMapper {
   @Mapping(source = "gender", target = "gender")
   @Mapping(source = "biography", target = "biography")
   @Mapping(source = "futureFlatmatesDescription", target = "futureFlatmatesDescription")
+  @Mapping(target = "lifespans", ignore = true)
   ProfileGetDTO convertProfileEntityToProfileGetDTO(ProfileEntity profile);
 
   @Mapping(source = "firstname", target = "firstname")
@@ -113,7 +116,6 @@ public interface DTOMapper {
   @Mapping(target = "id", ignore = true)
   ApplicationEntity convertApplicationPostDTOToApplicationEntity(ApplicationPostDTO applicationDTO);
 
-  
   @Mapping(source = "id", target = "applicationId")
   @Mapping(source = "listing.id", target = "listingId")
   @Mapping(source = "creationDate", target = "creationDate")
@@ -136,4 +138,15 @@ public interface DTOMapper {
   @Mapping(target = "applicants", ignore = true)
   @Mapping(source = "title", target = "listingTitle")
   ListingOverviewGetDTO convertListingEntityToListingOverviewGetDTO(ListingEntity listingEntity);
+
+  @Mapping(source = "fromDate", target = "fromDate")
+  @Mapping(source = "toDate", target = "toDate")
+  @Mapping(source = "text", target = "text")
+  ProfileLifespanDTO convertLifespanEntityToLifespanDTO(ProfileLifespanEntity profileLifespanEntity);
+
+  @Mapping(source = "fromDate", target = "fromDate")
+  @Mapping(source = "toDate", target = "toDate")
+  @Mapping(source = "text", target = "text")
+  @Mapping(target = "profile", ignore = true)
+  ProfileLifespanEntity convertLifespanDTOToLifespanEntity(ProfileLifespanDTO profileLifespanDTO);
 }
