@@ -1,6 +1,7 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,9 +43,11 @@ public class ProfileLifespanService {
         for (ProfileLifespanDTO lifespanDTO : lifespanDTOs) {
             ProfileLifespanEntity profileLifespanEntity = DTOMapper.INSTANCE
                     .convertLifespanDTOToLifespanEntity(lifespanDTO);
-            ProfileEntity profileEntity = profileRepository.findById(profileId).get();
-            profileLifespanEntity.setProfile(profileEntity);
-            profileLifespanRepository.save(profileLifespanEntity);
+            Optional<ProfileEntity> profileEntity = profileRepository.findById(profileId);
+            if (profileEntity.isPresent()) {
+                profileLifespanEntity.setProfile(profileEntity.get());
+                profileLifespanRepository.save(profileLifespanEntity);
+            }
         }
     }
 }
