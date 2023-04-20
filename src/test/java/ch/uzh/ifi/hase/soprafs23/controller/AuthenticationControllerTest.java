@@ -46,7 +46,7 @@ import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 @WebMvcTest(AuthenticationController.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ContextConfiguration(classes = AuthenticationController.class)
-public class AuthenticationControllerTest {
+class AuthenticationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
