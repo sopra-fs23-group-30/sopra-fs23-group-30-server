@@ -1,6 +1,5 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,14 +29,15 @@ public class AuthenticationController {
 
 	private final ProfileService profileService;
 
-	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
-	AuthenticationController(ProfileService profileService) {
+	AuthenticationController(ProfileService profileService, AuthenticationManager authenticationManager,
+			JwtTokenUtil jwtTokenUtil) {
+		this.authenticationManager = authenticationManager;
 		this.profileService = profileService;
+		this.jwtTokenUtil = jwtTokenUtil;
 	}
 
 	@PostMapping("/registration")
