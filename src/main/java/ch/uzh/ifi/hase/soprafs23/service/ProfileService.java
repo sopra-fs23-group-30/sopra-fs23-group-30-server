@@ -34,10 +34,13 @@ public class ProfileService implements UserDetailsService {
 
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
+    private ProfileLifespanService profileLifespanService;
 
     public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository,
+            ProfileLifespanService profileLifespanService,
             PasswordEncoder passwordEncoder) {
         this.profileRepository = profileRepository;
+        this.profileLifespanService = profileLifespanService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -73,8 +76,9 @@ public class ProfileService implements UserDetailsService {
         updatedEntity.setEmail(existingEntity.getEmail());
         updatedEntity.setPassword(existingEntity.getPassword());
         updatedEntity.setIsSearcher(existingEntity.getIsSearcher());
-
         this.profileRepository.save(updatedEntity);
+
+        profileLifespanService.updateProfileLifespans(id, updatedProfile.lifespans);
     }
 
     public ProfileEntity getProfileBySigninCredentials(JwtRequest authenticationRequest) {
