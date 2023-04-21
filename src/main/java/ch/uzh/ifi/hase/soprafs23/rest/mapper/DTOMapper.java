@@ -132,6 +132,7 @@ public interface DTOMapper {
   @Mapping(source = "applicant.firstname", target = "firstname")
   @Mapping(source = "applicant.lastname", target = "lastname")
   @Mapping(source = "creationDate", target = "applicationDate")
+  @Mapping(source = "state", target = "state")
   ApplicantGetDTO convertApplicationEntityToApplicantGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "id", target = "listingId")

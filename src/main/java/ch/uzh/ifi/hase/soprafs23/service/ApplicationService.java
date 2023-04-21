@@ -70,4 +70,15 @@ public class ApplicationService {
     public List<ApplicationEntity> getAllApplicationsByListingId(UUID id) {
         return this.applicationRepository.findByListingId(id);
     }
+
+    public void declineAllOtherApplicationsByListingId(UUID id, UUID idOfAccepted) {
+        List<ApplicationEntity> entities = this.getAllApplicationsByListingId(id);
+        for (ApplicationEntity applicationEntity : entities) {
+            if (applicationEntity.getId() != idOfAccepted) {
+                applicationEntity.setState(ApplicationState.DECLINED);
+                this.applicationRepository.save(applicationEntity);
+            }
+
+        }
+    }
 }

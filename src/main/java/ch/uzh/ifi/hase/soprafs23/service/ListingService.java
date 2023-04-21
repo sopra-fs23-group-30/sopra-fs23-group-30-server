@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -11,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import ch.uzh.ifi.hase.soprafs23.constant.ApplicationState;
+import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
+import ch.uzh.ifi.hase.soprafs23.repository.ApplicationRepository;
 import ch.uzh.ifi.hase.soprafs23.repository.ListingRepository;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
@@ -22,9 +26,12 @@ import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 public class ListingService {
 
     private final ListingRepository listingRepository;
+    private final ApplicationRepository applicationRepository;
 
-    public ListingService(@Qualifier("listingRepository") ListingRepository listingRepository) {
+    public ListingService(@Qualifier("listingRepository") ListingRepository listingRepository,
+            ApplicationRepository applicationRepository) {
         this.listingRepository = listingRepository;
+        this.applicationRepository = applicationRepository;
     }
 
     public ListingEntity createListing(ListingEntity newListing) {
@@ -33,7 +40,16 @@ public class ListingService {
     }
 
     public List<ListingEntity> getListings() {
-        return this.listingRepository.findAll();
+        List<ListingEntity> listings = this.listingRepository.findAll();
+        List<ListingEntity> listsToReturn = new ArrayList<>();
+        for (ListingEntity listingEntity : listings) {
+            List<ApplicationEntity> applicationsOfListing = applicationRepository
+                    .findByListingId(listingEntity.getId());
+            if (!hasAcceptedState(applicationsOfListing)) {
+                listsToReturn.add(listingEntity);
+            }
+        }
+        return listsToReturn;
     }
 
     public ListingEntity getListingById(UUID id) {
@@ -70,5 +86,10 @@ public class ListingService {
         updatedEntity.setCreationDate(existingEntity.getCreationDate());
         updatedEntity.setLister(existingEntity.getLister());
         this.listingRepository.save(updatedEntity);
+    }
+
+    private boolean hasAcceptedState(final List<ApplicationEntity> applications) {
+        return applications.stream().filter(o -> o.getState().equals(ApplicationState.ACCEPTED)).findFirst()
+                .isPresent();
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.uzh.ifi.hase.soprafs23.constant.ApplicationState;
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPutDTO;
@@ -56,6 +57,11 @@ public class ApplicationsController {
 
                 applicationService.updateApplication(applicationEntity,
                                 applicationDTO.getNewState());
+
+                if (applicationDTO.getNewState() == ApplicationState.ACCEPTED) {
+                        applicationService.declineAllOtherApplicationsByListingId(
+                                        applicationEntity.getListing().getId(), applicationEntity.getId());
+                }
 
                 return ResponseEntity
                                 .status(HttpStatus.NO_CONTENT)
