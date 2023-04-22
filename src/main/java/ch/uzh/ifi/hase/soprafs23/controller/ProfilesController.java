@@ -70,12 +70,11 @@ public class ProfilesController {
                                 .body(profileDTO);
         }
 
-        @PutMapping(value = "/profiles/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+        @PutMapping(value = "/profiles/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.MULTIPART_FORM_DATA_VALUE })
         public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id,
                         @RequestPart("body") String updatedProfile,
                         @RequestPart("file") MultipartFile file) throws IOException {
-
-                
 
                 ProfilePutDTO updateProfile = new ProfilePutDTO();
                 try {
@@ -84,9 +83,14 @@ public class ProfilesController {
                 } catch (IOException e) {
                 }
 
-                String blobURL = blobUploaderService.upload(file, "profilepictures", id.toString());
-                updateProfile.setProfilePictureURL(blobURL);
-                
+                if (file.getOriginalFilename().equals("deleted"))
+                        updateProfile.setProfilePictureURL(null);
+
+                else if (!file.getOriginalFilename().equals("unchanged")) {
+                        String blobURL = blobUploaderService.upload(file, "profilepictures", id.toString());
+                        updateProfile.setProfilePictureURL(blobURL);
+                }
+
                 profileService.updateProfile(id, updateProfile);
 
                 return ResponseEntity

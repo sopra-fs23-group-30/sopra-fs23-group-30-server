@@ -80,11 +80,11 @@ public class ProfilePutDTO {
   }
 
   public String getProfilePictureURL() {
-      return profilePictureURL;
+    return profilePictureURL;
   }
 
   public void setProfilePictureURL(String profilePictureURL) {
-      this.profilePictureURL = profilePictureURL;
+    this.profilePictureURL = profilePictureURL;
   }
 
 }

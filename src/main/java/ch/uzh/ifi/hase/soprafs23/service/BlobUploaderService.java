@@ -26,7 +26,7 @@ public class BlobUploaderService {
 
     public String upload(MultipartFile file, String containerName, String fileName) throws IOException {
         String connectionString = "AccountName=" + accountName + ";AccountKey=" + accountKey
-                + ";EndpointSuffix=core.windows.net;DefaultEndpointsProtocol=https;"; 
+                + ";EndpointSuffix=core.windows.net;DefaultEndpointsProtocol=https;";
 
         BlobContainerClient container = new BlobContainerClientBuilder()
                 .connectionString(connectionString)
@@ -40,5 +40,5 @@ public class BlobUploaderService {
 
         return blob.getBlobUrl();
     }
-    
+
 }
