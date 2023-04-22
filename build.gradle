@@ -48,6 +48,10 @@ dependencies {
              'org.apache.commons:commons-lang3:3.0'
     implementation 'com.auth0:java-jwt:4.3.0'
 
+    // Azure blob storage
+    implementation group: 'com.azure', name: 'azure-storage-blob', version: '12.22.0'
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     testImplementation 'com.h2database:h2'

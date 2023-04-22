@@ -53,6 +53,9 @@ public class ProfileEntity implements Serializable {
   @Column(nullable = true)
   private String futureFlatmatesDescription;
 
+  @Column(nullable = true)
+  private String profilePictureURL;
+
   public UUID getId() {
     return id;
   }
@@ -139,5 +142,13 @@ public class ProfileEntity implements Serializable {
 
   public void setFutureFlatmatesDescription(String futureFlatmatesDescription) {
     this.futureFlatmatesDescription = futureFlatmatesDescription;
+  }
+
+  public String getProfilePictureURL() {
+    return profilePictureURL;
+  }
+
+  public void setProfilePictureURL(String profilePictureURL) {
+    this.profilePictureURL = profilePictureURL;
   }
 }
