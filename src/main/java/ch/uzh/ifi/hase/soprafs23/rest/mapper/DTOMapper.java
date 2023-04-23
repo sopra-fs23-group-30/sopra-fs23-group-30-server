@@ -47,6 +47,7 @@ public interface DTOMapper {
   @Mapping(target = "birthday", ignore = true)
   @Mapping(target = "futureFlatmatesDescription", ignore = true)
   @Mapping(target = "gender", ignore = true)
+  @Mapping(target = "profilePictureURL", ignore = true)
   ProfileEntity convertRegisterProfileDTOtoEntity(RegisterPostDTO registerProfileDTO);
 
   @Mapping(source = "email", target = "email")
@@ -97,8 +98,11 @@ public interface DTOMapper {
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "lister.firstname", target = "listerFirstname")
   @Mapping(source = "lister.lastname", target = "listerLastname")
+  @Mapping(source = "lister.biography", target = "listerDescription")
+  @Mapping(source = "lister.birthday", target = "listerBirthdate")
   @Mapping(source = "lister.id", target = "listerId")
   @Mapping(source = "creationDate", target = "creationDate")
+  @Mapping(source = "lister.profilePictureURL", target = "profilePictureURL")
   ListingDetailsGetDTO convertListingEntityToListingDetailsGetDTO(ListingEntity listing);
 
   @Mapping(source = "id", target = "id")
@@ -134,6 +138,7 @@ public interface DTOMapper {
   @Mapping(source = "applicant.lastname", target = "lastname")
   @Mapping(source = "creationDate", target = "applicationDate")
   @Mapping(source = "state", target = "state")
+  @Mapping(source = "applicant.profilePictureURL", target = "profilePictureURL")
   ApplicantGetDTO convertApplicationEntityToApplicantGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "id", target = "listingId")

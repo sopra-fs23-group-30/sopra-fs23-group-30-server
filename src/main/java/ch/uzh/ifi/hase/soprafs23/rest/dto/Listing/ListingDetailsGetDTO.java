@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.rest.dto.listing;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -16,6 +17,10 @@ public class ListingDetailsGetDTO {
     private LocalDateTime creationDate;
     private String listerFirstname;
     private String listerLastname;
+    private String listerDescription;
+    private Date listerBirthdate;
+    private String profilePictureURL;
+
     private UUID listerId;
 
     public UUID getListerId() {
@@ -114,4 +119,27 @@ public class ListingDetailsGetDTO {
         this.creationDate = creationDate;
     }
 
+    public String getListerDescription() {
+        return listerDescription;
+    }
+
+    public void setListerDescription(String listerDescription) {
+        this.listerDescription = listerDescription;
+    }
+
+    public Date getListerBirthdate() {
+        return listerBirthdate;
+    }
+
+    public void setListerBirthdate(Date listerBirthdate) {
+        this.listerBirthdate = listerBirthdate;
+    }
+
+    public String getProfilePictureURL() {
+        return profilePictureURL;
+    }
+
+    public void setProfilePictureURL(String profilePictureURL) {
+        this.profilePictureURL = profilePictureURL;
+    }
 }

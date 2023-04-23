@@ -12,6 +12,7 @@ public class ApplicantGetDTO {
     private String lastname;
     private LocalDateTime applicationDate;
     private ApplicationState state;
+    private String profilePictureURL;
 
     public UUID getApplicantId() {
         return applicantId;
@@ -59,5 +60,13 @@ public class ApplicantGetDTO {
 
     public void setApplicationDate(LocalDateTime applicationDate) {
         this.applicationDate = applicationDate;
+    }
+
+    public String getProfilePictureURL() {
+        return profilePictureURL;
+    }
+
+    public void setProfilePictureURL(String profilePictureURL) {
+        this.profilePictureURL = profilePictureURL;
     }
 }

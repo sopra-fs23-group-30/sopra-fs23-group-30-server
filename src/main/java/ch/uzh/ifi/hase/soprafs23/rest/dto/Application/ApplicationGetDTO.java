@@ -15,6 +15,7 @@ public class ApplicationGetDTO {
     private String listingStreetNumber;
     private int listingZipCode;
     private String listingCityName;
+    
 
     public UUID getApplicationId() {
         return applicationId;
