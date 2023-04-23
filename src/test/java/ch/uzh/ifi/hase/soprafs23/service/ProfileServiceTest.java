@@ -2,9 +2,9 @@ package ch.uzh.ifi.hase.soprafs23.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.ignoreStubs;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,9 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
 
+import ch.uzh.ifi.hase.soprafs23.config.JwtRequest;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfileLifespanDTO;
@@ -126,6 +130,24 @@ class ProfileServiceTest {
 
         assertEquals("updated", updatedProfile.getFirstname());
         assertEquals("name", updatedProfile.getLastname());
+    }
+
+    
+    @Test
+    void loadUserByUsername_validEmail_success() {
+        Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
+
+        UserDetails userDetails = profileService.loadUserByUsername(testProfile.getEmail());
+
+        assertEquals(testProfile.getEmail(), userDetails.getUsername());
+        assertEquals(testProfile.getPassword(), userDetails.getPassword());
+    }
+
+    @Test
+    void loadUserByUsername_InvalidEmail_throwsException() {
+        Mockito.when(profileRepository.findById(Mockito.any())).thenReturn(null);
+
+        assertThrows(UsernameNotFoundException.class, () -> profileService.loadUserByUsername(testProfile.getEmail()));  
     }
 
 }
