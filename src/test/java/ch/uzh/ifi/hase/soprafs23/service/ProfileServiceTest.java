@@ -150,4 +150,23 @@ class ProfileServiceTest {
         assertThrows(UsernameNotFoundException.class, () -> profileService.loadUserByUsername(testProfile.getEmail()));  
     }
 
+    @Test
+    void getProfileBySigninCredentials_validCredentials_success() {
+        JwtRequest authenticationRequest = new JwtRequest();
+        authenticationRequest.setEmail(testProfile.getEmail());
+        authenticationRequest.setPassword(testProfile.getPassword());
+
+        Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
+
+        ProfileEntity profile = profileService.getProfileBySigninCredentials(authenticationRequest);
+
+        assertEquals(testProfile.getId(), profile.getId());
+        assertEquals(testProfile.getFirstname(), profile.getFirstname());
+        assertEquals(testProfile.getLastname(), profile.getLastname());
+        assertEquals(testProfile.getEmail(), profile.getEmail());
+        assertEquals(testProfile.getPhoneNumber(), profile.getPhoneNumber());
+        assertEquals(testProfile.getPassword(), profile.getPassword());
+        assertEquals(testProfile.getIsSearcher(), profile.getIsSearcher());
+    }
+
 }
