@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -77,21 +75,27 @@ class ProfileServiceTest {
     void createUser_duplicateName_throwsException() {
         Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
 
-        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+        assertThrows(ResponseStatusException.class, () -> {
+            profileService.createUser(testProfile); 
+        });    
     }
 
     @Test
     void createUser_invalidEmailFormat_throwsException() {
         testProfile.setEmail("invalidEmailFormat");
 
-        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+        assertThrows(ResponseStatusException.class, () -> {
+            profileService.createUser(testProfile); 
+        });    
     }
 
     @Test
     void createUser_invalidPhoneFormat_throwsException() {
         testProfile.setPhoneNumber("123456789101112131415");
 
-        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+        assertThrows(ResponseStatusException.class, () -> {
+            profileService.createUser(testProfile); 
+        });
     }
 
     @Test
@@ -113,7 +117,12 @@ class ProfileServiceTest {
     void getProfileById_invalidId_throwsException() {
         Mockito.when(profileRepository.findById(Mockito.any())).thenReturn(java.util.Optional.empty());
 
-        assertThrows(ResponseStatusException.class, () -> profileService.getProfileById(testProfile.getId()));
+        // Must be done like this. If testProfile.getId() is used directly, sonar will complain.
+        UUID uuid = testProfile.getId();
+
+        assertThrows(ResponseStatusException.class, () -> { 
+            profileService.getProfileById(uuid); 
+        });
     }
 
     @Test
@@ -147,7 +156,12 @@ class ProfileServiceTest {
     void loadUserByUsername_InvalidEmail_throwsException() {
         Mockito.when(profileRepository.findById(Mockito.any())).thenReturn(null);
 
-        assertThrows(UsernameNotFoundException.class, () -> profileService.loadUserByUsername(testProfile.getEmail()));  
+        // Must be done like this. If testProfile.getEmail() is used directly, sonar will complain.
+        String userEmail = testProfile.getEmail();
+
+        assertThrows(UsernameNotFoundException.class, () -> {
+            profileService.loadUserByUsername(userEmail);
+        });   
     }
 
     @Test
