@@ -26,8 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingFilterGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPutDTO;
@@ -44,7 +46,8 @@ public class ListingsController {
     private ProfileService profileService;
     private BlobUploaderService blobUploaderService;
 
-    ListingsController(ListingService listingService, ProfileService profileService, BlobUploaderService blobUploaderService) {
+    ListingsController(ListingService listingService, ProfileService profileService,
+            BlobUploaderService blobUploaderService) {
         this.listingService = listingService;
         this.profileService = profileService;
         this.blobUploaderService = blobUploaderService;
@@ -62,8 +65,9 @@ public class ListingsController {
     }
 
     @GetMapping("/listings")
-    public ResponseEntity<List<ListingGetDTO>> getListingById() {
-        List<ListingEntity> listingEntities = listingService.getListings();
+    public ResponseEntity<List<ListingGetDTO>> getListingById(@RequestBody ListingFilterGetDTO listingFilterGetDTO) {
+        ListingFilter listingFilter = DTOMapper.INSTANCE.convertListingFiltergetDTOToListingFilter(listingFilterGetDTO);
+        List<ListingEntity> listingEntities = listingService.getListings(listingFilter);
         List<ListingGetDTO> listingDTOs = new ArrayList<>();
         listingEntities
                 .forEach(entity -> listingDTOs.add(DTOMapper.INSTANCE.convertListingEntityToListingGetDTO(entity)));
@@ -90,32 +94,32 @@ public class ListingsController {
                 .body(null);
     }
 
-    @PutMapping(value = "/listings/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id, 
-                                                    @RequestPart("body") String updatedListing,
-                                                    @RequestPart("files") MultipartFile[] files) throws IOException {
+    @PutMapping(value = "/listings/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
+            MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id,
+            @RequestPart("body") String updatedListing,
+            @RequestPart("files") MultipartFile[] files) throws IOException {
 
         ListingPutDTO updateListing = new ListingPutDTO();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             updateListing = objectMapper.readValue(updatedListing, ListingPutDTO.class);
-        } catch(IOException e) {
+        } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        ListingEntity entityInDb =listingService.getListingById(id);
+        ListingEntity entityInDb = listingService.getListingById(id);
         List<String> existingImagesInDb = getListOfStrings(entityInDb.getImagesJson());
         List<String> updatedImages = getListOfStrings(updateListing.getImagesJson());
         List<String> toDeleteImages = new ArrayList<>(existingImagesInDb);
-        toDeleteImages.removeAll(updatedImages); 
+        toDeleteImages.removeAll(updatedImages);
 
-        try{
+        try {
             List<String> blobURLs = blobUploaderService.uploadImages(files, id.toString(), toDeleteImages);
             blobURLs.addAll(updatedImages);
             String jsonString = getJsonString(blobURLs);
             updateListing.setImagesJson(jsonString);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
@@ -125,19 +129,19 @@ public class ListingsController {
                 .body(null);
     }
 
-    private String getJsonString(List<String> blobURLs) throws JSONException{
+    private String getJsonString(List<String> blobURLs) throws JSONException {
         JSONArray jsonArray = new JSONArray();
 
         for (String blobURL : blobURLs) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("imageURL", blobURL);
-            jsonArray.put(jsonObject);    
+            jsonArray.put(jsonObject);
         }
 
         return jsonArray.toString();
     }
 
-    private List<String> getListOfStrings(String jsonString) throws com.fasterxml.jackson.core.JsonProcessingException{
+    private List<String> getListOfStrings(String jsonString) throws com.fasterxml.jackson.core.JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<String> imageURLs = new ArrayList<>();
 
@@ -151,4 +155,3 @@ public class ListingsController {
         return imageURLs;
     }
 }
-

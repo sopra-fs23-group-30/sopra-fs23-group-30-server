@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import ch.uzh.ifi.hase.soprafs23.constant.ApplicationState;
+import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ApplicationRepository;
@@ -39,7 +40,7 @@ public class ListingService {
         return newListing;
     }
 
-    public List<ListingEntity> getListings() {
+    public List<ListingEntity> getListings(ListingFilter listingFilter) {
         List<ListingEntity> listings = this.listingRepository.findAll();
         List<ListingEntity> listsToReturn = new ArrayList<>();
         for (ListingEntity listingEntity : listings) {
@@ -49,6 +50,8 @@ public class ListingService {
                 listsToReturn.add(listingEntity);
             }
         }
+        listsToReturn
+                .sort((listingA, listingB) -> (listingFilter.sortValue(listingB) - listingFilter.sortValue(listingA)));
         return listsToReturn;
     }
 

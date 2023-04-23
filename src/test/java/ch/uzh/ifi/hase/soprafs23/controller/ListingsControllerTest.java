@@ -1,6 +1,5 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
 
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,7 +19,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingFilterGetDTO;
 import ch.uzh.ifi.hase.soprafs23.service.BlobUploaderService;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
@@ -29,13 +32,13 @@ import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ContextConfiguration(classes = ListingsController.class)
 class ListingsControllerTest {
-    
+
     @Autowired
     private MockMvc mockMvc;
-    
+
     @MockBean
     private ProfileService profileService;
-    
+
     @MockBean
     private ListingService listingService;
 
@@ -43,26 +46,34 @@ class ListingsControllerTest {
     private BlobUploaderService blobUploaderService;
 
     private ListingEntity testListing;
-    
+
     @BeforeEach
     public void setup() {
         mockMvc = MockMvcBuilders
-            .standaloneSetup(new ListingsController(listingService, profileService, blobUploaderService))
-            .build();
+                .standaloneSetup(new ListingsController(listingService, profileService, blobUploaderService))
+                .build();
 
-            testListing = new ListingEntity();
-            testListing.setId(new UUID(0, 0));
-            testListing.setCreationDate(LocalDateTime.now());
+        testListing = new ListingEntity();
+        testListing.setId(new UUID(0, 0));
+        testListing.setCreationDate(LocalDateTime.now());
     }
 
     @Test
     @WithMockUser
     void getListings_validInput_thenSuccess() throws Exception {
+        ListingFilterGetDTO listingFilter = new ListingFilterGetDTO();
+        listingFilter.setSearchText("apartment");
+        listingFilter.setMaxPrice(2000);
+        listingFilter.setFlatmateCapacity(10);
+
+        String listingFilterJson = new ObjectMapper().writeValueAsString(listingFilter);
+
         MockHttpServletRequestBuilder getRequest = get("/listings")
-                .contentType(MediaType.APPLICATION_JSON);
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(listingFilterJson);
         // then
         mockMvc.perform(getRequest)
                 .andExpect(status().isOk());
     }
-    
+
 }

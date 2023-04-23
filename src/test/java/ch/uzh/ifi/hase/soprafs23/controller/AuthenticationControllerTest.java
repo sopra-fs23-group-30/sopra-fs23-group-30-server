@@ -173,12 +173,12 @@ class AuthenticationControllerTest {
         MockHttpServletRequestBuilder postRequest = post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(authenticationRequest));
-        
+
         // then
         mockMvc.perform(postRequest)
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(toGenerateToken)));
-                // .andExpect(jsonPath("$.token").value(toGenerateToken));
+        // .andExpect(jsonPath("$.token").value(toGenerateToken));
     }
 
     @Test
