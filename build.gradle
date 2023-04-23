@@ -47,6 +47,9 @@ dependencies {
              'io.jsonwebtoken:jjwt-jackson:0.11.2',
              'org.apache.commons:commons-lang3:3.0'
     implementation 'com.auth0:java-jwt:4.3.0'
+    testImplementation 'org.springframework.security:spring-security-test:5.5.1'
+
+
 
     // Azure blob storage
     implementation group: 'com.azure', name: 'azure-storage-blob', version: '12.22.0'
