@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs23.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.ignoreStubs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,20 @@ class ProfileServiceTest {
     @Test
     void createUser_duplicateName_throwsException() {
         Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
+
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+    }
+
+    @Test
+    void createUser_invalidEmailFormat_throwsException() {
+        testProfile.setEmail("invalidEmailFormat");
+
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+    }
+
+    @Test
+    void createUser_invalidPhoneFormat_throwsException() {
+        testProfile.setPhoneNumber("123456789101112131415");
 
         assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
     }
