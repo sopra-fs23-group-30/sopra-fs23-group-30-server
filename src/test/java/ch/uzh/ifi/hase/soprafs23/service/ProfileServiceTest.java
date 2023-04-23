@@ -1,77 +1,116 @@
-// package ch.uzh.ifi.hase.soprafs23.service;
+package ch.uzh.ifi.hase.soprafs23.service;
 
-// import ch.uzh.ifi.hase.soprafs23.constant.ProfileStatus;
-// import ch.uzh.ifi.hase.soprafs23.entity.Profile;
-// import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
-// import org.junit.jupiter.api.BeforeEach;
-// import org.junit.jupiter.api.Test;
-// import org.mockito.InjectMocks;
-// import org.mockito.Mock;
-// import org.mockito.Mockito;
-// import org.mockito.MockitoAnnotations;
-// import org.springframework.web.server.ResponseStatusException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-// import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-// public class ProfileServiceTest {
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
 
-//     @Mock
-//     private ProfileRepository profileRepository;
+import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
+import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfileLifespanDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfilePutDTO;
 
-//     @InjectMocks
-//     private ProfileService profileService;
+class ProfileServiceTest {
 
-//     private Profile testProfile;
+    @Mock
+    private ProfileRepository profileRepository;
 
-//     @BeforeEach
-//     public void setup() {
-//         MockitoAnnotations.openMocks(this);
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
-//         testProfile = new Profile();
-//         testProfile.setId(1L);
-//         testProfile.setFirstname("test");
-//         testProfile.setLastname("name");
-//         testProfile.setEmail("test.name@example.com");
-//         testProfile.setPhoneNumber("0791234567");
-//         testProfile.setPassword("OneTwoThree");
-//         testProfile.setSearcher(false);
+    @Mock
+    private ProfileLifespanService profileLifespanService;
 
-//         Mockito.when(profileRepository.save(Mockito.any())).thenReturn(testProfile);
-//     }
+    @InjectMocks
+    private ProfileService profileService;
 
-//     @Test
-//     public void createUser_validInputs_success() {
-//         Profile createdProfile = profileService.createUser(testProfile);
+    private ProfileEntity testProfile;
 
-//         Mockito.verify(profileRepository, Mockito.times(1)).save(Mockito.any());
+    @BeforeEach
+    void setup() {
+        MockitoAnnotations.openMocks(this);
 
-//         assertEquals(testProfile.getId(), createdProfile.getId());
-//         assertEquals(testProfile.getFirstname(), createdProfile.getFirstname());
-//         assertEquals(testProfile.getLastname(), createdProfile.getLastname());
-//         assertEquals(testProfile.getEmail(), createdProfile.getEmail());
-//         assertEquals(testProfile.getPhoneNumber(), createdProfile.getPhoneNumber());
-//         assertEquals(testProfile.getPassword(), createdProfile.getPassword());
-//         assertEquals(testProfile.isSearcher(), createdProfile.isSearcher());
-//         assertNotNull(createdProfile.getToken());
-//         assertEquals(ProfileStatus.OFFLINE, createdProfile.getStatus());
-//     }
+        testProfile = new ProfileEntity();
+        testProfile.setId(new UUID(0, 0));
+        testProfile.setFirstname("test");
+        testProfile.setLastname("name");
+        testProfile.setEmail("test.name@example.com");
+        testProfile.setPhoneNumber("+41 79 123 45 67");
+        testProfile.setPassword("OneTwoThree");
+        testProfile.setIsSearcher(false);
 
-//     @Test
-//     public void createUser_duplicateName_throwsException() {
-//         profileService.createUser(testProfile);
+        Mockito.when(profileRepository.save(Mockito.any())).thenReturn(testProfile);
+    }
 
-//         Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
+    @Test
+    void createUser_validInputs_success() {
+        ProfileEntity createdProfile = profileService.createUser(testProfile);
 
-//         assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
-//     }
+        Mockito.verify(profileRepository, Mockito.times(1)).save(Mockito.any());
 
-//     @Test
-//     public void createUser_duplicateInputs_throwsException() {
-//         profileService.createUser(testProfile);
+        assertEquals(testProfile.getId(), createdProfile.getId());
+        assertEquals(testProfile.getFirstname(), createdProfile.getFirstname());
+        assertEquals(testProfile.getLastname(), createdProfile.getLastname());
+        assertEquals(testProfile.getEmail(), createdProfile.getEmail());
+        assertEquals(testProfile.getPhoneNumber(), createdProfile.getPhoneNumber());
+        assertEquals(testProfile.getPassword(), createdProfile.getPassword());
+        assertEquals(testProfile.getIsSearcher(), createdProfile.getIsSearcher());
+    }
 
-//         Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
+    @Test
+    void createUser_duplicateName_throwsException() {
+        Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
 
-//         assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
-//     }
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));
+    }
 
-// }
+    @Test
+    void getProfileById_validId_success() {
+        Mockito.when(profileRepository.findById(Mockito.any())).thenReturn(java.util.Optional.of(testProfile));
+
+        ProfileEntity foundProfile = profileService.getProfileById(testProfile.getId());
+
+        assertEquals(testProfile.getId(), foundProfile.getId());
+        assertEquals(testProfile.getFirstname(), foundProfile.getFirstname());
+        assertEquals(testProfile.getLastname(), foundProfile.getLastname());
+        assertEquals(testProfile.getEmail(), foundProfile.getEmail());
+        assertEquals(testProfile.getPhoneNumber(), foundProfile.getPhoneNumber());
+        assertEquals(testProfile.getPassword(), foundProfile.getPassword());
+        assertEquals(testProfile.getIsSearcher(), foundProfile.getIsSearcher());
+    }
+
+    @Test
+    void getProfileById_invalidId_throwsException() {
+        Mockito.when(profileRepository.findById(Mockito.any())).thenReturn(java.util.Optional.empty());
+
+        assertThrows(ResponseStatusException.class, () -> profileService.getProfileById(testProfile.getId()));
+    }
+
+    @Test
+    void updateProfile_validInput_success() {
+        Mockito.when(profileRepository.findById(Mockito.any())).thenReturn(java.util.Optional.of(testProfile));
+
+        ProfilePutDTO updatedProfile = new ProfilePutDTO();
+        updatedProfile.setFirstname("updated");
+        updatedProfile.setLastname("name");
+        List<ProfileLifespanDTO> lifespans = new ArrayList<ProfileLifespanDTO>();
+        updatedProfile.setLifespans(lifespans);
+
+        profileService.updateProfile(testProfile.getId(), updatedProfile);
+
+        assertEquals("updated", updatedProfile.getFirstname());
+        assertEquals("name", updatedProfile.getLastname());
+    }
+
+}
