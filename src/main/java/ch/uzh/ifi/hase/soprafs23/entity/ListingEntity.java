@@ -52,6 +52,9 @@ public class ListingEntity implements Serializable {
     @Column(nullable = false)
     private float pricePerMonth;
 
+    @Column(columnDefinition = "varchar(max)", nullable = false)
+    private String imagesJson;
+
     @Column(nullable = false)
     private String perfectFlatmateDescription;
 
@@ -145,5 +148,13 @@ public class ListingEntity implements Serializable {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getImagesJson() {
+        return imagesJson;
+    }
+
+    public void setImagesJson(String imagesJson) {
+        this.imagesJson = imagesJson;
     }
 }

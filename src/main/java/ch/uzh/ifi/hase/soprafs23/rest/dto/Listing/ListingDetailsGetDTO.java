@@ -22,6 +22,7 @@ public class ListingDetailsGetDTO {
     private String profilePictureURL;
 
     private UUID listerId;
+    private String imagesJson;
 
     public UUID getListerId() {
         return listerId;
@@ -141,5 +142,13 @@ public class ListingDetailsGetDTO {
 
     public void setProfilePictureURL(String profilePictureURL) {
         this.profilePictureURL = profilePictureURL;
+    }
+
+    public String getImagesJson() {
+        return imagesJson;
+    }
+
+    public void setImagesJson(String imagesJson) {
+        this.imagesJson = imagesJson;
     }
 }

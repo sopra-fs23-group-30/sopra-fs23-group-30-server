@@ -13,6 +13,7 @@ public class ListingPostDTO {
     private float pricePerMonth;
     private String perfectFlatmateDescription;
     private UUID listerId;
+    private String imagesJson;
 
     public String getTitle() {
         return title;
@@ -84,5 +85,13 @@ public class ListingPostDTO {
 
     public void setListerId(UUID listerId) {
         this.listerId = listerId;
+    }
+
+    public String getImagesJson() {
+        return imagesJson;
+    }
+
+    public void setImagesJson(String imagesJson) {
+        this.imagesJson = imagesJson;
     }
 }

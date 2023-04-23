@@ -83,6 +83,7 @@ public interface DTOMapper {
   @Mapping(source = "cityName", target = "cityName")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
+  @Mapping(source = "imagesJson", target = "imagesJson")
   @Mapping(target = "creationDate", ignore = true)
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "lister", ignore = true)
@@ -103,6 +104,8 @@ public interface DTOMapper {
   @Mapping(source = "lister.id", target = "listerId")
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "lister.profilePictureURL", target = "profilePictureURL")
+  @Mapping(source = "imagesJson", target = "imagesJson")
+
   ListingDetailsGetDTO convertListingEntityToListingDetailsGetDTO(ListingEntity listing);
 
   @Mapping(source = "id", target = "id")
@@ -112,6 +115,7 @@ public interface DTOMapper {
   @Mapping(source = "zipCode", target = "zipCode")
   @Mapping(source = "cityName", target = "cityName")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
+  @Mapping(source = "imagesJson", target = "imagesJson")
   ListingGetDTO convertListingEntityToListingGetDTO(ListingEntity listing);
 
   @Mapping(source = "applicantId", target = "applicant.id")
