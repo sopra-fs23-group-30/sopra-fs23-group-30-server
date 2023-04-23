@@ -75,27 +75,21 @@ class ProfileServiceTest {
     void createUser_duplicateName_throwsException() {
         Mockito.when(profileRepository.findByEmail(Mockito.any())).thenReturn(testProfile);
 
-        assertThrows(ResponseStatusException.class, () -> {
-            profileService.createUser(testProfile); 
-        });    
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));    
     }
 
     @Test
     void createUser_invalidEmailFormat_throwsException() {
         testProfile.setEmail("invalidEmailFormat");
 
-        assertThrows(ResponseStatusException.class, () -> {
-            profileService.createUser(testProfile); 
-        });    
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile));    
     }
 
     @Test
     void createUser_invalidPhoneFormat_throwsException() {
         testProfile.setPhoneNumber("123456789101112131415");
 
-        assertThrows(ResponseStatusException.class, () -> {
-            profileService.createUser(testProfile); 
-        });
+        assertThrows(ResponseStatusException.class, () -> profileService.createUser(testProfile)); 
     }
 
     @Test
