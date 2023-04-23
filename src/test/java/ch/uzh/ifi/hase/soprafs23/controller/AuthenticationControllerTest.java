@@ -182,7 +182,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    public void givenEmailDisabled_whenLoginUser_thenThrowDisabledException() throws Exception {
+    void givenEmailDisabled_whenLoginUser_thenThrowDisabledException() throws Exception {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
@@ -215,7 +215,7 @@ class AuthenticationControllerTest {
     }
 
     @Test
-    public void givenEmailAndPasswordInvalid_whenLoginUser_thenThrowUnauthenticatedException() throws Exception {
+    void givenEmailAndPasswordInvalid_whenLoginUser_thenThrowUnauthenticatedException() throws Exception {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
