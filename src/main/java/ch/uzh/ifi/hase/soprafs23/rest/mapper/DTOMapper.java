@@ -47,6 +47,7 @@ public interface DTOMapper {
   @Mapping(target = "birthday", ignore = true)
   @Mapping(target = "futureFlatmatesDescription", ignore = true)
   @Mapping(target = "gender", ignore = true)
+  @Mapping(target = "profilePictureURL", ignore = true)
   ProfileEntity convertRegisterProfileDTOtoEntity(RegisterPostDTO registerProfileDTO);
 
   @Mapping(source = "email", target = "email")
@@ -82,7 +83,7 @@ public interface DTOMapper {
   @Mapping(source = "cityName", target = "cityName")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
-  // @Mapping(source = "documentURLs", target = "documentURLs")
+  @Mapping(source = "imagesJson", target = "imagesJson")
   @Mapping(target = "creationDate", ignore = true)
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "lister", ignore = true)
@@ -100,6 +101,7 @@ public interface DTOMapper {
   @Mapping(source = "lister.lastname", target = "listerLastname")
   @Mapping(source = "lister.id", target = "listerId")
   @Mapping(source = "creationDate", target = "creationDate")
+  @Mapping(source = "imagesJson", target = "imagesJson")
   ListingDetailsGetDTO convertListingEntityToListingDetailsGetDTO(ListingEntity listing);
 
   @Mapping(source = "id", target = "id")
@@ -109,6 +111,7 @@ public interface DTOMapper {
   @Mapping(source = "zipCode", target = "zipCode")
   @Mapping(source = "cityName", target = "cityName")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
+  @Mapping(source = "imagesJson", target = "imagesJson")
   ListingGetDTO convertListingEntityToListingGetDTO(ListingEntity listing);
 
   @Mapping(source = "applicantId", target = "applicant.id")

@@ -2,7 +2,6 @@ package ch.uzh.ifi.hase.soprafs23.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -53,15 +52,15 @@ public class ListingEntity implements Serializable {
     @Column(nullable = false)
     private float pricePerMonth;
 
+    @Column(columnDefinition = "varchar(max)", nullable = false)
+    private String imagesJson;
+
     @Column(nullable = false)
     private String perfectFlatmateDescription;
 
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime creationDate;
-
-    // @Column(nullable = true)
-    // private List<String> documentURLs;
 
     public UUID getId() {
         return id;
@@ -151,11 +150,11 @@ public class ListingEntity implements Serializable {
         this.creationDate = creationDate;
     }
 
-    // public void setDocumentURLs(List<String> documentURLs) {
-    //     this.documentURLs = documentURLs;
-    // }
+    public String getImagesJson() {
+        return imagesJson;
+    }
 
-    // public List<String> getDocumentURLs() {
-    //     return documentURLs;
-    // }
+    public void setImagesJson(String imagesJson) {
+        this.imagesJson = imagesJson;
+    }
 }

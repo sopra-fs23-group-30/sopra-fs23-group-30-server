@@ -11,6 +11,7 @@ public class ListingGetDTO {
     private int zipCode;
     private String cityName;
     private float pricePerMonth;
+    private String imagesJson;
 
     public UUID getId() {
         return id;
@@ -66,5 +67,13 @@ public class ListingGetDTO {
 
     public void setPricePerMonth(float pricePerMonth) {
         this.pricePerMonth = pricePerMonth;
+    }
+
+    public String getImagesJson() {
+        return imagesJson;
+    }
+
+    public void setImagesJson(String imagesJson) {
+        this.imagesJson = imagesJson;
     }
 }

@@ -17,6 +17,7 @@ public class ListingDetailsGetDTO {
     private String listerFirstname;
     private String listerLastname;
     private UUID listerId;
+    private String imagesJson;
 
     public UUID getListerId() {
         return listerId;
@@ -112,6 +113,14 @@ public class ListingDetailsGetDTO {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getImagesJson() {
+        return imagesJson;
+    }
+
+    public void setImagesJson(String imagesJson) {
+        this.imagesJson = imagesJson;
     }
 
 }
