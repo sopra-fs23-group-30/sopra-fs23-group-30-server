@@ -1,5 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.rest.dto.listing;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ListingPostDTO {
@@ -13,6 +14,7 @@ public class ListingPostDTO {
     private float pricePerMonth;
     private String perfectFlatmateDescription;
     private UUID listerId;
+    // private List<String> documentURLs;
 
     public String getTitle() {
         return title;
@@ -85,4 +87,12 @@ public class ListingPostDTO {
     public void setListerId(UUID listerId) {
         this.listerId = listerId;
     }
+
+    // public void setDocumentURLs(List<String> documentURLs) {
+    //     this.documentURLs = documentURLs;
+    // }
+
+    // public List<String> getDocumentURLs() {
+    //     return documentURLs;
+    // }
 }

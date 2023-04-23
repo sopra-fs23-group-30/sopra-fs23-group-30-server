@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs23.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -58,6 +59,9 @@ public class ListingEntity implements Serializable {
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime creationDate;
+
+    // @Column(nullable = true)
+    // private List<String> documentURLs;
 
     public UUID getId() {
         return id;
@@ -146,4 +150,12 @@ public class ListingEntity implements Serializable {
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
+
+    // public void setDocumentURLs(List<String> documentURLs) {
+    //     this.documentURLs = documentURLs;
+    // }
+
+    // public List<String> getDocumentURLs() {
+    //     return documentURLs;
+    // }
 }

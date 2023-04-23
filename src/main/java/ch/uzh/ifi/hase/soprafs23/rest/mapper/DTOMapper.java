@@ -82,6 +82,7 @@ public interface DTOMapper {
   @Mapping(source = "cityName", target = "cityName")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
+  // @Mapping(source = "documentURLs", target = "documentURLs")
   @Mapping(target = "creationDate", ignore = true)
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "lister", ignore = true)
