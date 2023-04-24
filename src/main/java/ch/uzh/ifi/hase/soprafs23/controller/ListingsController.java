@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,8 +66,15 @@ public class ListingsController {
     }
 
     @GetMapping("/listings")
-    public ResponseEntity<List<ListingGetDTO>> getListingById(@RequestBody ListingFilterGetDTO listingFilterGetDTO) {
-        ListingFilter listingFilter = DTOMapper.INSTANCE.convertListingFiltergetDTOToListingFilter(listingFilterGetDTO);
+    public ResponseEntity<List<ListingGetDTO>> getListingById(
+            @RequestParam String searchText,
+            @RequestParam Float maxRentPerMonth,
+            @RequestParam int flatmateCapacity) {
+        ListingFilter listingFilter = new ListingFilter();
+        listingFilter.setSearchText(searchText);
+        listingFilter.setMaxRentPerMonth(maxRentPerMonth);
+        listingFilter.setFlatmateCapacity(flatmateCapacity);
+
         List<ListingEntity> listingEntities = listingService.getListings(listingFilter);
         List<ListingGetDTO> listingDTOs = new ArrayList<>();
         listingEntities

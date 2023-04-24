@@ -55,7 +55,7 @@ public class ListingService {
                     int aValue = listingFilter.sortValue(listingA);
                     int bValue = listingFilter.sortValue(listingB);
                     int sortValue = bValue - aValue;
-                    if (sortValue < bValue) {
+                    if (sortValue <= bValue) {
                         return sortValue;
                     }
                     return Integer.MAX_VALUE - sortValue;
