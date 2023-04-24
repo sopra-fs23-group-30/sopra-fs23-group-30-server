@@ -11,8 +11,8 @@ Delia Datsomor:
     - [x] #7 FE 
     - [x] #18 FE 
 - Week 3
-    - [ ] #78 FE 
-    - [ ] #55 FE
+    - [x] #25 FE (Prior #78)
+    - [x] #56 FE (Prior #55)
 
 Rafael:
 - Week 1
@@ -31,8 +31,9 @@ Rafael:
     - [x] #27 (paired) BE (voraus)
     - [x] #26 (paired) BE (voraus)
     - [x] #30 (paired) BE (voraus)
-    - [ ] #52 BE
-    - [ ] #57 BE
+    - [x] #29 FE (prior #52)
+    - [x] #30 FE 
+    - [x] #31 FE (prior #57)
 
 Mathias:
 - Week 1
@@ -52,8 +53,8 @@ Mathias:
     - [x] #27 (paired) BE (voraus)
     - [x] #26 (paired) BE (voraus)
     - [x] #30 (paired) BE (voraus)
-    - [ ] #19 BE
-    - [ ] 
+    - [x] #19 BE
+    - [x] #18 FE 
 
 Mika:
 - Week 1
@@ -71,8 +72,8 @@ Mika:
     - [x] #27 (paired) BE (voraus)
     - [x] #26 (paired) BE (voraus)
     - [x] #30 (paired) BE (voraus)
-    - [ ] #61 BE
-    - [ ] #64 BE 
+    - [x] #61 BE
+    - [x] #64 BE 
 
 Fatih:
 - Week 1
@@ -83,5 +84,5 @@ Fatih:
     - [x] #25 FE (connected components with backend -> commit on User Story)
     - [x] #24 FE 
 - Week 3
-    - [ ] #14 FE
-    - [ ] #53 FE
+    - [x] #28 FE -> (prior #54)
+    - [x] #27 FE -> (prior #53) 
