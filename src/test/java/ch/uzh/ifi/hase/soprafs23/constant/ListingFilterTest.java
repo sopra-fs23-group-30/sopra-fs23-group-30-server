@@ -12,7 +12,7 @@ public class ListingFilterTest {
         ListingFilter listingFilter = new ListingFilter();
         listingFilter.setSearchText("Hello world");
         listingFilter.setFlatmateCapacity(10);
-        listingFilter.setMaxPrice(2000);
+        listingFilter.setMaxRentPerMonth(2000);
 
         ListingEntity listingEntity = new ListingEntity();
         listingEntity.setPricePerMonth(1500);
@@ -28,7 +28,7 @@ public class ListingFilterTest {
         ListingFilter listingFilter = new ListingFilter();
         listingFilter.setSearchText("Hello world");
         listingFilter.setFlatmateCapacity(10);
-        listingFilter.setMaxPrice(2000);
+        listingFilter.setMaxRentPerMonth(2000);
 
         ListingEntity listingEntity = new ListingEntity();
         listingEntity.setPricePerMonth(2500);

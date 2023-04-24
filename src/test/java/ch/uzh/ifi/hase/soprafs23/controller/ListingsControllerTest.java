@@ -63,7 +63,7 @@ class ListingsControllerTest {
     void getListings_validInput_thenSuccess() throws Exception {
         ListingFilterGetDTO listingFilter = new ListingFilterGetDTO();
         listingFilter.setSearchText("apartment");
-        listingFilter.setMaxPrice(2000);
+        listingFilter.setMaxRentPerMonth(2000);
         listingFilter.setFlatmateCapacity(10);
 
         String listingFilterJson = new ObjectMapper().writeValueAsString(listingFilter);

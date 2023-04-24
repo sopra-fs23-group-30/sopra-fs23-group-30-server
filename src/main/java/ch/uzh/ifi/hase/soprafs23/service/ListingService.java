@@ -58,7 +58,7 @@ public class ListingService {
                     if (sortValue < bValue) {
                         return sortValue;
                     }
-                    return Integer.MIN_VALUE;
+                    return Integer.MAX_VALUE - sortValue;
                 });
         return listsToReturn;
     }

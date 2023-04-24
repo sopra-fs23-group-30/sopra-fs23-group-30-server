@@ -7,7 +7,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 
 public class ListingFilter {
     private String searchText;
-    private float maxPrice;
+    private float maxRentPerMonth;
     private int flatmateCapacity;
     private List<String> keywords;
 
@@ -20,12 +20,12 @@ public class ListingFilter {
         this.keywords = Arrays.asList(searchText.split(" "));
     }
 
-    public float getMaxPrice() {
-        return maxPrice;
+    public float getMaxRentPerMonth() {
+        return maxRentPerMonth;
     }
 
-    public void setMaxPrice(float maxPrice) {
-        this.maxPrice = maxPrice;
+    public void setMaxRentPerMonth(float maxPrice) {
+        this.maxRentPerMonth = maxPrice;
     }
 
     public int getFlatmateCapacity() {
@@ -52,7 +52,7 @@ public class ListingFilter {
 
     private boolean listingIsApplicable(ListingEntity listingEntity) {
         // TODO: Flatmate capacity
-        if (listingEntity.getPricePerMonth() > maxPrice) {
+        if (listingEntity.getPricePerMonth() > maxRentPerMonth) {
             return false;
         }
         return true;

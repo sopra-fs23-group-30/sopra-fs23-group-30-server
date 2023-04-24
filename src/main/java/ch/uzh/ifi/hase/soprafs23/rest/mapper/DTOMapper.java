@@ -164,7 +164,7 @@ public interface DTOMapper {
   ProfileLifespanEntity convertLifespanDTOToLifespanEntity(ProfileLifespanDTO profileLifespanDTO);
 
   @Mapping(source = "searchText", target = "searchText")
-  @Mapping(source = "maxPrice", target = "maxPrice")
+  @Mapping(source = "maxRentPerMonth", target = "maxRentPerMonth")
   @Mapping(source = "flatmateCapacity", target = "flatmateCapacity")
   ListingFilter convertListingFiltergetDTOToListingFilter(ListingFilterGetDTO listingFilterGetDTO);
 }
