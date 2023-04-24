@@ -13,17 +13,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingFilterGetDTO;
 import ch.uzh.ifi.hase.soprafs23.service.BlobUploaderService;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
@@ -59,21 +54,19 @@ class ListingsControllerTest {
     }
 
     @Test
-    @WithMockUser
+    // @WithMockUser
     void getListings_validInput_thenSuccess() throws Exception {
-        ListingFilterGetDTO listingFilter = new ListingFilterGetDTO();
-        listingFilter.setSearchText("apartment");
-        listingFilter.setMaxRentPerMonth(2000);
-        listingFilter.setFlatmateCapacity(10);
-
-        String listingFilterJson = new ObjectMapper().writeValueAsString(listingFilter);
+        String searchText = "apartment";
+        Float maxRentPerMonth = 2000.0f;
+        Integer flatmateCapacity = 10;
 
         MockHttpServletRequestBuilder getRequest = get("/listings")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(listingFilterJson);
+                .param("searchText", searchText)
+                .param("maxRentPerMonth", maxRentPerMonth.toString())
+                .param("flatmateCapacity", flatmateCapacity.toString());
         // then
         mockMvc.perform(getRequest)
                 .andExpect(status().isOk());
     }
-
 }

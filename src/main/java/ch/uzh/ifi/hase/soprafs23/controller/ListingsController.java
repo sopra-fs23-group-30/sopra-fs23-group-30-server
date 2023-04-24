@@ -30,7 +30,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingFilterGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPutDTO;
