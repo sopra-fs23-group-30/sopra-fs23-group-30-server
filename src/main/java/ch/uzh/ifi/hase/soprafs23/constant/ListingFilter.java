@@ -1,11 +1,16 @@
 package ch.uzh.ifi.hase.soprafs23.constant;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 
 public class ListingFilter {
     private String searchText;
     private float maxPrice;
     private int flatmateCapacity;
+    private List<String> keywords;
 
     public String getSearchText() {
         return searchText;
@@ -13,6 +18,7 @@ public class ListingFilter {
 
     public void setSearchText(String searchText) {
         this.searchText = searchText;
+        this.keywords = Arrays.asList(searchText.split(" "));
     }
 
     public float getMaxPrice() {
@@ -36,9 +42,11 @@ public class ListingFilter {
             return Integer.MIN_VALUE;
         }
         int value = 0;
-        value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getTitle(), searchText);
-        value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getDescription(), searchText);
-        value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getPerfectFlatmateDescription(), searchText);
+        for (String keyword : keywords) {
+            value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getTitle(), keyword);
+            value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getDescription(), keyword);
+            value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getPerfectFlatmateDescription(), keyword);
+        }
 
         return value;
     }
