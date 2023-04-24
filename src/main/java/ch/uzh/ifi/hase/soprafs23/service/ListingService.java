@@ -51,7 +51,15 @@ public class ListingService {
             }
         }
         listsToReturn
-                .sort((listingA, listingB) -> (listingFilter.sortValue(listingB) - listingFilter.sortValue(listingA)));
+                .sort((listingA, listingB) -> {
+                    int aValue = listingFilter.sortValue(listingA);
+                    int bValue = listingFilter.sortValue(listingB);
+                    int sortValue = bValue - aValue;
+                    if (sortValue < bValue) {
+                        return sortValue;
+                    }
+                    return Integer.MIN_VALUE;
+                });
         return listsToReturn;
     }
 
