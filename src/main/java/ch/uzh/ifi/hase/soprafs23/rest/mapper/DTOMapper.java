@@ -4,7 +4,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
@@ -13,7 +12,6 @@ import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingFilterGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingOverviewGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPostDTO;
@@ -162,9 +160,4 @@ public interface DTOMapper {
   @Mapping(source = "text", target = "text")
   @Mapping(target = "profile", ignore = true)
   ProfileLifespanEntity convertLifespanDTOToLifespanEntity(ProfileLifespanDTO profileLifespanDTO);
-
-  @Mapping(source = "searchText", target = "searchText")
-  @Mapping(source = "maxRentPerMonth", target = "maxRentPerMonth")
-  @Mapping(source = "flatmateCapacity", target = "flatmateCapacity")
-  ListingFilter convertListingFiltergetDTOToListingFilter(ListingFilterGetDTO listingFilterGetDTO);
 }

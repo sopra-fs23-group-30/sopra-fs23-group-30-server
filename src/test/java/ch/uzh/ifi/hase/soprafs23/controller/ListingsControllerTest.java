@@ -65,5 +65,4 @@ class ListingsControllerTest {
     // mockMvc.perform(getRequest)
     // .andExpect(status().isOk());
     // }
-
 }
