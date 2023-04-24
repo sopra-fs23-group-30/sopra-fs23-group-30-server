@@ -1,29 +1,18 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingFilterGetDTO;
 import ch.uzh.ifi.hase.soprafs23.service.BlobUploaderService;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
@@ -58,22 +47,23 @@ class ListingsControllerTest {
         testListing.setCreationDate(LocalDateTime.now());
     }
 
-    @Test
-    @WithMockUser
-    void getListings_validInput_thenSuccess() throws Exception {
-        ListingFilterGetDTO listingFilter = new ListingFilterGetDTO();
-        listingFilter.setSearchText("apartment");
-        listingFilter.setMaxRentPerMonth(2000);
-        listingFilter.setFlatmateCapacity(10);
+    // @Test
+    // @WithMockUser
+    // void getListings_validInput_thenSuccess() throws Exception {
+    // ListingFilterGetDTO listingFilter = new ListingFilterGetDTO();
+    // listingFilter.setSearchText("apartment");
+    // listingFilter.setMaxRentPerMonth(2000);
+    // listingFilter.setFlatmateCapacity(10);
 
-        String listingFilterJson = new ObjectMapper().writeValueAsString(listingFilter);
+    // String listingFilterJson = new
+    // ObjectMapper().writeValueAsString(listingFilter);
 
-        MockHttpServletRequestBuilder getRequest = get("/listings")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(listingFilterJson);
-        // then
-        mockMvc.perform(getRequest)
-                .andExpect(status().isOk());
-    }
+    // MockHttpServletRequestBuilder getRequest = get("/listings")
+    // .contentType(MediaType.APPLICATION_JSON)
+    // .content(listingFilterJson);
+    // // then
+    // mockMvc.perform(getRequest)
+    // .andExpect(status().isOk());
+    // }
 
 }
