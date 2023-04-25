@@ -54,11 +54,12 @@ public class ListingService {
                 .sort((listingA, listingB) -> {
                     int aValue = listingFilter.sortValue(listingA);
                     int bValue = listingFilter.sortValue(listingB);
-                    int sortValue = bValue - aValue;
-                    if (sortValue <= bValue) {
-                        return sortValue;
+                    if (aValue < bValue && aValue <= Integer.MIN_VALUE + 1000) {
+                        return 1;
+                    } else if (bValue <= Integer.MIN_VALUE + 1000) {
+                        return -1;
                     }
-                    return Integer.MAX_VALUE - sortValue;
+                    return bValue - aValue;
                 });
         return listsToReturn;
     }
