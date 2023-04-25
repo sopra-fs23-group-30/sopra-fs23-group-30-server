@@ -84,9 +84,9 @@ class ApplicationServiceTest {
     @Test
     void getApplicationById_validInput_thenSuccess() {
         Mockito.when(applicationRepository.findById(Mockito.any())).thenReturn(java.util.Optional.of(testApplication));
-
+        
         ApplicationEntity foundApplication = applicationService.getApplicationById(testApplication.getId());
-
+        
         assertEquals(testApplication.getId(), foundApplication.getId());
         assertEquals(testApplication.getApplicant(), foundApplication.getApplicant());
         assertEquals(testApplication.getListing(), foundApplication.getListing());
@@ -98,8 +98,73 @@ class ApplicationServiceTest {
         Mockito.when(applicationRepository.findById(Mockito.any())).thenReturn(java.util.Optional.empty());
 
         UUID applicationId = testApplication.getId();
-
+        
         assertThrows(ResponseStatusException.class, () -> applicationService.getApplicationById(applicationId));
     }
+    
+    @Test
+    void updateApplication_validInput_success() {
+        Mockito.when(applicationRepository.findById(Mockito.any())).thenReturn(java.util.Optional.of(testApplication));
 
+        applicationService.updateApplication(testApplication, ApplicationState.DECLINED);
+
+        assertEquals(ApplicationState.DECLINED, testApplication.getState());
+    }
+    
+    @Test
+    void updateApplication_invalidInput_success() {
+        Mockito.when(applicationRepository.findById(Mockito.any())).thenReturn(java.util.Optional.of(testApplication));
+
+        assertThrows(ResponseStatusException.class, () -> applicationService.updateApplication(testApplication, ApplicationState.PENDING));
+    }
+
+    @Test
+    void getAllApplicationsByProfileId_validInput_success() {
+        List<ApplicationEntity> applications = new ArrayList<>();
+        applications.add(testApplication);
+
+        Mockito.when(applicationRepository.findByApplicantId(testApplication.getApplicant().getId())).thenReturn(applications);
+
+        List<ApplicationEntity> recieved = applicationService.getAllApplicationsByProfileId(testApplication.getApplicant().getId());
+        ApplicationEntity foundApplication = recieved.get(0);
+
+        assertEquals(testApplication.getId(), foundApplication.getId());
+        assertEquals(testApplication.getApplicant(), foundApplication.getApplicant());
+        assertEquals(testApplication.getListing(), foundApplication.getListing());
+        assertEquals(testApplication.getState(), foundApplication.getState());
+    }
+
+    @Test
+    void getAllApplicationsByProfileId_invalidInput_success() {
+        Mockito.when(applicationRepository.findByApplicantId(testApplication.getApplicant().getId())).thenReturn(new ArrayList<>());
+
+        List<ApplicationEntity> recieved = applicationService.getAllApplicationsByProfileId(testApplication.getApplicant().getId());
+        
+        assertEquals(0, recieved.size());
+    }
+
+    @Test
+    void getAllApplicationsByListingId_validInput_success() {
+        List<ApplicationEntity> applications = new ArrayList<>();
+        applications.add(testApplication);
+
+        Mockito.when(applicationRepository.findByApplicantId(testApplication.getListing().getId())).thenReturn(applications);
+
+        List<ApplicationEntity> recieved = applicationService.getAllApplicationsByProfileId(testApplication.getListing().getId());
+        ApplicationEntity foundApplication = recieved.get(0);
+
+        assertEquals(testApplication.getId(), foundApplication.getId());
+        assertEquals(testApplication.getApplicant(), foundApplication.getApplicant());
+        assertEquals(testApplication.getListing(), foundApplication.getListing());
+        assertEquals(testApplication.getState(), foundApplication.getState());
+    }
+
+    @Test
+    void getAllApplicationsByListingId_invalidInput_success() {
+        Mockito.when(applicationRepository.findByApplicantId(testApplication.getApplicant().getId())).thenReturn(new ArrayList<>());
+        
+        List<ApplicationEntity> recieved = applicationService.getAllApplicationsByProfileId(testApplication.getApplicant().getId());
+        
+        assertEquals(0, recieved.size());
+    }
 }

@@ -18,8 +18,6 @@ import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ApplicationRepository;
 import ch.uzh.ifi.hase.soprafs23.repository.ListingRepository;
-import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPutDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 
 @Service
 @Primary

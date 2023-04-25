@@ -78,7 +78,6 @@ public class ApplicationService {
                 applicationEntity.setState(ApplicationState.DECLINED);
                 this.applicationRepository.save(applicationEntity);
             }
-
         }
     }
 }

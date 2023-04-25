@@ -54,7 +54,7 @@ public class ApplicationRepositoryTest {
         listingEntity.setPerfectFlatmateDescription("Some person");
         entityManager.persist(listingEntity);
         entityManager.flush();
-
+        
         profileEntity = new ProfileEntity();
         profileEntity.setFirstname("test");
         profileEntity.setLastname("name");
@@ -63,6 +63,7 @@ public class ApplicationRepositoryTest {
         profileEntity.setPassword("OneTwoThree");
         profileEntity.setIsSearcher(false);
         entityManager.persist(profileEntity);
+        entityManager.flush();
     }
 
     @Test
