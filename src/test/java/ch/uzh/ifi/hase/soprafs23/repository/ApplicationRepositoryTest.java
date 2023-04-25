@@ -18,7 +18,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DataJpaTest
-public class ApplicationRepositoryIntegrationTest {
+public class ApplicationRepositoryTest {
 
     private ListingEntity listingEntity;
     private ProfileEntity profileEntity;

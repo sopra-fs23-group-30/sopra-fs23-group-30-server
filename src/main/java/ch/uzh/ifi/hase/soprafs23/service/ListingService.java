@@ -91,9 +91,8 @@ public class ListingService {
         listingRepository.delete(foundListing.get());
     }
 
-    public void updateListing(UUID id, ListingPutDTO updatedListing) {
+    public void updateListing(UUID id, ListingEntity updatedEntity) {
         ListingEntity existingEntity = getListingById(id);
-        ListingEntity updatedEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(updatedListing);
         updatedEntity.setId(existingEntity.getId());
         updatedEntity.setCreationDate(existingEntity.getCreationDate());
         updatedEntity.setLister(existingEntity.getLister());

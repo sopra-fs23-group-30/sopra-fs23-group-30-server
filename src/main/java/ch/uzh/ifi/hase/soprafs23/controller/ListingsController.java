@@ -130,7 +130,9 @@ public class ListingsController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
 
-        listingService.updateListing(id, updateListing);
+        ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(updateListing);
+
+        listingService.updateListing(id, listingEntity);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .body(null);

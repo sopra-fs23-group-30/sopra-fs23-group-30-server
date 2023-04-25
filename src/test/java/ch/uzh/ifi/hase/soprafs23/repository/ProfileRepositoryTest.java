@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DataJpaTest
-public class ProfileRepositoryIntegrationTest {
+public class ProfileRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
