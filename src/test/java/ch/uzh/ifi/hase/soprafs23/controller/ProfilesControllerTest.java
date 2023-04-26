@@ -2,7 +2,6 @@ package ch.uzh.ifi.hase.soprafs23.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.sql.Date;
 import java.time.LocalDateTime;

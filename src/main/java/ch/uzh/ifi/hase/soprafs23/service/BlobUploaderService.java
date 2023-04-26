@@ -1,8 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -34,14 +32,14 @@ public class BlobUploaderService {
     @Value("${azure.storage.account-key}")
     private String accountKey;
 
-    public static final String storageConnectionString = "DefaultEndpointsProtocol=https;" +
+    public static final String STORAGECONNECTIONSTRING = "DefaultEndpointsProtocol=https;" +
             "AccountName=upsearchstorage;" +
             "AccountKey=USKgaMmYTFVCfN+5V0C583JzmKeaRXFwksdvD8JJ8ys624aF+VjEUeamVrWYKo7zHyvKjxtvR0zM+AStpad7AA==";
 
     public String upload(MultipartFile file, String containerName, String fileName) {
         try {
             getOrCreateContainer(containerName);
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+            CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGECONNECTIONSTRING);
 
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
@@ -59,15 +57,13 @@ public class BlobUploaderService {
 
     }
 
-    public List<String> uploadImages(MultipartFile[] files, String listingId, List<String> urlsToDelete)
-            throws IOException, URISyntaxException {
+    public List<String> uploadImages(MultipartFile[] files, String listingId, List<String> urlsToDelete) {
         // delete urls
         for (String urlToDeleteString : urlsToDelete) {
             deleteBlobByUrl(urlToDeleteString);
         }
 
         List<String> imageUrls = new ArrayList<>();
-        // BlobContainerClient container = getOrCreateContainer(listingId);
         for (MultipartFile file : files) {
             if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
                 String filename = generateUUID();
@@ -80,33 +76,28 @@ public class BlobUploaderService {
 
     public CloudBlobClient getOrCreateContainer(String containerName) throws Exception {
 
-        try {
-            // Retrieve storage account from connection-string.
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+        CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGECONNECTIONSTRING);
 
-            // Create the blob client.
-            CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+        // Create the blob client.
+        CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-            // Get a reference to a container.
-            // The container name must be lower case
-            CloudBlobContainer container = blobClient.getContainerReference(containerName);
+        // Get a reference to a container.
+        // The container name must be lower case
+        CloudBlobContainer container = blobClient.getContainerReference(containerName);
 
-            // Create the container if it does not exist.
-            container.createIfNotExists();
+        // Create the container if it does not exist.
+        container.createIfNotExists();
 
-            // Create a permissions object.
-            BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
+        // Create a permissions object.
+        BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
 
-            // Include public access in the permissions object.
-            containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
+        // Include public access in the permissions object.
+        containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
 
-            // Set the permissions on the container.
-            container.uploadPermissions(containerPermissions);
-            return blobClient;
-
-        } catch (Exception e) {
-            throw new Exception();
-        }
+        // Set the permissions on the container.
+        container.uploadPermissions(containerPermissions);
+        return blobClient;
     }
 
     private String generateUUID() {

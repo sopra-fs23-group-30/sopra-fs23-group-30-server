@@ -98,7 +98,6 @@ public class ListingService {
     }
 
     private boolean hasAcceptedState(final List<ApplicationEntity> applications) {
-        return applications.stream().filter(o -> o.getState().equals(ApplicationState.ACCEPTED)).findFirst()
-                .isPresent();
+        return applications.stream().anyMatch(o -> o.getState().equals(ApplicationState.ACCEPTED));
     }
 }
