@@ -111,7 +111,7 @@ public class ProfilesControllerTest {
         MockHttpServletRequestBuilder getRequest = get("/profiles/" + profileEntity.getId().toString());
 
         mockMvc.perform(getRequest)
-            .andExpect(status().isOk())
+            .andExpect(status().isOk());
 //            .andExpect(jsonPath("$.firstname").value(profileEntity.getFirstname()))
 //            .andExpect(jsonPath("$.lastname").value(profileEntity.getLastname()))
 //            .andExpect(jsonPath("$.birthday").value(profileEntity.getBirthday()))
@@ -149,6 +149,54 @@ public class ProfilesControllerTest {
         applicationEntities.add(applicationEntity);
 
         Mockito.when(applicationService.getAllApplicationsByProfileId(Mockito.any())).thenReturn(applicationEntities);
+
+        MockHttpServletRequestBuilder getRequest = get("/profiles/" + profileEntity.getId().toString() + "/applications");
+
+        mockMvc.perform(getRequest).andExpect(status().isOk());
+    }
+
+    @Test
+    void getListingbyProfileId_validInput_success() throws Exception {
+        String email = "test.example@gmail.com";
+        String password = "OneTwoThreeFour";
+
+        ProfileEntity profileEntity = new ProfileEntity();
+        profileEntity.setId(UUID.randomUUID());
+        profileEntity.setFirstname("Test");
+        profileEntity.setLastname("Profile");
+        profileEntity.setEmail(email);
+        profileEntity.setPhoneNumber("0781234567");
+        profileEntity.setPassword(password);
+        profileEntity.setIsSearcher(true);
+
+        ListingEntity listingEntity = new ListingEntity();
+        listingEntity.setId(UUID.randomUUID());
+        listingEntity.setLister(profileEntity);
+        listingEntity.setTitle("Nice Listing");
+        listingEntity.setDescription("Nice Listing with description");
+        listingEntity.setStreetName("Kronestutz");
+        listingEntity.setStreetNumber("1");
+        listingEntity.setZipCode(4500);
+        listingEntity.setCityName("Solothurn");
+        listingEntity.setPricePerMonth(500);
+        listingEntity.setPerfectFlatmateDescription("A person, preferably alive");
+        listingEntity.setImagesJson("");
+        listingEntity.setCreationDate(LocalDateTime.now());
+        
+        List<ListingEntity> listingEntities = new ArrayList<>();
+        listingEntities.add(listingEntity);
+
+        ApplicationEntity applicationEntity = new ApplicationEntity();
+        applicationEntity.setId(UUID.randomUUID());
+        applicationEntity.setListing(listingEntity);
+        applicationEntity.setApplicant(profileEntity);
+        applicationEntity.setCreationDate(LocalDateTime.now());
+
+        List<ApplicationEntity> applicationEntities = new ArrayList<>();
+        applicationEntities.add(applicationEntity);
+
+        Mockito.when(listingService.getListingByProfileId(Mockito.any())).thenReturn(listingEntities);
+        Mockito.when(applicationService.getAllApplicationsByListingId(Mockito.any())).thenReturn(applicationEntities);
 
         MockHttpServletRequestBuilder getRequest = get("/profiles/" + profileEntity.getId().toString() + "/applications");
 
