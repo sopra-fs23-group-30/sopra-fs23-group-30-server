@@ -65,7 +65,7 @@ public class ListingsController {
     }
 
     @GetMapping("/listings")
-    public ResponseEntity<List<ListingGetDTO>> getListingById(
+    public ResponseEntity<List<ListingGetDTO>> getListing(
             @RequestParam String searchText,
             @RequestParam Float maxRentPerMonth,
             @RequestParam int flatmateCapacity) {
