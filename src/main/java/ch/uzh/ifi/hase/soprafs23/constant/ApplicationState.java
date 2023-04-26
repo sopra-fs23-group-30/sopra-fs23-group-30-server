@@ -7,7 +7,7 @@ public enum ApplicationState {
   MOVEIN(ApplicationState::validateMoveIn);
 
   private ITransitionValidator transitionValidator;
-
+ 
   private ApplicationState(ITransitionValidator transitionValidator) {
     this.transitionValidator = transitionValidator;
   }

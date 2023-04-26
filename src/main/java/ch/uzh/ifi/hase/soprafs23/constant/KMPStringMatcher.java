@@ -1,10 +1,6 @@
 package ch.uzh.ifi.hase.soprafs23.constant;
 
 public class KMPStringMatcher {
-    public static final KMPStringMatcher INSTANCE = new KMPStringMatcher();
-
-    private KMPStringMatcher() {
-    }
 
     private int[] substringSearchPattern(String keyword) {
         int[] pattern = new int[keyword.length()];

@@ -10,6 +10,7 @@ public class ListingFilter {
     private float maxRentPerMonth;
     private int flatmateCapacity;
     private List<String> keywords;
+    private KMPStringMatcher stringMatcher = new KMPStringMatcher();
 
     public String getSearchText() {
         return searchText;
@@ -42,9 +43,9 @@ public class ListingFilter {
         }
         int value = 0;
         for (String keyword : keywords) {
-            value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getTitle(), keyword);
-            value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getDescription(), keyword);
-            value += KMPStringMatcher.INSTANCE
+            value += stringMatcher.countOccurences(listingEntity.getTitle(), keyword);
+            value += stringMatcher.countOccurences(listingEntity.getDescription(), keyword);
+            value += stringMatcher
                     .countOccurences(listingEntity.getPerfectFlatmateDescription(), keyword);
         }
 
