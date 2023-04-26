@@ -91,7 +91,6 @@ class AuthenticationControllerTest {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
-        // given
         ProfileEntity profileEntity = new ProfileEntity();
         profileEntity.setFirstname("Test");
         profileEntity.setLastname("Profile");
@@ -110,12 +109,10 @@ class AuthenticationControllerTest {
 
         given(profileService.createUser(Mockito.any())).willReturn(profileEntity);
 
-        // when
         MockHttpServletRequestBuilder postRequest = post("/registration")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(registerPostDTO));
 
-        // then
         mockMvc.perform(postRequest).andExpect(status().isCreated());
     }
 
@@ -124,7 +121,6 @@ class AuthenticationControllerTest {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
-        // given
         RegisterPostDTO registerPostDTO = new RegisterPostDTO();
         registerPostDTO.setFirstname("Test");
         registerPostDTO.setLastname("Profile");
@@ -136,12 +132,10 @@ class AuthenticationControllerTest {
         given(profileService.createUser(Mockito.any())).willThrow(new ResponseStatusException(HttpStatus.BAD_REQUEST,
                 "The provided e-mail is not unique. Therefore, the profile could not be registered!"));
 
-        // when
         MockHttpServletRequestBuilder postRequest = post("/registration")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(registerPostDTO));
 
-        // then
         mockMvc.perform(postRequest).andExpect(status().isBadRequest());
     }
 
@@ -152,7 +146,6 @@ class AuthenticationControllerTest {
         String password = "OneTwoThreeFour";
         String toGenerateToken = "testtoken";
 
-        // given
         JwtRequest authenticationRequest = new JwtRequest();
         authenticationRequest.setEmail(email);
         authenticationRequest.setPassword(password);
@@ -169,12 +162,10 @@ class AuthenticationControllerTest {
 
         given(jwtTokenUtil.generateToken(Mockito.any())).willReturn(toGenerateToken);
 
-        // when
         MockHttpServletRequestBuilder postRequest = post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(authenticationRequest));
 
-        // then
         mockMvc.perform(postRequest)
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString(toGenerateToken)));
@@ -186,7 +177,6 @@ class AuthenticationControllerTest {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
-        // given
         JwtRequest authenticationRequest = new JwtRequest();
         authenticationRequest.setEmail(email);
         authenticationRequest.setPassword(password);
@@ -199,12 +189,10 @@ class AuthenticationControllerTest {
                 authenticationRequest.getEmail(), authenticationRequest.getPassword())))
                 .willThrow(new DisabledException(""));
 
-        // when
         MockHttpServletRequestBuilder postRequest = post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(authenticationRequest));
 
-        // then
 
         try {
             mockMvc.perform(postRequest);
@@ -219,7 +207,6 @@ class AuthenticationControllerTest {
         String email = "test.example@gmail.com";
         String password = "OneTwoThreeFour";
 
-        // given
         JwtRequest authenticationRequest = new JwtRequest();
         authenticationRequest.setEmail(email);
         authenticationRequest.setPassword(password);
@@ -232,12 +219,10 @@ class AuthenticationControllerTest {
                 authenticationRequest.getEmail(), authenticationRequest.getPassword())))
                 .willThrow(new BadCredentialsException(""));
 
-        // when
         MockHttpServletRequestBuilder postRequest = post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(authenticationRequest));
 
-        // then
 
         try {
             mockMvc.perform(postRequest);
