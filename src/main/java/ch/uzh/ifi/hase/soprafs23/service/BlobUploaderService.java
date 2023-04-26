@@ -34,14 +34,14 @@ public class BlobUploaderService {
     @Value("${azure.storage.account-key}")
     private String accountKey;
 
-    public static final String STORAGECONNECTIONSTRING = "DefaultEndpointsProtocol=https;" +
-            "AccountName=upsearchstorage;" +
-            "AccountKey=USKgaMmYTFVCfN+5V0C583JzmKeaRXFwksdvD8JJ8ys624aF+VjEUeamVrWYKo7zHyvKjxtvR0zM+AStpad7AA==";
+    private String storageConnectionString = "DefaultEndpointsProtocol=https;" +
+            "AccountName=" + accountName + ";" +
+            "AccountKey=" + accountKey;
 
     public String upload(MultipartFile file, String containerName, String fileName) {
         try {
             getOrCreateContainer(containerName);
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGECONNECTIONSTRING);
+            CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
@@ -60,7 +60,7 @@ public class BlobUploaderService {
     }
 
     public List<String> uploadImages(MultipartFile[] files, String listingId, List<String> urlsToDelete)
-            throws URISyntaxException {
+            throws URISyntaxException, NullPointerException {
         // delete urls
         for (String urlToDeleteString : urlsToDelete) {
             deleteBlobByUrl(urlToDeleteString);
@@ -68,7 +68,7 @@ public class BlobUploaderService {
 
         List<String> imageUrls = new ArrayList<>();
         for (MultipartFile file : files) {
-            if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("")) {
+            if (!file.getOriginalFilename().equals("")) {
                 String filename = generateUUID();
                 String imageUrl = upload(file, listingId, filename);
                 imageUrls.add(imageUrl);
@@ -81,7 +81,7 @@ public class BlobUploaderService {
             throws URISyntaxException, java.security.InvalidKeyException, StorageException {
 
         // Retrieve storage account from connection-string.
-        CloudStorageAccount storageAccount = CloudStorageAccount.parse(STORAGECONNECTIONSTRING);
+        CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
         // Create the blob client.
         CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
@@ -122,7 +122,6 @@ public class BlobUploaderService {
                 .getBlobClient(blobName);
 
         blobClient.delete();
-
     }
 
 }

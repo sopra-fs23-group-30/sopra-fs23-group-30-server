@@ -86,12 +86,19 @@ public class ProfilesController {
                                         .body(null);
                 }
 
-                if (file.getOriginalFilename() != null && file.getOriginalFilename().equals("deleted"))
+                try {
+                    String originalFilename = file.getOriginalFilename();
+                    if (originalFilename.equals("deleted"))
                         updateProfile.setProfilePictureURL(null);
 
-                else if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("unchanged")) {
+                    else if (!originalFilename.equals("unchanged")) {
                         String blobURL = blobUploaderService.upload(file, "profilepictures", id.toString());
                         updateProfile.setProfilePictureURL(blobURL);
+                    }
+                } catch (NullPointerException e) {
+                        return ResponseEntity
+                                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                        .body(null);
                 }
 
                 profileService.updateProfile(id, updateProfile);
