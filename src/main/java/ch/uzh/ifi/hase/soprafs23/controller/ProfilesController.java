@@ -86,10 +86,10 @@ public class ProfilesController {
                                         .body(null);
                 }
 
-                if (file.getOriginalFilename().equals("deleted"))
+                if (file.getOriginalFilename() != null && file.getOriginalFilename().equals("deleted"))
                         updateProfile.setProfilePictureURL(null);
 
-                else if (!file.getOriginalFilename().equals("unchanged")) {
+                else if (file.getOriginalFilename() != null && !file.getOriginalFilename().equals("unchanged")) {
                         String blobURL = blobUploaderService.upload(file, "profilepictures", id.toString());
                         updateProfile.setProfilePictureURL(blobURL);
                 }
