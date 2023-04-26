@@ -16,14 +16,14 @@ import java.util.Optional;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DataJpaTest
-public class ProfileRepositoryTest {
+class ProfileRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
     @Autowired
     private ProfileRepository profileRepository;
 
     @Test
-    public void findByEMail_success() {
+    void findByEMail_success() {
         ProfileEntity profileEntity = new ProfileEntity();
         profileEntity.setFirstname("Firstname");
         profileEntity.setLastname("Lastname");
@@ -46,7 +46,7 @@ public class ProfileRepositoryTest {
     }
 
     @Test
-    public void findByID_success() {
+    void findByID_success() {
         ProfileEntity profile = new ProfileEntity();
         profile.setFirstname("Firstname");
         profile.setLastname("Lastname");

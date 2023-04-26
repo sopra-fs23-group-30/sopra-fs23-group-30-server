@@ -19,7 +19,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DataJpaTest
-public class ListingRepositoryTest {
+class ListingRepositoryTest {
     private ProfileEntity profileEntity;
 
     @Autowired
@@ -115,6 +115,6 @@ public class ListingRepositoryTest {
     @Test
     void findById_unknownInput_emptyOptional() {
         List<ListingEntity> searched = listingRepository.findByListerId(new UUID(1, 1));
-        assertTrue(searched.size() == 0);
+        assertEquals(searched.size(), 0);
     }
 }

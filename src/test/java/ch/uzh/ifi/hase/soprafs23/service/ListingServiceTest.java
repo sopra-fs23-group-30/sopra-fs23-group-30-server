@@ -21,7 +21,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ApplicationRepository;
 import ch.uzh.ifi.hase.soprafs23.repository.ListingRepository;
 
-public class ListingServiceTest {
+class ListingServiceTest {
     @Mock
     private ListingRepository listingRepository;
     @Mock
@@ -330,6 +330,7 @@ public class ListingServiceTest {
         Mockito.when(listingRepository.findById(Mockito.any()))
                 .thenReturn(Optional.empty());
 
-        assertThrows(ResponseStatusException.class, () -> listingService.getListingById(UUID.randomUUID()));
+        UUID randomUUID = UUID.randomUUID();
+        assertThrows(ResponseStatusException.class, () -> listingService.getListingById(randomUUID));
     }
 }

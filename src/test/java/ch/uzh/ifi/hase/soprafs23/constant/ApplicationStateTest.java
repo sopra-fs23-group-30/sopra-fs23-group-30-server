@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class ApplicationStateTest {
+class ApplicationStateTest {
     @Test
     void isTransitionValid_pendingToDeclined_trueExpected() {
         ApplicationState applicationState = ApplicationState.PENDING;

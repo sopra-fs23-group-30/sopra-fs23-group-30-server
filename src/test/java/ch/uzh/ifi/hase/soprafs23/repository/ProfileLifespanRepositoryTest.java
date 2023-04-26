@@ -19,7 +19,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DataJpaTest
-public class ProfileLifespanRepositoryTest {
+class ProfileLifespanRepositoryTest {
     private ProfileEntity profileEntity;
 
     @Autowired
@@ -76,6 +76,6 @@ public class ProfileLifespanRepositoryTest {
         entityManager.flush();
 
         List<ProfileLifespanEntity> searched = profileLifespanRepository.findByProfileId(new UUID(1, 1));
-        assertTrue(searched.size() == 0);
+        assertEquals(searched.size(), 0);
     }
 }

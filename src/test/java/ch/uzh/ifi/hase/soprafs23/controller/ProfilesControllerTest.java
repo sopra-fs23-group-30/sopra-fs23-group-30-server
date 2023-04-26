@@ -39,7 +39,7 @@ import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 @WebMvcTest(ProfilesController.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ContextConfiguration(classes = ProfilesController.class)
-public class ProfilesControllerTest {
+class ProfilesControllerTest {
 
         @Autowired
         private MockMvc mockMvc;

@@ -18,7 +18,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @DataJpaTest
-public class ApplicationRepositoryTest {
+class ApplicationRepositoryTest {
 
     private ListingEntity listingEntity;
     private ProfileEntity profileEntity;
@@ -30,7 +30,7 @@ public class ApplicationRepositoryTest {
     private ApplicationRepository applicationRepository;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         ProfileEntity lister = new ProfileEntity();
         lister.setFirstname("testlister");
         lister.setLastname("name");
@@ -67,7 +67,7 @@ public class ApplicationRepositoryTest {
     }
 
     @Test
-    public void findByID_success() {
+    void findByID_success() {
         ApplicationEntity applicationEntity = new ApplicationEntity();
 
         applicationEntity.setListing(listingEntity);
@@ -87,7 +87,7 @@ public class ApplicationRepositoryTest {
     }
 
     @Test
-    public void findByApplicantId_success() {
+    void findByApplicantId_success() {
         ApplicationEntity applicationEntity = new ApplicationEntity();
 
         applicationEntity.setListing(listingEntity);
@@ -107,7 +107,7 @@ public class ApplicationRepositoryTest {
     }
 
     @Test
-    public void findByListingId_success() {
+    void findByListingId_success() {
         ApplicationEntity applicationEntity = new ApplicationEntity();
 
         applicationEntity.setListing(listingEntity);

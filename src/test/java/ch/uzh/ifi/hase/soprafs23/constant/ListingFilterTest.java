@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 
-public class ListingFilterTest {
+class ListingFilterTest {
     @Test
     void sortValue_validInput_4expected() {
         ListingFilter listingFilter = new ListingFilter();
