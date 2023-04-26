@@ -89,7 +89,6 @@ public class BlobUploaderService {
         CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
         // Get a reference to a container.
-        // The container name must be lower case
         CloudBlobContainer container = blobClient.getContainerReference(containerName);
 
         // Create the container if it does not exist.
