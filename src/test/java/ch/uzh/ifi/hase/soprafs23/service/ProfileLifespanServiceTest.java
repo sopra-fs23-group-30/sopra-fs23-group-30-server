@@ -19,7 +19,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileLifespanRepository;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
 
-public class ProfileLifespanServiceTest {
+class ProfileLifespanServiceTest {
 
     @Mock
     private ProfileLifespanRepository profileLifespanRepository;
