@@ -7,7 +7,8 @@ public enum ApplicationState {
   MOVEIN(ApplicationState::validateMoveIn);
 
   private ITransitionValidator transitionValidator;
- 
+  private static final boolean NOTPOSSIBLE = false;
+
   private ApplicationState(ITransitionValidator transitionValidator) {
     this.transitionValidator = transitionValidator;
   }
@@ -21,7 +22,7 @@ public enum ApplicationState {
   }
 
   private static boolean validateDeclined(ApplicationState next) {
-    return false;
+    return NOTPOSSIBLE;
   }
 
   private static boolean validateAccepted(ApplicationState next) {
@@ -29,6 +30,6 @@ public enum ApplicationState {
   }
 
   private static boolean validateMoveIn(ApplicationState next) {
-    return false;
+    return NOTPOSSIBLE;
   }
 }
