@@ -44,17 +44,14 @@ public class ListingFilter {
         for (String keyword : keywords) {
             value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getTitle(), keyword);
             value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getDescription(), keyword);
-            value += KMPStringMatcher.INSTANCE.countOccurences(listingEntity.getPerfectFlatmateDescription(), keyword);
+            value += KMPStringMatcher.INSTANCE
+                    .countOccurences(listingEntity.getPerfectFlatmateDescription(), keyword);
         }
 
         return value;
     }
 
     private boolean listingIsApplicable(ListingEntity listingEntity) {
-        // TODO: Flatmate capacity
-        if (listingEntity.getPricePerMonth() > maxRentPerMonth) {
-            return false;
-        }
-        return true;
+        return listingEntity.getPricePerMonth() <= maxRentPerMonth;
     }
 }

@@ -1,14 +1,15 @@
 package ch.uzh.ifi.hase.soprafs23.constant;
 
 public class KMPStringMatcher {
-    public static KMPStringMatcher INSTANCE = new KMPStringMatcher();
+    public static final KMPStringMatcher INSTANCE = new KMPStringMatcher();
 
     private KMPStringMatcher() {
     }
 
     private int[] substringSearchPattern(String keyword) {
         int[] pattern = new int[keyword.length()];
-        int i = 1, j = 0;
+        int i = 1;
+        int j = 0;
 
         while (i < keyword.length()) {
             if (keyword.charAt(i) == keyword.charAt(j)) {
@@ -31,7 +32,8 @@ public class KMPStringMatcher {
             return 0;
         }
         int i = 0, j = 0, counter = 0;
-        String lowerCaseText = text.toLowerCase(), lowerCaseKeyword = keyword.toLowerCase();
+        String lowerCaseText = text.toLowerCase();
+        String lowerCaseKeyword = keyword.toLowerCase();
         int[] pattern = substringSearchPattern(lowerCaseKeyword);
         while (i < text.length()) {
             if (lowerCaseText.charAt(i) == lowerCaseKeyword.charAt(j)) {

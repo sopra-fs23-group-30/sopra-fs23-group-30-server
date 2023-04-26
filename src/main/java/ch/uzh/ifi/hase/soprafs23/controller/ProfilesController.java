@@ -81,6 +81,9 @@ public class ProfilesController {
                         ObjectMapper objectMapper = new ObjectMapper();
                         updateProfile = objectMapper.readValue(updatedProfile, ProfilePutDTO.class);
                 } catch (IOException e) {
+                        return ResponseEntity
+                                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                        .body(null);
                 }
 
                 if (file.getOriginalFilename().equals("deleted"))
