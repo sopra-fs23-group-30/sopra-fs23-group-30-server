@@ -68,7 +68,7 @@ public class BlobUploaderService {
 
         List<String> imageUrls = new ArrayList<>();
         for (MultipartFile file : files) {
-            if (!file.getOriginalFilename().equals("")) {
+            if (!"".equals(file.getOriginalFilename())) {
                 String filename = generateUUID();
                 String imageUrl = upload(file, listingId, filename);
                 imageUrls.add(imageUrl);
