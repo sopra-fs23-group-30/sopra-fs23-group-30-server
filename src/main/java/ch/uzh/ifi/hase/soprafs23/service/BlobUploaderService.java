@@ -34,14 +34,13 @@ public class BlobUploaderService {
     @Value("${azure.storage.account-key}")
     private String accountKey;
 
-    private String storageConnectionString = "DefaultEndpointsProtocol=https;" +
-            "AccountName=" + accountName + ";" +
-            "AccountKey=" + accountKey;
-
     public String upload(MultipartFile file, String containerName, String fileName) {
         try {
             getOrCreateContainer(containerName);
-            CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+            String connectionString = "DefaultEndpointsProtocol=https;" +
+                    "AccountName=" + accountName + ";" +
+                    "AccountKey=" + accountKey;
+            CloudStorageAccount storageAccount = CloudStorageAccount.parse(connectionString);
 
             // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
@@ -81,7 +80,10 @@ public class BlobUploaderService {
             throws URISyntaxException, java.security.InvalidKeyException, StorageException {
 
         // Retrieve storage account from connection-string.
-        CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+        String connectionString = "DefaultEndpointsProtocol=https;" +
+                "AccountName=" + accountName + ";" +
+                "AccountKey=" + accountKey;
+        CloudStorageAccount storageAccount = CloudStorageAccount.parse(connectionString);
 
         // Create the blob client.
         CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
