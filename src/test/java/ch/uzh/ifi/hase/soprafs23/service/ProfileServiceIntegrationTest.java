@@ -30,7 +30,7 @@ import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfilePutDTO;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @WebAppConfiguration
 @SpringBootTest
-public class ProfileServiceIntegrationTest {
+class ProfileServiceIntegrationTest {
     @Qualifier("profileRepository")
     @Autowired
     private ProfileRepository profileRepository;
