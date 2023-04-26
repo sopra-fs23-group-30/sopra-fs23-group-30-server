@@ -112,14 +112,14 @@ public class ProfilesControllerTest {
 
         mockMvc.perform(getRequest)
             .andExpect(status().isOk());
-//            .andExpect(jsonPath("$.firstname").value(profileEntity.getFirstname()))
-//            .andExpect(jsonPath("$.lastname").value(profileEntity.getLastname()))
-//            .andExpect(jsonPath("$.birthday").value(profileEntity.getBirthday()))
-//            .andExpect(jsonPath("$.phoneNumber").value(profileEntity.getPhoneNumber()))
-//            .andExpect(jsonPath("$.gender").value(profileEntity.getGender()))
-//            .andExpect(jsonPath("$.biography").value(profileEntity.getBiography()))
-//            .andExpect(jsonPath("$.futureFlatmatesDescription").value(profileEntity.getFutureFlatmatesDescription()))
-//            .andExpect(jsonPath("$.lifespans[0]").value(profileLifespanEntity));
+        //    .andExpect(jsonPath("$.firstname").value(profileEntity.getFirstname()))
+        //    .andExpect(jsonPath("$.lastname").value(profileEntity.getLastname()))
+        //    .andExpect(jsonPath("$.birthday").value(profileEntity.getBirthday()))
+        //    .andExpect(jsonPath("$.phoneNumber").value(profileEntity.getPhoneNumber()))
+        //    .andExpect(jsonPath("$.gender").value(profileEntity.getGender()))
+        //    .andExpect(jsonPath("$.biography").value(profileEntity.getBiography()))
+        //    .andExpect(jsonPath("$.futureFlatmatesDescription").value(profileEntity.getFutureFlatmatesDescription()))
+        //    .andExpect(jsonPath("$.lifespans[0]").value(profileLifespanEntity));
     }
 
     @Test
@@ -198,7 +198,7 @@ public class ProfilesControllerTest {
         Mockito.when(listingService.getListingByProfileId(Mockito.any())).thenReturn(listingEntities);
         Mockito.when(applicationService.getAllApplicationsByListingId(Mockito.any())).thenReturn(applicationEntities);
 
-        MockHttpServletRequestBuilder getRequest = get("/profiles/" + profileEntity.getId().toString() + "/applications");
+        MockHttpServletRequestBuilder getRequest = get("/profiles/" + profileEntity.getId().toString() + "/listings");
 
         mockMvc.perform(getRequest).andExpect(status().isOk());
     }
