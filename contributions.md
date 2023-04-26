@@ -12,7 +12,7 @@ Delia Datsomor:
     - [x] #18 FE 
 - Week 3
     - [x] #25 FE (Prior #78)
-    - [x] #56 FE (Prior #55)
+    - [x] #26 FE (Prior #55)
 
 Rafael:
 - Week 1
