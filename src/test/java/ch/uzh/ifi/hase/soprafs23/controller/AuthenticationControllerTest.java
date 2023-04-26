@@ -74,7 +74,7 @@ class AuthenticationControllerTest {
     private AuthenticationController authenticationController;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(new AuthenticationController(profileService, authenticationManager, jwtTokenUtil))
                 .build();

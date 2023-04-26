@@ -131,7 +131,7 @@ class ListingServiceTest {
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
-        assertTrue(allListings.size() == 1);
+        assertEquals(1, allListings.size());
         assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
     }
 

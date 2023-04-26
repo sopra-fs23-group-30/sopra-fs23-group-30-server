@@ -1,4 +1,5 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,7 +38,7 @@ import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 @WebMvcTest(ApplicationsController.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ContextConfiguration(classes = ApplicationsController.class)
-public class ApplicationControllerTest {
+class ApplicationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -50,7 +51,7 @@ public class ApplicationControllerTest {
 
     @MockBean
     private ListingService listingService;
-    
+
     private ProfileEntity profileEntity;
     private ListingEntity listingEntity;
 
@@ -99,11 +100,9 @@ public class ApplicationControllerTest {
         Mockito.when(profileService.getProfileById(Mockito.any())).thenReturn(profileEntity);
         Mockito.when(listingService.getListingById(Mockito.any())).thenReturn(listingEntity);
 
-        
         MockHttpServletRequestBuilder postRequest = post("/applications")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(applicationPostDTO));
-
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(applicationPostDTO));
 
         mockMvc.perform(postRequest).andExpect(status().isCreated());
     }
@@ -122,11 +121,9 @@ public class ApplicationControllerTest {
 
         Mockito.when(applicationService.getApplicationById(Mockito.any())).thenReturn(applicationEntity);
 
-        
         MockHttpServletRequestBuilder putRequest = put("/applications/" + applicationEntity.getId().toString())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(applicationPutDTO));
-
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(applicationPutDTO));
 
         mockMvc.perform(putRequest).andExpect(status().isNoContent());
     }

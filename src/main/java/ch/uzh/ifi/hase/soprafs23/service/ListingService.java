@@ -39,7 +39,7 @@ public class ListingService {
     }
 
     public List<ListingEntity> getListings(ListingFilter listingFilter) {
-        int threshold = (int)(Integer.MIN_VALUE * 0.5);
+        int threshold = (int) (Integer.MIN_VALUE * 0.5);
         List<ListingEntity> listings = this.listingRepository.findAll();
         List<ListingEntity> listsToReturn = new ArrayList<>();
         for (ListingEntity listingEntity : listings) {
@@ -49,7 +49,7 @@ public class ListingService {
                 listsToReturn.add(listingEntity);
             }
         }
-        listsToReturn.removeIf((listing) -> (listingFilter.sortValue(listing) < threshold));
+        listsToReturn.removeIf(listing -> (listingFilter.sortValue(listing) < threshold));
         listsToReturn
                 .sort((listingA, listingB) -> {
                     int aValue = listingFilter.sortValue(listingA);

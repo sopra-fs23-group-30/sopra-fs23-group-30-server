@@ -7,6 +7,7 @@ public class ProfileLifespanDTO {
   private String text;
   private Date fromDate;
   private Date toDate;
+  private Boolean isExperience;
 
   public Date getToDate() {
     return toDate;
@@ -15,8 +16,6 @@ public class ProfileLifespanDTO {
   public void setToDate(Date toDate) {
     this.toDate = toDate;
   }
-
-  private Boolean isExperience;
 
   public Date getFromDate() {
     return fromDate;

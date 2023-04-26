@@ -1,4 +1,5 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -53,7 +54,7 @@ class ListingsControllerTest {
     private ProfileEntity testProfileEntity;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         mockMvc = MockMvcBuilders
                 .standaloneSetup(new ListingsController(listingService, profileService, blobUploaderService))
                 .build();
@@ -90,13 +91,13 @@ class ListingsControllerTest {
         listingPostDTO.setImagesJson(testListing.getImagesJson());
 
         Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-            .thenReturn(testProfileEntity);
+                .thenReturn(testProfileEntity);
         Mockito.when(listingService.createListing(Mockito.any()))
-            .thenReturn(testListing);
+                .thenReturn(testListing);
 
         MockHttpServletRequestBuilder postRequest = post("/listings")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(listingPostDTO));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(listingPostDTO));
 
         mockMvc.perform(postRequest).andExpect(status().isCreated());
     }
@@ -115,53 +116,52 @@ class ListingsControllerTest {
         listingPostDTO.setImagesJson(testListing.getImagesJson());
 
         Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-            .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "For the provided profile id no profile was found"));
+                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "For the provided profile id no profile was found"));
         Mockito.when(listingService.createListing(Mockito.any()))
-            .thenReturn(testListing);
+                .thenReturn(testListing);
 
         MockHttpServletRequestBuilder postRequest = post("/listings")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(listingPostDTO));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(listingPostDTO));
 
         mockMvc.perform(postRequest).andExpect(status().isNotFound());
     }
 
     @Test
-    //  @WithMockUser
+    // @WithMockUser
     void getListings_validInput_thenSuccess() throws Exception {
         String searchText = "apartment";
         Float maxRentPerMonth = 2000.0f;
         Integer flatmateCapacity = 10;
 
         MockHttpServletRequestBuilder getRequest = get("/listings")
-            .param("searchText", searchText)
-            .param("maxRentPerMonth", maxRentPerMonth.toString())
-            .param("flatmateCapacity", flatmateCapacity.toString());
+                .param("searchText", searchText)
+                .param("maxRentPerMonth", maxRentPerMonth.toString())
+                .param("flatmateCapacity", flatmateCapacity.toString());
 
-        
         mockMvc.perform(getRequest)
-            .andExpect(status().isOk());
+                .andExpect(status().isOk());
     }
 
     @Test
-    //  @WithMockUser
+    // @WithMockUser
     void getListingById_validInput_thenSuccess() throws Exception {
         Mockito.when(listingService.getListingById(Mockito.any())).thenReturn(testListing);
 
         MockHttpServletRequestBuilder getRequest = get("/listings/" + testListing.getId().toString());
 
         mockMvc.perform(getRequest)
-            .andExpect(status().isOk());
+                .andExpect(status().isOk());
     }
 
     @Test
-    //  @WithMockUser
+    // @WithMockUser
     void deleteListingById_validInput_thenSuccess() throws Exception {
         MockHttpServletRequestBuilder deleteRequest = delete("/listings/" + testListing.getId().toString());
 
         mockMvc.perform(deleteRequest)
-            .andExpect(status().isNoContent());
+                .andExpect(status().isNoContent());
     }
 
     /**
