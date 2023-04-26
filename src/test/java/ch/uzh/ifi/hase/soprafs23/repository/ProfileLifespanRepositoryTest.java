@@ -76,6 +76,6 @@ class ProfileLifespanRepositoryTest {
         entityManager.flush();
 
         List<ProfileLifespanEntity> searched = profileLifespanRepository.findByProfileId(new UUID(1, 1));
-        assertEquals(searched.size(), 0);
+        assertEquals(0, searched.size());
     }
 }

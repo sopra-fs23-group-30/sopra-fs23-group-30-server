@@ -26,9 +26,9 @@ class ListingRepositoryTest {
     private TestEntityManager entityManager;
     @Autowired
     private ListingRepository listingRepository;
-    
+
     @BeforeEach
-    void setup() {        
+    void setup() {
         profileEntity = new ProfileEntity();
         profileEntity.setFirstname("test");
         profileEntity.setLastname("name");
@@ -115,6 +115,6 @@ class ListingRepositoryTest {
     @Test
     void findById_unknownInput_emptyOptional() {
         List<ListingEntity> searched = listingRepository.findByListerId(new UUID(1, 1));
-        assertEquals(searched.size(), 0);
+        assertEquals(0, searched.size());
     }
 }

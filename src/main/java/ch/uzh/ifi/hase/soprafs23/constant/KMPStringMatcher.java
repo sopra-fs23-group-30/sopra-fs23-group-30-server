@@ -31,7 +31,9 @@ public class KMPStringMatcher {
         if (text.length() < keyword.length()) {
             return 0;
         }
-        int i = 0, j = 0, counter = 0;
+        int i = 0;
+        int j = 0;
+        int counter = 0;
         String lowerCaseText = text.toLowerCase();
         String lowerCaseKeyword = keyword.toLowerCase();
         int[] pattern = substringSearchPattern(lowerCaseKeyword);
