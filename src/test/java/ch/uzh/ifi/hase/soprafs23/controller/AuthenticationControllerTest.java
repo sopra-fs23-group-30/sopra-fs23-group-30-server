@@ -193,7 +193,6 @@ class AuthenticationControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(authenticationRequest));
 
-
         try {
             mockMvc.perform(postRequest);
             assertTrue(false);
@@ -222,7 +221,6 @@ class AuthenticationControllerTest {
         MockHttpServletRequestBuilder postRequest = post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(authenticationRequest));
-
 
         try {
             mockMvc.perform(postRequest);
