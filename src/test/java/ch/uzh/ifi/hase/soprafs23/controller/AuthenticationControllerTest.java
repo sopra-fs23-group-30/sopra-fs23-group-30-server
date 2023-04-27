@@ -41,12 +41,6 @@ import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.RegisterPostDTO;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 
-/**
- * UserControllerTest
- * This is a WebMvcTest which allows to test the UserController i.e. GET/POST
- * request without actually sending them over the network.
- * This tests if the UserController works.
- */
 @WebMvcTest(AuthenticationController.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ContextConfiguration(classes = AuthenticationController.class)
