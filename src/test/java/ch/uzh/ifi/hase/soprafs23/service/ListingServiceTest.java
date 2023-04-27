@@ -2,6 +2,7 @@ package ch.uzh.ifi.hase.soprafs23.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,8 +131,8 @@ class ListingServiceTest {
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
+        assertTrue(allListings.size() == 1);
         assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
-        assertEquals(allListings.get(1).getTitle(), testListingEntityB.getTitle());
     }
 
     @Test
