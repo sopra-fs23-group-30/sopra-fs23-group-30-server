@@ -28,4 +28,9 @@ public class WebSocketController {
     public void inventoryItemToUsers(UUID inventoryId, InventoryItemGetDTO inventoryItemDTO) {        
         this.webSocketService.sendMessageToClients(INVENTORY_URL + inventoryId, inventoryItemDTO);
     }
+
+    @MessageMapping("/inventories/{inventoryId}/deletedItem")
+    public void notifyAboutDelete(UUID inventoryId, UUID inventoryItemId) {        
+        this.webSocketService.sendMessageToClients(INVENTORY_URL + inventoryId + "/deletedItem", inventoryItemId);
+    }
 }

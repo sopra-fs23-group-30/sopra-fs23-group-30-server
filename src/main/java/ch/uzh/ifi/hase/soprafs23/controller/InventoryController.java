@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,14 @@ private InventoryItemService inventoryItemService;
         InventoryItemEntity updatedItem = inventoryItemService.update(inventoryPutDTO);
         InventoryItemGetDTO inventoryItemGetDTO = DTOMapper.INSTANCE.convertInventoryItemEntityDTOtoInventoryItemGetDto(updatedItem);
         webSocketController.inventoryItemToUsers(inventoryPutDTO.getInventoryId(), inventoryItemGetDTO);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+  }
+
+  @DeleteMapping(value = "/inventories/{inventoryItemId}")
+  public ResponseEntity<Object> deleteInventoryItem(@PathVariable UUID inventoryItemId){
+        UUID inventoryId = inventoryItemService.getByItemId(inventoryItemId).getInventoryId();
+        inventoryItemService.deleteById(inventoryItemId);      
+        webSocketController.notifyAboutDelete(inventoryId, inventoryItemId);  
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 }
