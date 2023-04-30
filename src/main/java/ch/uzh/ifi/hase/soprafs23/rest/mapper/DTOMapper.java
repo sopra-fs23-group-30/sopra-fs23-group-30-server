@@ -5,12 +5,15 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
+import ch.uzh.ifi.hase.soprafs23.entity.InventoryItemEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.inventory.InventoryItemGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.inventory.InventoryItemPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingOverviewGetDTO;
@@ -160,4 +163,19 @@ public interface DTOMapper {
   @Mapping(source = "text", target = "text")
   @Mapping(target = "profile", ignore = true)
   ProfileLifespanEntity convertLifespanDTOToLifespanEntity(ProfileLifespanDTO profileLifespanDTO);
+
+  @Mapping(source = "text", target = "text")
+  @Mapping(source = "isSelected", target = "isSelected")
+  @Mapping(source = "isSearcher", target = "isSearcher")
+  @Mapping(source = "inventoryId", target = "inventoryId")
+  @Mapping(target = "id", ignore = true)
+  InventoryItemEntity convertInventoryItemPostDTOtoInventoryItemEntity(InventoryItemPostDTO inventoryItemPostDTO);
+
+  @Mapping(source = "text", target = "text")
+  @Mapping(source = "isSelected", target = "isSelected")
+  @Mapping(source = "isSearcher", target = "isSearcher")
+  @Mapping(source = "inventoryId", target = "inventoryId")
+  @Mapping(source = "id", target = "id")
+  InventoryItemGetDTO convertInventoryItemEntityDTOtoInventoryItemGetDto(InventoryItemEntity inventoryItemEntity);
+  
 }
