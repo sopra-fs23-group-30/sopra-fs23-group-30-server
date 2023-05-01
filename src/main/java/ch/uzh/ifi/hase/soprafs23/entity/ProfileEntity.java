@@ -56,6 +56,9 @@ public class ProfileEntity implements Serializable {
   @Column(nullable = true)
   private String profilePictureURL;
 
+  @Column(nullable = true)
+  private String documentURL;
+
   public UUID getId() {
     return id;
   }
@@ -151,4 +154,13 @@ public class ProfileEntity implements Serializable {
   public void setProfilePictureURL(String profilePictureURL) {
     this.profilePictureURL = profilePictureURL;
   }
+
+  public String getDocumentURL() {
+    return documentURL;
+  }
+
+  public void setDocumentURL(String documentURL) {
+    this.documentURL = documentURL;
+  }
+
 }
