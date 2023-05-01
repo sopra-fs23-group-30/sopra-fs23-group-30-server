@@ -13,6 +13,7 @@ public class ApplicantGetDTO {
     private LocalDateTime applicationDate;
     private ApplicationState state;
     private String profilePictureURL;
+    private UUID inventoryId;
 
     public UUID getApplicantId() {
         return applicantId;
@@ -69,4 +70,13 @@ public class ApplicantGetDTO {
     public void setProfilePictureURL(String profilePictureURL) {
         this.profilePictureURL = profilePictureURL;
     }
+
+    public UUID getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(UUID inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
 }

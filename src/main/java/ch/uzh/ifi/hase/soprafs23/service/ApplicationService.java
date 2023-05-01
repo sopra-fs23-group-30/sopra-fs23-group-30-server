@@ -60,6 +60,9 @@ public class ApplicationService {
                             applicationEntity.getState().toString(), newState.toString()));
         }
         applicationEntity.setState(newState);
+        if (newState == ApplicationState.MOVEIN) {
+            applicationEntity.setInventoryId(UUID.randomUUID());
+        }
         this.applicationRepository.save(applicationEntity);
     }
 

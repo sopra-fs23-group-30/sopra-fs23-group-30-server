@@ -137,6 +137,7 @@ public interface DTOMapper {
   @Mapping(source = "listing.streetNumber", target = "listingStreetNumber")
   @Mapping(source = "listing.zipCode", target = "listingZipCode")
   @Mapping(source = "listing.cityName", target = "listingCityName")
+  @Mapping(source = "inventoryId", target = "inventoryId")
   ApplicationGetDTO convertApplicationEntityToApplicationGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "applicant.id", target = "applicantId")
@@ -146,6 +147,7 @@ public interface DTOMapper {
   @Mapping(source = "creationDate", target = "applicationDate")
   @Mapping(source = "state", target = "state")
   @Mapping(source = "applicant.profilePictureURL", target = "profilePictureURL")
+  @Mapping(source = "inventoryId", target = "inventoryId")
   ApplicantGetDTO convertApplicationEntityToApplicantGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "id", target = "listingId")

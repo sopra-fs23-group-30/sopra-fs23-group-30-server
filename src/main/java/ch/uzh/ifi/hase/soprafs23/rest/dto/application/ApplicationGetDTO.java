@@ -15,6 +15,7 @@ public class ApplicationGetDTO {
     private String listingStreetNumber;
     private int listingZipCode;
     private String listingCityName;
+    private UUID inventoryId;
 
     public UUID getApplicationId() {
         return applicationId;
@@ -86,6 +87,14 @@ public class ApplicationGetDTO {
 
     public void setListingCityName(String listingCityName) {
         this.listingCityName = listingCityName;
+    }
+
+    public UUID getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(UUID inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
 }
