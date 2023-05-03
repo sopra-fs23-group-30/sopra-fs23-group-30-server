@@ -81,6 +81,8 @@ public interface DTOMapper {
   @Mapping(source = "title", target = "title")
   @Mapping(source = "description", target = "description")
   @Mapping(source = "address", target = "address")
+  @Mapping(source = "lattitude", target = "lattitude")
+  @Mapping(source = "longitude", target = "longitude")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "imagesJson", target = "imagesJson")
