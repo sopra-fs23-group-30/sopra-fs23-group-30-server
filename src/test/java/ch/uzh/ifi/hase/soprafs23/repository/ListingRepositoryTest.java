@@ -46,10 +46,7 @@ class ListingRepositoryTest {
         listingEntity.setLister(profileEntity);
         listingEntity.setTitle("Top tier apartment");
         listingEntity.setDescription("A very nice place to live.");
-        listingEntity.setStreetName("Ahornweg");
-        listingEntity.setStreetNumber("27b");
-        listingEntity.setZipCode(4500);
-        listingEntity.setCityName("Solothurn");
+        listingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
         listingEntity.setPricePerMonth(765.85f);
         listingEntity.setImagesJson("");
         listingEntity.setPerfectFlatmateDescription("Some person");
@@ -64,10 +61,7 @@ class ListingRepositoryTest {
         assertEquals(listingEntity.getLister(), found.getLister());
         assertEquals(listingEntity.getTitle(), found.getTitle());
         assertEquals(listingEntity.getDescription(), found.getDescription());
-        assertEquals(listingEntity.getStreetName(), found.getStreetName());
-        assertEquals(listingEntity.getStreetNumber(), found.getStreetNumber());
-        assertEquals(listingEntity.getZipCode(), found.getZipCode());
-        assertEquals(listingEntity.getCityName(), found.getCityName());
+        assertEquals(listingEntity.getAddress(), found.getAddress());
         assertEquals(listingEntity.getPricePerMonth(), found.getPricePerMonth());
         assertEquals(listingEntity.getImagesJson(), found.getImagesJson());
         assertEquals(listingEntity.getPerfectFlatmateDescription(), found.getPerfectFlatmateDescription());
@@ -85,10 +79,7 @@ class ListingRepositoryTest {
         listingEntity.setLister(profileEntity);
         listingEntity.setTitle("Top tier apartment");
         listingEntity.setDescription("A very nice place to live.");
-        listingEntity.setStreetName("Ahornweg");
-        listingEntity.setStreetNumber("27b");
-        listingEntity.setZipCode(4500);
-        listingEntity.setCityName("Solothurn");
+        listingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
         listingEntity.setPricePerMonth(765.85f);
         listingEntity.setImagesJson("");
         listingEntity.setPerfectFlatmateDescription("Some person");
@@ -103,10 +94,7 @@ class ListingRepositoryTest {
         assertEquals(listingEntity.getLister(), found.getLister());
         assertEquals(listingEntity.getTitle(), found.getTitle());
         assertEquals(listingEntity.getDescription(), found.getDescription());
-        assertEquals(listingEntity.getStreetName(), found.getStreetName());
-        assertEquals(listingEntity.getStreetNumber(), found.getStreetNumber());
-        assertEquals(listingEntity.getZipCode(), found.getZipCode());
-        assertEquals(listingEntity.getCityName(), found.getCityName());
+        assertEquals(listingEntity.getAddress(), found.getAddress());
         assertEquals(listingEntity.getPricePerMonth(), found.getPricePerMonth());
         assertEquals(listingEntity.getImagesJson(), found.getImagesJson());
         assertEquals(listingEntity.getPerfectFlatmateDescription(), found.getPerfectFlatmateDescription());

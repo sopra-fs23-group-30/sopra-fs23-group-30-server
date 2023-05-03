@@ -11,11 +11,15 @@ public class ApplicationGetDTO {
     private LocalDateTime creationDate;
     private ApplicationState state;
     private String listingTitle;
-    private String listingStreetName;
-    private String listingStreetNumber;
-    private int listingZipCode;
-    private String listingCityName;
-    private UUID inventoryId;
+    private String listingAddress;
+
+    public String getListingAddress() {
+        return listingAddress;
+    }
+
+    public void setListingAddress(String listingAddress) {
+        this.listingAddress = listingAddress;
+    }
 
     public UUID getApplicationId() {
         return applicationId;
@@ -56,45 +60,4 @@ public class ApplicationGetDTO {
     public void setListingTitle(String listingTitle) {
         this.listingTitle = listingTitle;
     }
-
-    public String getListingStreetName() {
-        return listingStreetName;
-    }
-
-    public void setListingStreetName(String listinStreetName) {
-        this.listingStreetName = listinStreetName;
-    }
-
-    public String getListingStreetNumber() {
-        return listingStreetNumber;
-    }
-
-    public void setListingStreetNumber(String listingStreetNumber) {
-        this.listingStreetNumber = listingStreetNumber;
-    }
-
-    public int getListingZipCode() {
-        return listingZipCode;
-    }
-
-    public void setListingZipCode(int listingZipCode) {
-        this.listingZipCode = listingZipCode;
-    }
-
-    public String getListingCityName() {
-        return listingCityName;
-    }
-
-    public void setListingCityName(String listingCityName) {
-        this.listingCityName = listingCityName;
-    }
-
-    public UUID getInventoryId() {
-        return inventoryId;
-    }
-
-    public void setInventoryId(UUID inventoryId) {
-        this.inventoryId = inventoryId;
-    }
-
 }

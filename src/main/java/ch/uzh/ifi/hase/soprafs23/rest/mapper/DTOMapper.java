@@ -80,10 +80,7 @@ public interface DTOMapper {
 
   @Mapping(source = "title", target = "title")
   @Mapping(source = "description", target = "description")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "imagesJson", target = "imagesJson")
@@ -94,10 +91,9 @@ public interface DTOMapper {
 
   @Mapping(source = "title", target = "title")
   @Mapping(source = "description", target = "description")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
+  @Mapping(source = "lattitude", target = "lattitude")
+  @Mapping(source = "longitude", target = "longitude")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "lister.firstname", target = "listerFirstname")
@@ -113,10 +109,7 @@ public interface DTOMapper {
 
   @Mapping(source = "id", target = "id")
   @Mapping(source = "title", target = "title")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "imagesJson", target = "imagesJson")
   ListingGetDTO convertListingEntityToListingGetDTO(ListingEntity listing);
@@ -133,11 +126,7 @@ public interface DTOMapper {
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "state", target = "state")
   @Mapping(source = "listing.title", target = "listingTitle")
-  @Mapping(source = "listing.streetName", target = "listingStreetName")
-  @Mapping(source = "listing.streetNumber", target = "listingStreetNumber")
-  @Mapping(source = "listing.zipCode", target = "listingZipCode")
-  @Mapping(source = "listing.cityName", target = "listingCityName")
-  @Mapping(source = "inventoryId", target = "inventoryId")
+  @Mapping(source = "listing.address", target = "listingAddress")
   ApplicationGetDTO convertApplicationEntityToApplicationGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "applicant.id", target = "applicantId")
