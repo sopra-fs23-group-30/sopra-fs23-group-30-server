@@ -51,6 +51,7 @@ public interface DTOMapper {
   @Mapping(target = "futureFlatmatesDescription", ignore = true)
   @Mapping(target = "gender", ignore = true)
   @Mapping(target = "profilePictureURL", ignore = true)
+  @Mapping(target = "documentURL", ignore = true)
   ProfileEntity convertRegisterProfileDTOtoEntity(RegisterPostDTO registerProfileDTO);
 
   @Mapping(source = "email", target = "email")
@@ -122,12 +123,14 @@ public interface DTOMapper {
   @Mapping(target = "state", ignore = true)
   @Mapping(target = "creationDate", ignore = true)
   @Mapping(target = "id", ignore = true)
+  @Mapping(target = "inventoryId", ignore = true)
   ApplicationEntity convertApplicationPostDTOToApplicationEntity(ApplicationPostDTO applicationDTO);
 
   @Mapping(source = "id", target = "applicationId")
   @Mapping(source = "listing.id", target = "listingId")
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "state", target = "state")
+  @Mapping(source = "inventoryId", target = "inventoryId")
   @Mapping(source = "listing.title", target = "listingTitle")
   @Mapping(source = "listing.address", target = "listingAddress")
   ApplicationGetDTO convertApplicationEntityToApplicationGetDTO(ApplicationEntity applicationEntity);

@@ -12,6 +12,7 @@ public class ApplicationGetDTO {
     private ApplicationState state;
     private String listingTitle;
     private String listingAddress;
+    private UUID inventoryId;
 
     public String getListingAddress() {
         return listingAddress;
@@ -60,4 +61,13 @@ public class ApplicationGetDTO {
     public void setListingTitle(String listingTitle) {
         this.listingTitle = listingTitle;
     }
+
+    public UUID getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(UUID inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
 }
