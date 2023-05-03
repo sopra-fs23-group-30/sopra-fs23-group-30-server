@@ -72,6 +72,7 @@ public interface DTOMapper {
   @Mapping(source = "biography", target = "biography")
   @Mapping(source = "futureFlatmatesDescription", target = "futureFlatmatesDescription")
   @Mapping(target = "profilePictureURL", source = "profilePictureURL")
+  @Mapping(target = "documentURL", source = "documentURL")
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "email", ignore = true)
   @Mapping(target = "isSearcher", ignore = true)

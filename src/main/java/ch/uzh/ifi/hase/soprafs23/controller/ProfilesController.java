@@ -74,7 +74,8 @@ public class ProfilesController {
                         MediaType.MULTIPART_FORM_DATA_VALUE })
         public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id,
                         @RequestPart("body") String updatedProfile,
-                        @RequestPart("file") MultipartFile file) throws IOException {
+                        @RequestPart("file") MultipartFile file,
+                        @RequestPart("document") MultipartFile document) throws IOException {
 
                 ProfilePutDTO updateProfile = new ProfilePutDTO();
                 try {
@@ -100,6 +101,21 @@ public class ProfilesController {
                                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
                                         .body(null);
                 }
+
+                try {
+                        String originalDocumentFilename = document.getOriginalFilename();
+                        if ("deleted".equals(originalDocumentFilename))
+                                updateProfile.setDocumentURL(null);
+
+                        else if (!"unchanged".equals(originalDocumentFilename)) {
+                                String blobURL = blobUploaderService.upload(document, "debtcollectionregisters", id.toString());
+                                updateProfile.setDocumentURL(blobURL);
+                        }
+                        } catch (NullPointerException e) {
+                                return ResponseEntity
+                                                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                                .body(null);
+                        }
 
                 profileService.updateProfile(id, updateProfile);
 
