@@ -46,6 +46,9 @@ public class ApplicationEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private ApplicationState state;
 
+    @Column(nullable = true)
+    private UUID inventoryId;
+
     public UUID getId() {
         return id;
     }
@@ -85,4 +88,13 @@ public class ApplicationEntity implements Serializable {
     public void setState(ApplicationState state) {
         this.state = state;
     }
+
+    public UUID getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(UUID inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
 }

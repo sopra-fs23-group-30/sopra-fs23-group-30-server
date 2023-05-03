@@ -5,12 +5,15 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import ch.uzh.ifi.hase.soprafs23.entity.ApplicationEntity;
+import ch.uzh.ifi.hase.soprafs23.entity.InventoryItemEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.ApplicantGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.application.ApplicationPostDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.inventory.InventoryItemGetDTO;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.inventory.InventoryItemPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingOverviewGetDTO;
@@ -77,10 +80,9 @@ public interface DTOMapper {
 
   @Mapping(source = "title", target = "title")
   @Mapping(source = "description", target = "description")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
+  @Mapping(source = "lattitude", target = "lattitude")
+  @Mapping(source = "longitude", target = "longitude")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "imagesJson", target = "imagesJson")
@@ -91,10 +93,9 @@ public interface DTOMapper {
 
   @Mapping(source = "title", target = "title")
   @Mapping(source = "description", target = "description")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
+  @Mapping(source = "lattitude", target = "lattitude")
+  @Mapping(source = "longitude", target = "longitude")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "lister.firstname", target = "listerFirstname")
@@ -110,10 +111,7 @@ public interface DTOMapper {
 
   @Mapping(source = "id", target = "id")
   @Mapping(source = "title", target = "title")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "imagesJson", target = "imagesJson")
   ListingGetDTO convertListingEntityToListingGetDTO(ListingEntity listing);
@@ -130,10 +128,7 @@ public interface DTOMapper {
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "state", target = "state")
   @Mapping(source = "listing.title", target = "listingTitle")
-  @Mapping(source = "listing.streetName", target = "listingStreetName")
-  @Mapping(source = "listing.streetNumber", target = "listingStreetNumber")
-  @Mapping(source = "listing.zipCode", target = "listingZipCode")
-  @Mapping(source = "listing.cityName", target = "listingCityName")
+  @Mapping(source = "listing.address", target = "listingAddress")
   ApplicationGetDTO convertApplicationEntityToApplicationGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "applicant.id", target = "applicantId")
@@ -143,6 +138,7 @@ public interface DTOMapper {
   @Mapping(source = "creationDate", target = "applicationDate")
   @Mapping(source = "state", target = "state")
   @Mapping(source = "applicant.profilePictureURL", target = "profilePictureURL")
+  @Mapping(source = "inventoryId", target = "inventoryId")
   ApplicantGetDTO convertApplicationEntityToApplicantGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "id", target = "listingId")
@@ -160,4 +156,19 @@ public interface DTOMapper {
   @Mapping(source = "text", target = "text")
   @Mapping(target = "profile", ignore = true)
   ProfileLifespanEntity convertLifespanDTOToLifespanEntity(ProfileLifespanDTO profileLifespanDTO);
+
+  @Mapping(source = "text", target = "text")
+  @Mapping(source = "isSelected", target = "isSelected")
+  @Mapping(source = "isSearcher", target = "isSearcher")
+  @Mapping(source = "inventoryId", target = "inventoryId")
+  @Mapping(target = "id", ignore = true)
+  InventoryItemEntity convertInventoryItemPostDTOtoInventoryItemEntity(InventoryItemPostDTO inventoryItemPostDTO);
+
+  @Mapping(source = "text", target = "text")
+  @Mapping(source = "isSelected", target = "isSelected")
+  @Mapping(source = "isSearcher", target = "isSearcher")
+  @Mapping(source = "inventoryId", target = "inventoryId")
+  @Mapping(source = "id", target = "id")
+  InventoryItemGetDTO convertInventoryItemEntityDTOtoInventoryItemGetDto(InventoryItemEntity inventoryItemEntity);
+  
 }

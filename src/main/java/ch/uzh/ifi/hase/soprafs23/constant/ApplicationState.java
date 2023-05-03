@@ -14,22 +14,23 @@ public enum ApplicationState {
   }
 
   public boolean isTransitionValid(ApplicationState next) {
-    return transitionValidator.validate(next);
+    // TODO: Get, whether request comes from the lister or not. 
+    return transitionValidator.validate(next, true) ||  transitionValidator.validate(next, false);
   }
 
-  private static boolean validatePending(ApplicationState next) {
-    return next == ApplicationState.DECLINED || next == ApplicationState.ACCEPTED;
+  private static boolean validatePending(ApplicationState next, Boolean isLister) {
+    return !isLister && (next == ApplicationState.DECLINED || next == ApplicationState.ACCEPTED);
   }
 
-  private static boolean validateDeclined(ApplicationState next) {
+  private static boolean validateDeclined(ApplicationState next, Boolean isLister) {
     return NOTPOSSIBLE;
   }
 
-  private static boolean validateAccepted(ApplicationState next) {
-    return next == ApplicationState.MOVEIN || next == ApplicationState.DECLINED;
+  private static boolean validateAccepted(ApplicationState next, Boolean isLister) {
+    return isLister && (next == ApplicationState.MOVEIN || next == ApplicationState.DECLINED);
   }
 
-  private static boolean validateMoveIn(ApplicationState next) {
+  private static boolean validateMoveIn(ApplicationState next, Boolean isLister) {
     return NOTPOSSIBLE;
   }
 }

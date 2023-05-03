@@ -68,10 +68,7 @@ class ApplicationControllerTest {
         listingEntity.setId(UUID.randomUUID());
         listingEntity.setTitle("Nice Listing");
         listingEntity.setDescription("Nice Listing with description");
-        listingEntity.setStreetName("Kronestutz");
-        listingEntity.setStreetNumber("1");
-        listingEntity.setZipCode(4500);
-        listingEntity.setCityName("Solothurn");
+        listingEntity.setAddress("Kronengasse 1, 4500 Solothurn");
         listingEntity.setPricePerMonth(500);
         listingEntity.setPerfectFlatmateDescription("A person, preferably alive");
         listingEntity.setLister(lister);

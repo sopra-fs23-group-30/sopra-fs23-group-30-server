@@ -66,10 +66,7 @@ class ListingsControllerTest {
         testListing.setId(UUID.randomUUID());
         testListing.setTitle("Nice Listing");
         testListing.setDescription("Nice Listing with description");
-        testListing.setStreetName("Kronestutz");
-        testListing.setStreetNumber("1");
-        testListing.setZipCode(4500);
-        testListing.setCityName("Solothurn");
+        testListing.setAddress("Kronengasse 1, 4500 Solothurn");
         testListing.setPricePerMonth(500);
         testListing.setPerfectFlatmateDescription("A person, preferably alive");
         testListing.setLister(testProfileEntity);
@@ -82,10 +79,7 @@ class ListingsControllerTest {
         ListingPostDTO listingPostDTO = new ListingPostDTO();
         listingPostDTO.setTitle(testListing.getTitle());
         listingPostDTO.setDescription(testListing.getDescription());
-        listingPostDTO.setStreetName(testListing.getStreetName());
-        listingPostDTO.setStreetNumber(testListing.getStreetNumber());
-        listingPostDTO.setZipCode(testListing.getZipCode());
-        listingPostDTO.setCityName(testListing.getCityName());
+        listingPostDTO.setAddress(testListing.getAddress());
         listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
         listingPostDTO.setListerId(testListing.getLister().getId());
         listingPostDTO.setImagesJson(testListing.getImagesJson());
@@ -107,10 +101,7 @@ class ListingsControllerTest {
         ListingPostDTO listingPostDTO = new ListingPostDTO();
         listingPostDTO.setTitle(testListing.getTitle());
         listingPostDTO.setDescription(testListing.getDescription());
-        listingPostDTO.setStreetName(testListing.getStreetName());
-        listingPostDTO.setStreetNumber(testListing.getStreetNumber());
-        listingPostDTO.setZipCode(testListing.getZipCode());
-        listingPostDTO.setCityName(testListing.getCityName());
+        listingPostDTO.setAddress(testListing.getAddress());
         listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
         listingPostDTO.setListerId(testListing.getLister().getId());
         listingPostDTO.setImagesJson(testListing.getImagesJson());

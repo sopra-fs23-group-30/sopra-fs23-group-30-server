@@ -2,7 +2,6 @@ package ch.uzh.ifi.hase.soprafs23.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +51,7 @@ class ListingServiceTest {
         testListingEntity.setLister(testProfileEntity);
         testListingEntity.setTitle("Top tier apartment");
         testListingEntity.setDescription("A very nice place to live.");
-        testListingEntity.setStreetName("Ahornweg");
-        testListingEntity.setStreetNumber("27b");
-        testListingEntity.setZipCode(4500);
-        testListingEntity.setCityName("Solothurn");
+        testListingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntity.setPricePerMonth(765.85f);
         testListingEntity.setImagesJson("");
         testListingEntity.setPerfectFlatmateDescription("Some nice person.");
@@ -67,10 +63,7 @@ class ListingServiceTest {
         assertEquals(testListingEntity.getLister(), createdListingEntity.getLister());
         assertEquals(testListingEntity.getTitle(), createdListingEntity.getTitle());
         assertEquals(testListingEntity.getDescription(), createdListingEntity.getDescription());
-        assertEquals(testListingEntity.getStreetName(), createdListingEntity.getStreetName());
-        assertEquals(testListingEntity.getStreetNumber(), createdListingEntity.getStreetNumber());
-        assertEquals(testListingEntity.getZipCode(), createdListingEntity.getZipCode());
-        assertEquals(testListingEntity.getCityName(), createdListingEntity.getCityName());
+        assertEquals(testListingEntity.getAddress(), createdListingEntity.getAddress());
         assertEquals(testListingEntity.getPricePerMonth(), createdListingEntity.getPricePerMonth());
         assertEquals(testListingEntity.getPerfectFlatmateDescription(),
                 createdListingEntity.getPerfectFlatmateDescription());
@@ -98,10 +91,7 @@ class ListingServiceTest {
         testListingEntityA.setLister(testProfileEntity);
         testListingEntityA.setTitle("cozy apartment");
         testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setStreetName("Ahornweg");
-        testListingEntityA.setStreetNumber("27b");
-        testListingEntityA.setZipCode(4500);
-        testListingEntityA.setCityName("Solothurn");
+        testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
@@ -111,10 +101,7 @@ class ListingServiceTest {
         testListingEntityB.setLister(testProfileEntity);
         testListingEntityB.setTitle("spacious apartment");
         testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setStreetName("Ahornweg");
-        testListingEntityB.setStreetNumber("27b");
-        testListingEntityB.setZipCode(4500);
-        testListingEntityB.setCityName("Solothurn");
+        testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
@@ -157,10 +144,7 @@ class ListingServiceTest {
         testListingEntityA.setLister(testProfileEntity);
         testListingEntityA.setTitle("cozy apartment");
         testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setStreetName("Ahornweg");
-        testListingEntityA.setStreetNumber("27b");
-        testListingEntityA.setZipCode(4500);
-        testListingEntityA.setCityName("Solothurn");
+        testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
@@ -170,10 +154,7 @@ class ListingServiceTest {
         testListingEntityB.setLister(testProfileEntity);
         testListingEntityB.setTitle("spacious apartment");
         testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setStreetName("Ahornweg");
-        testListingEntityB.setStreetNumber("27b");
-        testListingEntityB.setZipCode(4500);
-        testListingEntityB.setCityName("Solothurn");
+        testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
@@ -216,10 +197,7 @@ class ListingServiceTest {
         testListingEntityA.setLister(testProfileEntity);
         testListingEntityA.setTitle("cozy apartment");
         testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setStreetName("Ahornweg");
-        testListingEntityA.setStreetNumber("27b");
-        testListingEntityA.setZipCode(4500);
-        testListingEntityA.setCityName("Solothurn");
+        testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
@@ -228,11 +206,8 @@ class ListingServiceTest {
         testListingEntityB.setId(UUID.randomUUID());
         testListingEntityB.setLister(testProfileEntity);
         testListingEntityB.setTitle("spacious apartment");
-        testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setStreetName("Ahornweg");
-        testListingEntityB.setStreetNumber("27b");
-        testListingEntityB.setZipCode(4500);
-        testListingEntityB.setCityName("Solothurn");
+        testListingEntityB.setDescription("A very nice place to live.");    
+        testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
@@ -274,10 +249,7 @@ class ListingServiceTest {
         testListingEntity.setLister(testProfileEntity);
         testListingEntity.setTitle("Top tier apartment");
         testListingEntity.setDescription("A very nice place to live.");
-        testListingEntity.setStreetName("Ahornweg");
-        testListingEntity.setStreetNumber("27b");
-        testListingEntity.setZipCode(4500);
-        testListingEntity.setCityName("Solothurn");
+        testListingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntity.setPricePerMonth(765.85f);
         testListingEntity.setImagesJson("");
         testListingEntity.setPerfectFlatmateDescription("Some nice person.");
@@ -290,10 +262,7 @@ class ListingServiceTest {
         assertEquals(testListingEntity.getLister(), foundListingEntity.getLister());
         assertEquals(testListingEntity.getTitle(), foundListingEntity.getTitle());
         assertEquals(testListingEntity.getDescription(), foundListingEntity.getDescription());
-        assertEquals(testListingEntity.getStreetName(), foundListingEntity.getStreetName());
-        assertEquals(testListingEntity.getStreetNumber(), foundListingEntity.getStreetNumber());
-        assertEquals(testListingEntity.getZipCode(), foundListingEntity.getZipCode());
-        assertEquals(testListingEntity.getCityName(), foundListingEntity.getCityName());
+        assertEquals(testListingEntity.getAddress(), foundListingEntity.getAddress());
         assertEquals(testListingEntity.getPricePerMonth(), foundListingEntity.getPricePerMonth());
         assertEquals(testListingEntity.getPerfectFlatmateDescription(),
                 foundListingEntity.getPerfectFlatmateDescription());
@@ -320,10 +289,7 @@ class ListingServiceTest {
         testListingEntity.setLister(testProfileEntity);
         testListingEntity.setTitle("Top tier apartment");
         testListingEntity.setDescription("A very nice place to live.");
-        testListingEntity.setStreetName("Ahornweg");
-        testListingEntity.setStreetNumber("27b");
-        testListingEntity.setZipCode(4500);
-        testListingEntity.setCityName("Solothurn");
+        testListingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
         testListingEntity.setPricePerMonth(765.85f);
         testListingEntity.setImagesJson("");
         testListingEntity.setPerfectFlatmateDescription("Some nice person.");
