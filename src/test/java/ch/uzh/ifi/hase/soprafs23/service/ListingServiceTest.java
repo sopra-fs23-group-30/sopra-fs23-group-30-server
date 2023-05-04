@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.web.server.ResponseStatusException;
 
 import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
+import ch.uzh.ifi.hase.soprafs23.constant.SortBy;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ApplicationRepository;
@@ -123,10 +124,7 @@ class ListingServiceTest {
         testListings.add(testListingEntityB);
         Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("apartment");
-        listingFilter.setMaxRentPerMonth(1000.0f);
-        listingFilter.setFlatmateCapacity(3);
+        ListingFilter listingFilter = new ListingFilter("apartment", 1000, 10, SortBy.PRICE_ASCENDING);
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
@@ -181,11 +179,8 @@ class ListingServiceTest {
         testListings.add(testListingEntityA);
         testListings.add(testListingEntityB);
         Mockito.when(listingRepository.findAll()).thenReturn(testListings);
-
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("cozy");
-        listingFilter.setMaxRentPerMonth(2000.0f);
-        listingFilter.setFlatmateCapacity(3);
+        
+        ListingFilter listingFilter = new ListingFilter("cozy", 2000, 10, SortBy.PRICE_ASCENDING);
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
@@ -232,7 +227,7 @@ class ListingServiceTest {
         testListingEntityB.setStreetNumber("27b");
         testListingEntityB.setZipCode(4500);
         testListingEntityB.setCityName("Solothurn");
-        testListingEntityB.setPricePerMonth(1765.85f);
+        testListingEntityB.setPricePerMonth(765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
 
@@ -240,11 +235,8 @@ class ListingServiceTest {
         testListings.add(testListingEntityA);
         testListings.add(testListingEntityB);
         Mockito.when(listingRepository.findAll()).thenReturn(testListings);
-
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("spacious");
-        listingFilter.setMaxRentPerMonth(2000.0f);
-        listingFilter.setFlatmateCapacity(3);
+        
+        ListingFilter listingFilter = new ListingFilter("spacious", 2000, 10, SortBy.PRICE_ASCENDING);
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 

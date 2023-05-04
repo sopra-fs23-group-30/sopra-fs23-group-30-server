@@ -24,7 +24,7 @@ public class KMPStringMatcher {
     }
 
     public int countOccurences(String text, String keyword) {
-        if (text.length() < keyword.length()) {
+        if (text.length() < keyword.length() || keyword.length() == 0) {
             return 0;
         }
         int i = 0;

@@ -134,11 +134,13 @@ class ListingsControllerTest {
         String searchText = "apartment";
         Float maxRentPerMonth = 2000.0f;
         Integer flatmateCapacity = 10;
+        String sortBy = "PRICE_ASCENDING";
 
         MockHttpServletRequestBuilder getRequest = get("/listings")
                 .param("searchText", searchText)
                 .param("maxRentPerMonth", maxRentPerMonth.toString())
-                .param("flatmateCapacity", flatmateCapacity.toString());
+                .param("flatmateCapacity", flatmateCapacity.toString())
+                .param("sortBy", sortBy);
 
         mockMvc.perform(getRequest)
                 .andExpect(status().isOk());

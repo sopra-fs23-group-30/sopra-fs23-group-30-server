@@ -6,35 +6,20 @@ import java.util.List;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 
 public class ListingFilter {
-    private String searchText;
     private float maxRentPerMonth;
     private int flatmateCapacity;
+    private SortBy sortBy;
+
     private List<String> keywords;
     private KMPStringMatcher stringMatcher = new KMPStringMatcher();
 
-    public String getSearchText() {
-        return searchText;
-    }
+    private final int PRIORITIZED_SORT_VALUE_FACTOR = 10000;
 
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
+    public ListingFilter(String searchText, float maxRentPerMonth, int flatmateCapacity, SortBy sortBy) {
         this.keywords = Arrays.asList(searchText.split(" "));
-    }
-
-    public float getMaxRentPerMonth() {
-        return maxRentPerMonth;
-    }
-
-    public void setMaxRentPerMonth(float maxPrice) {
-        this.maxRentPerMonth = maxPrice;
-    }
-
-    public int getFlatmateCapacity() {
-        return flatmateCapacity;
-    }
-
-    public void setFlatmateCapacity(int flatmateCapacity) {
+        this.maxRentPerMonth = maxRentPerMonth;
         this.flatmateCapacity = flatmateCapacity;
+        this.sortBy = sortBy;
     }
 
     public int sortValue(ListingEntity listingEntity) {
@@ -47,8 +32,12 @@ public class ListingFilter {
             value += stringMatcher.countOccurences(listingEntity.getDescription(), keyword);
             value += stringMatcher
                     .countOccurences(listingEntity.getPerfectFlatmateDescription(), keyword);
+            
+            value += stringMatcher.countOccurences(listingEntity.getStreetName(), keyword) * PRIORITIZED_SORT_VALUE_FACTOR;
+            value += stringMatcher.countOccurences(listingEntity.getCityName(), keyword) * PRIORITIZED_SORT_VALUE_FACTOR;
+            value += stringMatcher.countOccurences(((Integer)listingEntity.getZipCode()).toString(), keyword) * PRIORITIZED_SORT_VALUE_FACTOR;
         }
-
+        value += sortBy.getValue(listingEntity);
         return value;
     }
 

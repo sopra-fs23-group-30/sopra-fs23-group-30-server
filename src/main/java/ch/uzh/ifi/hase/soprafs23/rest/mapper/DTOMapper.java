@@ -108,7 +108,6 @@ public interface DTOMapper {
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "lister.profilePictureURL", target = "profilePictureURL")
   @Mapping(source = "imagesJson", target = "imagesJson")
-
   ListingDetailsGetDTO convertListingEntityToListingDetailsGetDTO(ListingEntity listing);
 
   @Mapping(source = "id", target = "id")
