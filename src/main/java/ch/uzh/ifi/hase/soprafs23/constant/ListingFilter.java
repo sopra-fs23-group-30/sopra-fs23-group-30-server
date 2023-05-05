@@ -6,35 +6,21 @@ import java.util.List;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 
 public class ListingFilter {
-    private String searchText;
     private float maxRentPerMonth;
-    private int flatmateCapacity;
+    private int rooms;
+    private boolean petsAllowed;
+    private boolean elevator;
+    private boolean dishwasher;
     private List<String> keywords;
     private KMPStringMatcher stringMatcher = new KMPStringMatcher();
 
-    public String getSearchText() {
-        return searchText;
-    }
-
-    public void setSearchText(String searchText) {
-        this.searchText = searchText;
+    public ListingFilter(String searchText, float maxRentPerMonth, int rooms, boolean petsAllowed, boolean elevator, boolean dishwasher) {
         this.keywords = Arrays.asList(searchText.split(" "));
-    }
-
-    public float getMaxRentPerMonth() {
-        return maxRentPerMonth;
-    }
-
-    public void setMaxRentPerMonth(float maxPrice) {
-        this.maxRentPerMonth = maxPrice;
-    }
-
-    public int getFlatmateCapacity() {
-        return flatmateCapacity;
-    }
-
-    public void setFlatmateCapacity(int flatmateCapacity) {
-        this.flatmateCapacity = flatmateCapacity;
+        this.maxRentPerMonth = maxRentPerMonth;
+        this.rooms = rooms;
+        this.petsAllowed = petsAllowed;
+        this.elevator = elevator;
+        this.dishwasher = dishwasher;
     }
 
     public int sortValue(ListingEntity listingEntity) {
@@ -53,6 +39,13 @@ public class ListingFilter {
     }
 
     private boolean listingIsApplicable(ListingEntity listingEntity) {
-        return listingEntity.getPricePerMonth() <= maxRentPerMonth;
+        return listingEntity.getPricePerMonth() <= maxRentPerMonth 
+            && listingEntity.getRooms() >= rooms
+            && (listingEntity.getPetsAllowed() || !petsAllowed)
+            && (listingEntity.getElevator() || !elevator)
+            && (listingEntity.getDishwasher() || !dishwasher);
+        // The only case where pets, elevator or dishwasher should return false is when:
+        // the lister says false and the searcher says true.
+        // In any other case, they either agree, or the searcher doesn't care.
     }
 }

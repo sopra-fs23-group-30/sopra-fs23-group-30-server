@@ -13,6 +13,42 @@ public class ListingPostDTO {
     private String perfectFlatmateDescription;
     private UUID listerId;
     private String imagesJson;
+    private int rooms;
+    private boolean petsAllowed;
+    private boolean elevator;
+    private boolean dishwasher;
+    
+    public int getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
+    }
+
+    public boolean getPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public void setPetsAllowed(boolean petsAllowed) {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public boolean getElevator() {
+        return elevator;
+    }
+
+    public void setElevator(boolean elevator) {
+        this.elevator = elevator;
+    }
+
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
 
     public String getAddress() {
         return address;

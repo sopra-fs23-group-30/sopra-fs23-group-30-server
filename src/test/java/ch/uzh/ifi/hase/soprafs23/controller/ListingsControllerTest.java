@@ -124,12 +124,18 @@ class ListingsControllerTest {
     void getListings_validInput_thenSuccess() throws Exception {
         String searchText = "apartment";
         Float maxRentPerMonth = 2000.0f;
-        Integer flatmateCapacity = 10;
+        Integer rooms = 10;
+        Boolean petsAllowed = true;
+        Boolean elevator = true;
+        Boolean dishwasher = true;
 
         MockHttpServletRequestBuilder getRequest = get("/listings")
                 .param("searchText", searchText)
                 .param("maxRentPerMonth", maxRentPerMonth.toString())
-                .param("flatmateCapacity", flatmateCapacity.toString());
+                .param("rooms", rooms.toString())
+                .param("petsAllowed", petsAllowed.toString())
+                .param("elevator", elevator.toString())
+                .param("dishwasher", dishwasher.toString());
 
         mockMvc.perform(getRequest)
                 .andExpect(status().isOk());

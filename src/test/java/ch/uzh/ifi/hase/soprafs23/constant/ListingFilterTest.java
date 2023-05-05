@@ -9,26 +9,25 @@ import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 class ListingFilterTest {
     @Test
     void sortValue_validInput_4expected() {
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("Hello world");
-        listingFilter.setFlatmateCapacity(10);
-        listingFilter.setMaxRentPerMonth(2000);
+        ListingFilter listingFilter = new ListingFilter("Hello world", 2000, 3, true, true, true);
 
         ListingEntity listingEntity = new ListingEntity();
         listingEntity.setPricePerMonth(1500);
         listingEntity.setTitle("World");
         listingEntity.setDescription("Hello");
         listingEntity.setPerfectFlatmateDescription("World, I say: hello!");
+        listingEntity.setAddress("Friedhofsplatz 8, 4500 Solothurn");
+        listingEntity.setRooms(4);
+        listingEntity.setPetsAllowed(true);
+        listingEntity.setElevator(true);
+        listingEntity.setDishwasher(true);
 
         assertEquals(4, listingFilter.sortValue(listingEntity));
     }
 
     @Test
     void sortValue_validInput_minValueExpected() {
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("Hello world");
-        listingFilter.setFlatmateCapacity(10);
-        listingFilter.setMaxRentPerMonth(2000);
+        ListingFilter listingFilter = new ListingFilter("Hello world", 2000, 3, true, true, true);
 
         ListingEntity listingEntity = new ListingEntity();
         listingEntity.setPricePerMonth(2500);

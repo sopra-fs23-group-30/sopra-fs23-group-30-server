@@ -95,6 +95,7 @@ class ListingServiceTest {
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+        testListingEntityA.setRooms(4);
 
         testListingEntityB = new ListingEntity();
         testListingEntityB.setId(UUID.randomUUID());
@@ -105,16 +106,14 @@ class ListingServiceTest {
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+        testListingEntityB.setRooms(4);
 
         List<ListingEntity> testListings = new ArrayList<>();
         testListings.add(testListingEntityA);
         testListings.add(testListingEntityB);
         Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("apartment");
-        listingFilter.setMaxRentPerMonth(1000.0f);
-        listingFilter.setFlatmateCapacity(3);
+        ListingFilter listingFilter = new ListingFilter("Hello world", 1000, 3, false, false, false);
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
@@ -148,6 +147,10 @@ class ListingServiceTest {
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+        testListingEntityA.setRooms(4);
+        testListingEntityA.setPetsAllowed(true);
+        testListingEntityA.setDishwasher(true);
+        testListingEntityA.setElevator(true);
 
         testListingEntityB = new ListingEntity();
         testListingEntityB.setId(UUID.randomUUID());
@@ -158,16 +161,17 @@ class ListingServiceTest {
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+        testListingEntityB.setRooms(4);
+        testListingEntityB.setPetsAllowed(true);
+        testListingEntityB.setDishwasher(true);
+        testListingEntityB.setElevator(true);
 
         List<ListingEntity> testListings = new ArrayList<>();
         testListings.add(testListingEntityA);
         testListings.add(testListingEntityB);
         Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("cozy");
-        listingFilter.setMaxRentPerMonth(2000.0f);
-        listingFilter.setFlatmateCapacity(3);
+        ListingFilter listingFilter = new ListingFilter("cozy", 2000, 3, true, true, true);
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
@@ -201,6 +205,10 @@ class ListingServiceTest {
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+        testListingEntityA.setRooms(4);
+        testListingEntityA.setPetsAllowed(true);
+        testListingEntityA.setDishwasher(true);
+        testListingEntityA.setElevator(true);
 
         testListingEntityB = new ListingEntity();
         testListingEntityB.setId(UUID.randomUUID());
@@ -211,16 +219,17 @@ class ListingServiceTest {
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+        testListingEntityB.setRooms(4);
+        testListingEntityB.setPetsAllowed(true);
+        testListingEntityB.setDishwasher(true);
+        testListingEntityB.setElevator(true);
 
         List<ListingEntity> testListings = new ArrayList<>();
         testListings.add(testListingEntityA);
         testListings.add(testListingEntityB);
         Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        ListingFilter listingFilter = new ListingFilter();
-        listingFilter.setSearchText("spacious");
-        listingFilter.setMaxRentPerMonth(2000.0f);
-        listingFilter.setFlatmateCapacity(3);
+        ListingFilter listingFilter = new ListingFilter("spacious", 2000, 3, true, true, true);
 
         List<ListingEntity> allListings = listingService.getListings(listingFilter);
 

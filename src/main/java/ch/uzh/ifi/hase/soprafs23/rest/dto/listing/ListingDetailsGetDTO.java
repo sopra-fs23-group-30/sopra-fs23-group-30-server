@@ -14,6 +14,10 @@ public class ListingDetailsGetDTO {
     private float pricePerMonth;
     private String perfectFlatmateDescription;
     private LocalDateTime creationDate;
+    private int rooms;
+    private boolean petsAllowed;
+    private boolean elevator;
+    private boolean dishwasher;   
     private String listerFirstname;
     private String listerLastname;
     private String listerDescription;
@@ -22,6 +26,38 @@ public class ListingDetailsGetDTO {
 
     private UUID listerId;
     private String imagesJson;
+
+    public int getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
+    }
+
+    public boolean getPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public void setPetsAllowed(boolean petsAllowed) {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public boolean getElevator() {
+        return elevator;
+    }
+
+    public void setElevator(boolean elevator) {
+        this.elevator = elevator;
+    }
+
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
 
     public UUID getListerId() {
         return listerId;

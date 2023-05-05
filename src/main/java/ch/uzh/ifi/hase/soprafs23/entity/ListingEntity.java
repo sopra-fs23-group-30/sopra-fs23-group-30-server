@@ -46,30 +46,6 @@ public class ListingEntity implements Serializable {
     @Column(nullable = false)
     private float longitude;
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public float getLattitude() {
-        return lattitude;
-    }
-
-    public void setLattitude(float lattitude) {
-        this.lattitude = lattitude;
-    }
-
-    public float getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(float longitude) {
-        this.longitude = longitude;
-    }
-
     @Column(nullable = false)
     private float pricePerMonth;
 
@@ -82,6 +58,50 @@ public class ListingEntity implements Serializable {
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime creationDate;
+
+    @Column(updatable = false)
+    private int rooms;
+
+    @Column(nullable = false)
+    private boolean petsAllowed;
+    
+    @Column(nullable = false)
+    private boolean elevator; //Wheechair friendly?
+    
+    @Column(nullable = false)
+    private boolean dishwasher;
+
+    public boolean getPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public void setPetsAllowed(boolean petsAllowed) {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public boolean getElevator() {
+        return elevator;
+    }
+
+    public void setElevator(boolean elevator) {
+        this.elevator = elevator;
+    }
+
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
+
+    public int getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(int rooms) {
+        this.rooms = rooms;
+    }
 
     public UUID getId() {
         return id;
@@ -113,6 +133,30 @@ public class ListingEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public float getLattitude() {
+        return lattitude;
+    }
+
+    public void setLattitude(float lattitude) {
+        this.lattitude = lattitude;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
     public float getPricePerMonth() {

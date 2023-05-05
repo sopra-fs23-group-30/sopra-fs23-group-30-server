@@ -91,6 +91,10 @@ public interface DTOMapper {
   @Mapping(target = "creationDate", ignore = true)
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "lister", ignore = true)
+  @Mapping(source = "rooms", target = "rooms")
+  @Mapping(source = "petsAllowed", target = "petsAllowed")
+  @Mapping(source = "dishwasher", target = "dishwasher")
+  @Mapping(source = "elevator", target = "elevator")
   ListingEntity convertListingPostDTOToListingEntity(ListingPostDTO listing);
 
   @Mapping(source = "title", target = "title")
@@ -108,7 +112,10 @@ public interface DTOMapper {
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "lister.profilePictureURL", target = "profilePictureURL")
   @Mapping(source = "imagesJson", target = "imagesJson")
-
+  @Mapping(source = "rooms", target = "rooms")
+  @Mapping(source = "petsAllowed", target = "petsAllowed")
+  @Mapping(source = "dishwasher", target = "dishwasher")
+  @Mapping(source = "elevator", target = "elevator")
   ListingDetailsGetDTO convertListingEntityToListingDetailsGetDTO(ListingEntity listing);
 
   @Mapping(source = "id", target = "id")
