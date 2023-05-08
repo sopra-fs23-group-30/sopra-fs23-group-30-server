@@ -181,5 +181,5 @@ public interface DTOMapper {
   @Mapping(source = "inventoryId", target = "inventoryId")
   @Mapping(source = "id", target = "id")
   InventoryItemGetDTO convertInventoryItemEntityDTOtoInventoryItemGetDto(InventoryItemEntity inventoryItemEntity);
-  
+
 }

@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.uzh.ifi.hase.soprafs23.constant.ListingFilter;
+import ch.uzh.ifi.hase.soprafs23.constant.SortBy;
 import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingDetailsGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
@@ -69,11 +70,13 @@ public class ListingsController {
             @RequestParam String searchText,
             @RequestParam Float maxRentPerMonth,
             @RequestParam int flatmateCapacity,
+            @RequestParam SortBy sortBy,
             @RequestParam boolean petsAllowed,
             @RequestParam boolean elevator,
             @RequestParam boolean dishwasher) {
-        ListingFilter listingFilter = new ListingFilter(searchText, maxRentPerMonth, flatmateCapacity, petsAllowed, elevator, dishwasher);
-        
+        ListingFilter listingFilter = new ListingFilter(searchText, maxRentPerMonth, flatmateCapacity, petsAllowed,
+                elevator, dishwasher, sortBy);
+
         List<ListingEntity> listingEntities = listingService.getListings(listingFilter);
         List<ListingGetDTO> listingDTOs = new ArrayList<>();
         listingEntities

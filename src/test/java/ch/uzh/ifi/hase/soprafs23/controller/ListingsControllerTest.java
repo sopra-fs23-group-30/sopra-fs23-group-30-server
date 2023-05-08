@@ -38,139 +38,142 @@ import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 @ContextConfiguration(classes = ListingsController.class)
 class ListingsControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @MockBean
-    private ProfileService profileService;
+        @MockBean
+        private ProfileService profileService;
 
-    @MockBean
-    private ListingService listingService;
+        @MockBean
+        private ListingService listingService;
 
-    @MockBean
-    private BlobUploaderService blobUploaderService;
+        @MockBean
+        private BlobUploaderService blobUploaderService;
 
-    private ListingEntity testListing;
-    private ProfileEntity testProfileEntity;
+        private ListingEntity testListing;
+        private ProfileEntity testProfileEntity;
 
-    @BeforeEach
-    void setup() {
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(new ListingsController(listingService, profileService, blobUploaderService))
-                .build();
+        @BeforeEach
+        void setup() {
+                mockMvc = MockMvcBuilders
+                                .standaloneSetup(new ListingsController(listingService, profileService,
+                                                blobUploaderService))
+                                .build();
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
+                testProfileEntity = new ProfileEntity();
+                testProfileEntity.setId(UUID.randomUUID());
 
-        testListing = new ListingEntity();
-        testListing.setId(UUID.randomUUID());
-        testListing.setTitle("Nice Listing");
-        testListing.setDescription("Nice Listing with description");
-        testListing.setAddress("Kronengasse 1, 4500 Solothurn");
-        testListing.setPricePerMonth(500);
-        testListing.setPerfectFlatmateDescription("A person, preferably alive");
-        testListing.setLister(testProfileEntity);
-        testListing.setImagesJson("");
-        testListing.setCreationDate(LocalDateTime.now());
-    }
-
-    @Test
-    void createdListing_validInput_success() throws Exception {
-        ListingPostDTO listingPostDTO = new ListingPostDTO();
-        listingPostDTO.setTitle(testListing.getTitle());
-        listingPostDTO.setDescription(testListing.getDescription());
-        listingPostDTO.setAddress(testListing.getAddress());
-        listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
-        listingPostDTO.setListerId(testListing.getLister().getId());
-        listingPostDTO.setImagesJson(testListing.getImagesJson());
-
-        Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-                .thenReturn(testProfileEntity);
-        Mockito.when(listingService.createListing(Mockito.any()))
-                .thenReturn(testListing);
-
-        MockHttpServletRequestBuilder postRequest = post("/listings")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(listingPostDTO));
-
-        mockMvc.perform(postRequest).andExpect(status().isCreated());
-    }
-
-    @Test
-    void createdListing_validInput_badRequest() throws Exception {
-        ListingPostDTO listingPostDTO = new ListingPostDTO();
-        listingPostDTO.setTitle(testListing.getTitle());
-        listingPostDTO.setDescription(testListing.getDescription());
-        listingPostDTO.setAddress(testListing.getAddress());
-        listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
-        listingPostDTO.setListerId(testListing.getLister().getId());
-        listingPostDTO.setImagesJson(testListing.getImagesJson());
-
-        Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "For the provided profile id no profile was found"));
-        Mockito.when(listingService.createListing(Mockito.any()))
-                .thenReturn(testListing);
-
-        MockHttpServletRequestBuilder postRequest = post("/listings")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(listingPostDTO));
-
-        mockMvc.perform(postRequest).andExpect(status().isNotFound());
-    }
-
-    @Test
-    // @WithMockUser
-    void getListings_validInput_thenSuccess() throws Exception {
-        String searchText = "apartment";
-        Float maxRentPerMonth = 2000.0f;
-        Integer flatmateCapacity = 10;
-        Boolean petsAllowed = true;
-        Boolean elevator = true;
-        Boolean dishwasher = true;
-
-        MockHttpServletRequestBuilder getRequest = get("/listings")
-                .param("searchText", searchText)
-                .param("maxRentPerMonth", maxRentPerMonth.toString())
-                .param("flatmateCapacity", flatmateCapacity.toString())
-                .param("petsAllowed", petsAllowed.toString())
-                .param("elevator", elevator.toString())
-                .param("dishwasher", dishwasher.toString());
-
-        mockMvc.perform(getRequest)
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    // @WithMockUser
-    void getListingById_validInput_thenSuccess() throws Exception {
-        Mockito.when(listingService.getListingById(Mockito.any())).thenReturn(testListing);
-
-        MockHttpServletRequestBuilder getRequest = get("/listings/" + testListing.getId().toString());
-
-        mockMvc.perform(getRequest)
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    // @WithMockUser
-    void deleteListingById_validInput_thenSuccess() throws Exception {
-        MockHttpServletRequestBuilder deleteRequest = delete("/listings/" + testListing.getId().toString());
-
-        mockMvc.perform(deleteRequest)
-                .andExpect(status().isNoContent());
-    }
-
-    /**
-     * @param object
-     * @return string
-     */
-    private String asJsonString(final Object object) {
-        try {
-            return new ObjectMapper().writeValueAsString(object);
-        } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    String.format("The request body could not be created.%s", e.toString()));
+                testListing = new ListingEntity();
+                testListing.setId(UUID.randomUUID());
+                testListing.setTitle("Nice Listing");
+                testListing.setDescription("Nice Listing with description");
+                testListing.setAddress("Kronengasse 1, 4500 Solothurn");
+                testListing.setPricePerMonth(500);
+                testListing.setPerfectFlatmateDescription("A person, preferably alive");
+                testListing.setLister(testProfileEntity);
+                testListing.setImagesJson("");
+                testListing.setCreationDate(LocalDateTime.now());
         }
-    }
+
+        @Test
+        void createdListing_validInput_success() throws Exception {
+                ListingPostDTO listingPostDTO = new ListingPostDTO();
+                listingPostDTO.setTitle(testListing.getTitle());
+                listingPostDTO.setDescription(testListing.getDescription());
+                listingPostDTO.setAddress(testListing.getAddress());
+                listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
+                listingPostDTO.setListerId(testListing.getLister().getId());
+                listingPostDTO.setImagesJson(testListing.getImagesJson());
+
+                Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
+                                .thenReturn(testProfileEntity);
+                Mockito.when(listingService.createListing(Mockito.any()))
+                                .thenReturn(testListing);
+
+                MockHttpServletRequestBuilder postRequest = post("/listings")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(asJsonString(listingPostDTO));
+
+                mockMvc.perform(postRequest).andExpect(status().isCreated());
+        }
+
+        @Test
+        void createdListing_validInput_badRequest() throws Exception {
+                ListingPostDTO listingPostDTO = new ListingPostDTO();
+                listingPostDTO.setTitle(testListing.getTitle());
+                listingPostDTO.setDescription(testListing.getDescription());
+                listingPostDTO.setAddress(testListing.getAddress());
+                listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
+                listingPostDTO.setListerId(testListing.getLister().getId());
+                listingPostDTO.setImagesJson(testListing.getImagesJson());
+
+                Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
+                                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                                "For the provided profile id no profile was found"));
+                Mockito.when(listingService.createListing(Mockito.any()))
+                                .thenReturn(testListing);
+
+                MockHttpServletRequestBuilder postRequest = post("/listings")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(asJsonString(listingPostDTO));
+
+                mockMvc.perform(postRequest).andExpect(status().isNotFound());
+        }
+
+        @Test
+        // @WithMockUser
+        void getListings_validInput_thenSuccess() throws Exception {
+                String searchText = "apartment";
+                Float maxRentPerMonth = 2000.0f;
+                Integer flatmateCapacity = 10;
+                String sortBy = "PRICE_ASCENDING";
+                Boolean petsAllowed = true;
+                Boolean elevator = true;
+                Boolean dishwasher = true;
+
+                MockHttpServletRequestBuilder getRequest = get("/listings")
+                                .param("searchText", searchText)
+                                .param("maxRentPerMonth", maxRentPerMonth.toString())
+                                .param("flatmateCapacity", flatmateCapacity.toString())
+                                .param("sortBy", sortBy)
+                                .param("petsAllowed", petsAllowed.toString())
+                                .param("elevator", elevator.toString())
+                                .param("dishwasher", dishwasher.toString());
+
+                mockMvc.perform(getRequest)
+                                .andExpect(status().isOk());
+        }
+
+        @Test
+        // @WithMockUser
+        void getListingById_validInput_thenSuccess() throws Exception {
+                Mockito.when(listingService.getListingById(Mockito.any())).thenReturn(testListing);
+
+                MockHttpServletRequestBuilder getRequest = get("/listings/" + testListing.getId().toString());
+
+                mockMvc.perform(getRequest)
+                                .andExpect(status().isOk());
+        }
+
+        @Test
+        // @WithMockUser
+        void deleteListingById_validInput_thenSuccess() throws Exception {
+                MockHttpServletRequestBuilder deleteRequest = delete("/listings/" + testListing.getId().toString());
+
+                mockMvc.perform(deleteRequest)
+                                .andExpect(status().isNoContent());
+        }
+
+        /**
+         * @param object
+         * @return string
+         */
+        private String asJsonString(final Object object) {
+                try {
+                        return new ObjectMapper().writeValueAsString(object);
+                } catch (JsonProcessingException e) {
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                                        String.format("The request body could not be created.%s", e.toString()));
+                }
+        }
 }
