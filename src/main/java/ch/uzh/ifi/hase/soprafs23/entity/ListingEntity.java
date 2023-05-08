@@ -38,16 +38,13 @@ public class ListingEntity implements Serializable {
     private String description;
 
     @Column(nullable = false)
-    private String streetName;
+    private String address;
 
     @Column(nullable = false)
-    private String streetNumber;
+    private float lattitude;
 
     @Column(nullable = false)
-    private int zipCode;
-
-    @Column(nullable = false)
-    private String cityName;
+    private float longitude;
 
     @Column(nullable = false)
     private float pricePerMonth;
@@ -61,6 +58,50 @@ public class ListingEntity implements Serializable {
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime creationDate;
+
+    @Column(updatable = false)
+    private int flatmateCapacity;
+
+    @Column(nullable = false)
+    private boolean petsAllowed;
+    
+    @Column(nullable = false)
+    private boolean elevator; //Wheechair friendly?
+    
+    @Column(nullable = false)
+    private boolean dishwasher;
+
+    public boolean getPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public void setPetsAllowed(boolean petsAllowed) {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public boolean getElevator() {
+        return elevator;
+    }
+
+    public void setElevator(boolean elevator) {
+        this.elevator = elevator;
+    }
+
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
+
+    public int getFlatmateCapacity() {
+        return flatmateCapacity;
+    }
+
+    public void setFlatmateCapacity(int flatmateCapacity) {
+        this.flatmateCapacity = flatmateCapacity;
+    }
 
     public UUID getId() {
         return id;
@@ -94,36 +135,28 @@ public class ListingEntity implements Serializable {
         this.description = description;
     }
 
-    public String getStreetName() {
-        return streetName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getStreetNumber() {
-        return streetNumber;
+    public float getLattitude() {
+        return lattitude;
     }
 
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
+    public void setLattitude(float lattitude) {
+        this.lattitude = lattitude;
     }
 
-    public int getZipCode() {
-        return zipCode;
+    public float getLongitude() {
+        return longitude;
     }
 
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
     public float getPricePerMonth() {

@@ -45,10 +45,7 @@ class ApplicationRepositoryTest {
         listingEntity.setLister(lister);
         listingEntity.setTitle("Top tier apartment");
         listingEntity.setDescription("A very nice place to live.");
-        listingEntity.setStreetName("Ahornweg");
-        listingEntity.setStreetNumber("27b");
-        listingEntity.setZipCode(4500);
-        listingEntity.setCityName("Solothurn");
+        listingEntity.setAddress("Ahronweg 77, 4543 Deitingen");
         listingEntity.setPricePerMonth(765.85f);
         listingEntity.setImagesJson("");
         listingEntity.setPerfectFlatmateDescription("Some person");

@@ -51,6 +51,7 @@ public interface DTOMapper {
   @Mapping(target = "futureFlatmatesDescription", ignore = true)
   @Mapping(target = "gender", ignore = true)
   @Mapping(target = "profilePictureURL", ignore = true)
+  @Mapping(target = "documentURL", ignore = true)
   ProfileEntity convertRegisterProfileDTOtoEntity(RegisterPostDTO registerProfileDTO);
 
   @Mapping(source = "email", target = "email")
@@ -72,6 +73,7 @@ public interface DTOMapper {
   @Mapping(source = "biography", target = "biography")
   @Mapping(source = "futureFlatmatesDescription", target = "futureFlatmatesDescription")
   @Mapping(target = "profilePictureURL", source = "profilePictureURL")
+  @Mapping(target = "documentURL", source = "documentURL")
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "email", ignore = true)
   @Mapping(target = "isSearcher", ignore = true)
@@ -80,24 +82,26 @@ public interface DTOMapper {
 
   @Mapping(source = "title", target = "title")
   @Mapping(source = "description", target = "description")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
+  @Mapping(source = "lattitude", target = "lattitude")
+  @Mapping(source = "longitude", target = "longitude")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "imagesJson", target = "imagesJson")
   @Mapping(target = "creationDate", ignore = true)
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "lister", ignore = true)
+  @Mapping(source = "flatmateCapacity", target = "flatmateCapacity")
+  @Mapping(source = "petsAllowed", target = "petsAllowed")
+  @Mapping(source = "dishwasher", target = "dishwasher")
+  @Mapping(source = "elevator", target = "elevator")
   ListingEntity convertListingPostDTOToListingEntity(ListingPostDTO listing);
 
   @Mapping(source = "title", target = "title")
   @Mapping(source = "description", target = "description")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
+  @Mapping(source = "lattitude", target = "lattitude")
+  @Mapping(source = "longitude", target = "longitude")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "perfectFlatmateDescription", target = "perfectFlatmateDescription")
   @Mapping(source = "lister.firstname", target = "listerFirstname")
@@ -108,14 +112,15 @@ public interface DTOMapper {
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "lister.profilePictureURL", target = "profilePictureURL")
   @Mapping(source = "imagesJson", target = "imagesJson")
+  @Mapping(source = "flatmateCapacity", target = "flatmateCapacity")
+  @Mapping(source = "petsAllowed", target = "petsAllowed")
+  @Mapping(source = "dishwasher", target = "dishwasher")
+  @Mapping(source = "elevator", target = "elevator")
   ListingDetailsGetDTO convertListingEntityToListingDetailsGetDTO(ListingEntity listing);
 
   @Mapping(source = "id", target = "id")
   @Mapping(source = "title", target = "title")
-  @Mapping(source = "streetName", target = "streetName")
-  @Mapping(source = "streetNumber", target = "streetNumber")
-  @Mapping(source = "zipCode", target = "zipCode")
-  @Mapping(source = "cityName", target = "cityName")
+  @Mapping(source = "address", target = "address")
   @Mapping(source = "pricePerMonth", target = "pricePerMonth")
   @Mapping(source = "imagesJson", target = "imagesJson")
   ListingGetDTO convertListingEntityToListingGetDTO(ListingEntity listing);
@@ -125,18 +130,16 @@ public interface DTOMapper {
   @Mapping(target = "state", ignore = true)
   @Mapping(target = "creationDate", ignore = true)
   @Mapping(target = "id", ignore = true)
+  @Mapping(target = "inventoryId", ignore = true)
   ApplicationEntity convertApplicationPostDTOToApplicationEntity(ApplicationPostDTO applicationDTO);
 
   @Mapping(source = "id", target = "applicationId")
   @Mapping(source = "listing.id", target = "listingId")
   @Mapping(source = "creationDate", target = "creationDate")
   @Mapping(source = "state", target = "state")
-  @Mapping(source = "listing.title", target = "listingTitle")
-  @Mapping(source = "listing.streetName", target = "listingStreetName")
-  @Mapping(source = "listing.streetNumber", target = "listingStreetNumber")
-  @Mapping(source = "listing.zipCode", target = "listingZipCode")
-  @Mapping(source = "listing.cityName", target = "listingCityName")
   @Mapping(source = "inventoryId", target = "inventoryId")
+  @Mapping(source = "listing.title", target = "listingTitle")
+  @Mapping(source = "listing.address", target = "listingAddress")
   ApplicationGetDTO convertApplicationEntityToApplicationGetDTO(ApplicationEntity applicationEntity);
 
   @Mapping(source = "applicant.id", target = "applicantId")
@@ -178,5 +181,5 @@ public interface DTOMapper {
   @Mapping(source = "inventoryId", target = "inventoryId")
   @Mapping(source = "id", target = "id")
   InventoryItemGetDTO convertInventoryItemEntityDTOtoInventoryItemGetDto(InventoryItemEntity inventoryItemEntity);
-  
+
 }

@@ -14,6 +14,7 @@ public class ProfilePutDTO {
   private String futureFlatmatesDescription;
   private List<ProfileLifespanDTO> lifespans;
   private String profilePictureURL;
+  private String documentURL;
 
   public List<ProfileLifespanDTO> getLifespans() {
     return lifespans;
@@ -85,6 +86,14 @@ public class ProfilePutDTO {
 
   public void setProfilePictureURL(String profilePictureURL) {
     this.profilePictureURL = profilePictureURL;
+  }
+
+  public String getDocumentURL() {
+    return documentURL;
+  }
+
+  public void setDocumentURL(String documentURL) {
+    this.documentURL = documentURL;
   }
 
 }

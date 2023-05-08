@@ -86,3 +86,50 @@ Fatih:
 - Week 3
     - [x] #28 FE -> (prior #54)
     - [x] #27 FE -> (prior #53) 
+
+
+
+
+
+**Sprint 2**
+FE = FrontEnd   BE = BackEnd
+
+Delia Datsomor:
+- Week 1
+    - [x] #3 FE
+    - [x] #6 FE
+- Week 2
+    - [ ] #34 FE
+    - [ ] #39 FE
+
+Rafael:
+- Week 1
+    - [x] #84 BE
+    - [x] #85 BE
+- Week 2
+    - [ ] #36 FE
+    - [ ] #66 BE FE
+
+Mathias:
+- Week 1
+    - [x] #86 BE
+    - [x] #32 FE
+- Week 2
+    - [ ] #33 FE
+    - [ ] #22 BE
+
+Mika:
+- Week 1
+    - [x] #23 FE
+    - [x] #63 BE
+- Week 2
+    - [ ] #65 BE FE
+    - [ ] #35 FE
+
+Fatih:
+- Week 1
+    - [x] #4 FE
+    - [x] #5 FE
+- Week 2
+    - [ ] #37 FE
+    - [ ] #38 FE

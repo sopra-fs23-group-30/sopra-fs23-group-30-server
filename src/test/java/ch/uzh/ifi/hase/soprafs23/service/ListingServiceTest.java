@@ -23,306 +23,283 @@ import ch.uzh.ifi.hase.soprafs23.repository.ApplicationRepository;
 import ch.uzh.ifi.hase.soprafs23.repository.ListingRepository;
 
 class ListingServiceTest {
-    @Mock
-    private ListingRepository listingRepository;
-    @Mock
-    private ApplicationRepository applicationRepository;
+        @Mock
+        private ListingRepository listingRepository;
+        @Mock
+        private ApplicationRepository applicationRepository;
 
-    @InjectMocks
-    private ListingService listingService;
+        @InjectMocks
+        private ListingService listingService;
 
-    @Test
-    void creatListing_validInput_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+        @Test
+        void creatListing_validInput_expectSuccess() {
+                MockitoAnnotations.openMocks(this);
 
-        ProfileEntity testProfileEntity;
+                ProfileEntity testProfileEntity;
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+                testProfileEntity = new ProfileEntity();
+                testProfileEntity.setId(UUID.randomUUID());
+                testProfileEntity.setFirstname("test");
+                testProfileEntity.setLastname("name");
+                testProfileEntity.setEmail("test.name@example.com");
+                testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+                testProfileEntity.setPassword("OneTwoThree");
+                testProfileEntity.setIsSearcher(false);
 
-        ListingEntity testListingEntity = new ListingEntity();
+                ListingEntity testListingEntity = new ListingEntity();
 
-        testListingEntity.setId(UUID.randomUUID());
-        testListingEntity.setLister(testProfileEntity);
-        testListingEntity.setTitle("Top tier apartment");
-        testListingEntity.setDescription("A very nice place to live.");
-        testListingEntity.setStreetName("Ahornweg");
-        testListingEntity.setStreetNumber("27b");
-        testListingEntity.setZipCode(4500);
-        testListingEntity.setCityName("Solothurn");
-        testListingEntity.setPricePerMonth(765.85f);
-        testListingEntity.setImagesJson("");
-        testListingEntity.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntity.setId(UUID.randomUUID());
+                testListingEntity.setLister(testProfileEntity);
+                testListingEntity.setTitle("Top tier apartment");
+                testListingEntity.setDescription("A very nice place to live.");
+                testListingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntity.setPricePerMonth(765.85f);
+                testListingEntity.setImagesJson("");
+                testListingEntity.setPerfectFlatmateDescription("Some nice person.");
 
-        Mockito.when(listingRepository.save(Mockito.any())).thenReturn(testListingEntity);
-        ListingEntity createdListingEntity = listingService.createListing(testListingEntity);
+                Mockito.when(listingRepository.save(Mockito.any())).thenReturn(testListingEntity);
+                ListingEntity createdListingEntity = listingService.createListing(testListingEntity);
 
-        assertEquals(testListingEntity.getId(), createdListingEntity.getId());
-        assertEquals(testListingEntity.getLister(), createdListingEntity.getLister());
-        assertEquals(testListingEntity.getTitle(), createdListingEntity.getTitle());
-        assertEquals(testListingEntity.getDescription(), createdListingEntity.getDescription());
-        assertEquals(testListingEntity.getStreetName(), createdListingEntity.getStreetName());
-        assertEquals(testListingEntity.getStreetNumber(), createdListingEntity.getStreetNumber());
-        assertEquals(testListingEntity.getZipCode(), createdListingEntity.getZipCode());
-        assertEquals(testListingEntity.getCityName(), createdListingEntity.getCityName());
-        assertEquals(testListingEntity.getPricePerMonth(), createdListingEntity.getPricePerMonth());
-        assertEquals(testListingEntity.getPerfectFlatmateDescription(),
-                createdListingEntity.getPerfectFlatmateDescription());
-    }
+                assertEquals(testListingEntity.getId(), createdListingEntity.getId());
+                assertEquals(testListingEntity.getLister(), createdListingEntity.getLister());
+                assertEquals(testListingEntity.getTitle(), createdListingEntity.getTitle());
+                assertEquals(testListingEntity.getDescription(), createdListingEntity.getDescription());
+                assertEquals(testListingEntity.getAddress(), createdListingEntity.getAddress());
+                assertEquals(testListingEntity.getPricePerMonth(), createdListingEntity.getPricePerMonth());
+                assertEquals(testListingEntity.getPerfectFlatmateDescription(),
+                                createdListingEntity.getPerfectFlatmateDescription());
+        }
 
-    @Test
-    void getListings_filterPrice_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+        @Test
+        void getListings_filterPrice_expectSuccess() {
+                MockitoAnnotations.openMocks(this);
+                ProfileEntity testProfileEntity;
+                ListingEntity testListingEntityA;
+                ListingEntity testListingEntityB;
+                testProfileEntity = new ProfileEntity();
+                testProfileEntity.setId(UUID.randomUUID());
+                testProfileEntity.setFirstname("test");
+                testProfileEntity.setLastname("name");
+                testProfileEntity.setEmail("test.name@example.com");
+                testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+                testProfileEntity.setPassword("OneTwoThree");
+                testProfileEntity.setIsSearcher(false);
 
-        ProfileEntity testProfileEntity;
-        ListingEntity testListingEntityA;
-        ListingEntity testListingEntityB;
+                testListingEntityA = new ListingEntity();
+                testListingEntityA.setId(UUID.randomUUID());
+                testListingEntityA.setLister(testProfileEntity);
+                testListingEntityA.setTitle("cozy apartment");
+                testListingEntityA.setDescription("A very nice place to live.");
+                testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntityA.setPricePerMonth(765.85f);
+                testListingEntityA.setImagesJson("");
+                testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityA.setFlatmateCapacity(4);
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+                testListingEntityB = new ListingEntity();
+                testListingEntityB.setId(UUID.randomUUID());
+                testListingEntityB.setLister(testProfileEntity);
+                testListingEntityB.setTitle("spacious apartment");
+                testListingEntityB.setDescription("A very nice place to live.");
+                testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntityB.setPricePerMonth(1765.85f);
+                testListingEntityB.setImagesJson("");
+                testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityB.setFlatmateCapacity(4);
+                List<ListingEntity> testListings = new ArrayList<>();
+                testListings.add(testListingEntityA);
+                testListings.add(testListingEntityB);
+                Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        testListingEntityA = new ListingEntity();
-        testListingEntityA.setId(UUID.randomUUID());
-        testListingEntityA.setLister(testProfileEntity);
-        testListingEntityA.setTitle("cozy apartment");
-        testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setStreetName("Ahornweg");
-        testListingEntityA.setStreetNumber("27b");
-        testListingEntityA.setZipCode(4500);
-        testListingEntityA.setCityName("Solothurn");
-        testListingEntityA.setPricePerMonth(765.85f);
-        testListingEntityA.setImagesJson("");
-        testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+                ListingFilter listingFilter = new ListingFilter("Hello world", 1000, 5, false, false, false,
+                                SortBy.PRICE_ASCENDING);
+                List<ListingEntity> allListings = listingService.getListings(listingFilter);
+                assertEquals(1, allListings.size());
+                assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
+        }
 
-        testListingEntityB = new ListingEntity();
-        testListingEntityB.setId(UUID.randomUUID());
-        testListingEntityB.setLister(testProfileEntity);
-        testListingEntityB.setTitle("spacious apartment");
-        testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setStreetName("Ahornweg");
-        testListingEntityB.setStreetNumber("27b");
-        testListingEntityB.setZipCode(4500);
-        testListingEntityB.setCityName("Solothurn");
-        testListingEntityB.setPricePerMonth(1765.85f);
-        testListingEntityB.setImagesJson("");
-        testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+        @Test
+        void getListings_filterTextCozy_expectSuccess() {
+                MockitoAnnotations.openMocks(this);
+                ProfileEntity testProfileEntity;
+                ListingEntity testListingEntityA;
+                ListingEntity testListingEntityB;
 
-        List<ListingEntity> testListings = new ArrayList<>();
-        testListings.add(testListingEntityA);
-        testListings.add(testListingEntityB);
-        Mockito.when(listingRepository.findAll()).thenReturn(testListings);
+                testProfileEntity = new ProfileEntity();
+                testProfileEntity.setId(UUID.randomUUID());
+                testProfileEntity.setFirstname("test");
+                testProfileEntity.setLastname("name");
+                testProfileEntity.setEmail("test.name@example.com");
+                testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+                testProfileEntity.setPassword("OneTwoThree");
+                testProfileEntity.setIsSearcher(false);
 
-        ListingFilter listingFilter = new ListingFilter("apartment", 1000, 10, SortBy.PRICE_ASCENDING);
+                testListingEntityA = new ListingEntity();
+                testListingEntityA.setId(UUID.randomUUID());
+                testListingEntityA.setLister(testProfileEntity);
+                testListingEntityA.setTitle("cozy apartment");
+                testListingEntityA.setDescription("A very nice place to live.");
+                testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntityA.setPricePerMonth(765.85f);
+                testListingEntityA.setImagesJson("");
+                testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityA.setFlatmateCapacity(4);
+                testListingEntityA.setPetsAllowed(true);
+                testListingEntityA.setDishwasher(true);
+                testListingEntityA.setElevator(true);
 
-        List<ListingEntity> allListings = listingService.getListings(listingFilter);
+                testListingEntityB = new ListingEntity();
+                testListingEntityB.setId(UUID.randomUUID());
+                testListingEntityB.setLister(testProfileEntity);
+                testListingEntityB.setTitle("spacious apartment");
+                testListingEntityB.setDescription("A very nice place to live.");
+                testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntityB.setPricePerMonth(1765.85f);
+                testListingEntityB.setImagesJson("");
+                testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityB.setFlatmateCapacity(4);
+                testListingEntityB.setPetsAllowed(true);
+                testListingEntityB.setDishwasher(true);
+                testListingEntityB.setElevator(true);
 
-        assertEquals(1, allListings.size());
-        assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
-    }
+                List<ListingEntity> testListings = new ArrayList<>();
+                testListings.add(testListingEntityA);
+                testListings.add(testListingEntityB);
+                Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-    @Test
-    void getListings_filterTextCozy_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+                ListingFilter listingFilter = new ListingFilter("cozy", 2000, 5, true, true, true,
+                                SortBy.PRICE_ASCENDING);
+                List<ListingEntity> allListings = listingService.getListings(listingFilter);
+                assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
+                assertEquals(allListings.get(1).getTitle(), testListingEntityB.getTitle());
+        }
 
-        ProfileEntity testProfileEntity;
-        ListingEntity testListingEntityA;
-        ListingEntity testListingEntityB;
+        @Test
+        void getListings_filterTextSpacious_expectSuccess() {
+                MockitoAnnotations.openMocks(this);
+                ProfileEntity testProfileEntity;
+                ListingEntity testListingEntityA;
+                ListingEntity testListingEntityB;
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+                testProfileEntity = new ProfileEntity();
+                testProfileEntity.setId(UUID.randomUUID());
+                testProfileEntity.setFirstname("test");
+                testProfileEntity.setLastname("name");
+                testProfileEntity.setEmail("test.name@example.com");
+                testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+                testProfileEntity.setPassword("OneTwoThree");
+                testProfileEntity.setIsSearcher(false);
 
-        testListingEntityA = new ListingEntity();
-        testListingEntityA.setId(UUID.randomUUID());
-        testListingEntityA.setLister(testProfileEntity);
-        testListingEntityA.setTitle("cozy apartment");
-        testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setStreetName("Ahornweg");
-        testListingEntityA.setStreetNumber("27b");
-        testListingEntityA.setZipCode(4500);
-        testListingEntityA.setCityName("Solothurn");
-        testListingEntityA.setPricePerMonth(765.85f);
-        testListingEntityA.setImagesJson("");
-        testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityA = new ListingEntity();
+                testListingEntityA.setId(UUID.randomUUID());
+                testListingEntityA.setLister(testProfileEntity);
+                testListingEntityA.setTitle("cozy apartment");
+                testListingEntityA.setDescription("A very nice place to live.");
+                testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntityA.setPricePerMonth(765.85f);
+                testListingEntityA.setImagesJson("");
+                testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityA.setFlatmateCapacity(4);
+                testListingEntityA.setPetsAllowed(true);
+                testListingEntityA.setDishwasher(true);
+                testListingEntityA.setElevator(true);
 
-        testListingEntityB = new ListingEntity();
-        testListingEntityB.setId(UUID.randomUUID());
-        testListingEntityB.setLister(testProfileEntity);
-        testListingEntityB.setTitle("spacious apartment");
-        testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setStreetName("Ahornweg");
-        testListingEntityB.setStreetNumber("27b");
-        testListingEntityB.setZipCode(4500);
-        testListingEntityB.setCityName("Solothurn");
-        testListingEntityB.setPricePerMonth(1765.85f);
-        testListingEntityB.setImagesJson("");
-        testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityB = new ListingEntity();
+                testListingEntityB.setId(UUID.randomUUID());
+                testListingEntityB.setLister(testProfileEntity);
+                testListingEntityB.setTitle("spacious apartment");
+                testListingEntityB.setDescription("A very nice place to live.");
+                testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntityB.setPricePerMonth(1765.85f);
+                testListingEntityB.setImagesJson("");
+                testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntityB.setFlatmateCapacity(4);
+                testListingEntityB.setPetsAllowed(true);
+                testListingEntityB.setDishwasher(true);
+                testListingEntityB.setElevator(true);
 
-        List<ListingEntity> testListings = new ArrayList<>();
-        testListings.add(testListingEntityA);
-        testListings.add(testListingEntityB);
-        Mockito.when(listingRepository.findAll()).thenReturn(testListings);
-        
-        ListingFilter listingFilter = new ListingFilter("cozy", 2000, 10, SortBy.PRICE_ASCENDING);
+                List<ListingEntity> testListings = new ArrayList<>();
+                testListings.add(testListingEntityA);
+                testListings.add(testListingEntityB);
+                Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        List<ListingEntity> allListings = listingService.getListings(listingFilter);
+                ListingFilter listingFilter = new ListingFilter("spacious", 2000, 5, true, true, true,
+                                SortBy.PRICE_ASCENDING);
+                List<ListingEntity> allListings = listingService.getListings(listingFilter);
+                assertEquals(allListings.get(1).getTitle(), testListingEntityA.getTitle());
+                assertEquals(allListings.get(0).getTitle(), testListingEntityB.getTitle());
+        }
 
-        assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
-        assertEquals(allListings.get(1).getTitle(), testListingEntityB.getTitle());
-    }
+        @Test
+        void getListingsById_validInput_expectSuccess() {
+                MockitoAnnotations.openMocks(this);
 
-    @Test
-    void getListings_filterTextSpacious_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+                ProfileEntity testProfileEntity;
 
-        ProfileEntity testProfileEntity;
-        ListingEntity testListingEntityA;
-        ListingEntity testListingEntityB;
+                testProfileEntity = new ProfileEntity();
+                testProfileEntity.setId(UUID.randomUUID());
+                testProfileEntity.setFirstname("test");
+                testProfileEntity.setLastname("name");
+                testProfileEntity.setEmail("test.name@example.com");
+                testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+                testProfileEntity.setPassword("OneTwoThree");
+                testProfileEntity.setIsSearcher(false);
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+                ListingEntity testListingEntity = new ListingEntity();
 
-        testListingEntityA = new ListingEntity();
-        testListingEntityA.setId(UUID.randomUUID());
-        testListingEntityA.setLister(testProfileEntity);
-        testListingEntityA.setTitle("cozy apartment");
-        testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setStreetName("Ahornweg");
-        testListingEntityA.setStreetNumber("27b");
-        testListingEntityA.setZipCode(4500);
-        testListingEntityA.setCityName("Solothurn");
-        testListingEntityA.setPricePerMonth(765.85f);
-        testListingEntityA.setImagesJson("");
-        testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+                testListingEntity.setId(UUID.randomUUID());
+                testListingEntity.setLister(testProfileEntity);
+                testListingEntity.setTitle("Top tier apartment");
+                testListingEntity.setDescription("A very nice place to live.");
+                testListingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntity.setPricePerMonth(765.85f);
+                testListingEntity.setImagesJson("");
+                testListingEntity.setPerfectFlatmateDescription("Some nice person.");
 
-        testListingEntityB = new ListingEntity();
-        testListingEntityB.setId(UUID.randomUUID());
-        testListingEntityB.setLister(testProfileEntity);
-        testListingEntityB.setTitle("spacious apartment");
-        testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setStreetName("Ahornweg");
-        testListingEntityB.setStreetNumber("27b");
-        testListingEntityB.setZipCode(4500);
-        testListingEntityB.setCityName("Solothurn");
-        testListingEntityB.setPricePerMonth(765.85f);
-        testListingEntityB.setImagesJson("");
-        testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+                Mockito.when(listingRepository.findById(testListingEntity.getId()))
+                                .thenReturn(Optional.of(testListingEntity));
+                ListingEntity foundListingEntity = listingService.getListingById(testListingEntity.getId());
 
-        List<ListingEntity> testListings = new ArrayList<>();
-        testListings.add(testListingEntityA);
-        testListings.add(testListingEntityB);
-        Mockito.when(listingRepository.findAll()).thenReturn(testListings);
-        
-        ListingFilter listingFilter = new ListingFilter("spacious", 2000, 10, SortBy.PRICE_ASCENDING);
+                assertEquals(testListingEntity.getId(), foundListingEntity.getId());
+                assertEquals(testListingEntity.getLister(), foundListingEntity.getLister());
+                assertEquals(testListingEntity.getTitle(), foundListingEntity.getTitle());
+                assertEquals(testListingEntity.getDescription(), foundListingEntity.getDescription());
+                assertEquals(testListingEntity.getAddress(), foundListingEntity.getAddress());
+                assertEquals(testListingEntity.getPricePerMonth(), foundListingEntity.getPricePerMonth());
+                assertEquals(testListingEntity.getPerfectFlatmateDescription(),
+                                foundListingEntity.getPerfectFlatmateDescription());
+        }
 
-        List<ListingEntity> allListings = listingService.getListings(listingFilter);
+        @Test
+        void getListingsById_unknownInput_expectEmpty() {
+                MockitoAnnotations.openMocks(this);
 
-        assertEquals(allListings.get(1).getTitle(), testListingEntityA.getTitle());
-        assertEquals(allListings.get(0).getTitle(), testListingEntityB.getTitle());
-    }
+                ProfileEntity testProfileEntity;
 
-    @Test
-    void getListingsById_validInput_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+                testProfileEntity = new ProfileEntity();
+                testProfileEntity.setId(UUID.randomUUID());
+                testProfileEntity.setFirstname("test");
+                testProfileEntity.setLastname("name");
+                testProfileEntity.setEmail("test.name@example.com");
+                testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+                testProfileEntity.setPassword("OneTwoThree");
+                testProfileEntity.setIsSearcher(false);
 
-        ProfileEntity testProfileEntity;
+                ListingEntity testListingEntity = new ListingEntity();
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+                testListingEntity.setId(UUID.randomUUID());
+                testListingEntity.setLister(testProfileEntity);
+                testListingEntity.setTitle("Top tier apartment");
+                testListingEntity.setDescription("A very nice place to live.");
+                testListingEntity.setAddress("Friedhofplatz 8, 4500 Solothurn");
+                testListingEntity.setPricePerMonth(765.85f);
+                testListingEntity.setImagesJson("");
+                testListingEntity.setPerfectFlatmateDescription("Some nice person.");
 
-        ListingEntity testListingEntity = new ListingEntity();
+                Mockito.when(listingRepository.findById(Mockito.any()))
+                                .thenReturn(Optional.empty());
 
-        testListingEntity.setId(UUID.randomUUID());
-        testListingEntity.setLister(testProfileEntity);
-        testListingEntity.setTitle("Top tier apartment");
-        testListingEntity.setDescription("A very nice place to live.");
-        testListingEntity.setStreetName("Ahornweg");
-        testListingEntity.setStreetNumber("27b");
-        testListingEntity.setZipCode(4500);
-        testListingEntity.setCityName("Solothurn");
-        testListingEntity.setPricePerMonth(765.85f);
-        testListingEntity.setImagesJson("");
-        testListingEntity.setPerfectFlatmateDescription("Some nice person.");
-
-        Mockito.when(listingRepository.findById(testListingEntity.getId()))
-                .thenReturn(Optional.of(testListingEntity));
-        ListingEntity foundListingEntity = listingService.getListingById(testListingEntity.getId());
-
-        assertEquals(testListingEntity.getId(), foundListingEntity.getId());
-        assertEquals(testListingEntity.getLister(), foundListingEntity.getLister());
-        assertEquals(testListingEntity.getTitle(), foundListingEntity.getTitle());
-        assertEquals(testListingEntity.getDescription(), foundListingEntity.getDescription());
-        assertEquals(testListingEntity.getStreetName(), foundListingEntity.getStreetName());
-        assertEquals(testListingEntity.getStreetNumber(), foundListingEntity.getStreetNumber());
-        assertEquals(testListingEntity.getZipCode(), foundListingEntity.getZipCode());
-        assertEquals(testListingEntity.getCityName(), foundListingEntity.getCityName());
-        assertEquals(testListingEntity.getPricePerMonth(), foundListingEntity.getPricePerMonth());
-        assertEquals(testListingEntity.getPerfectFlatmateDescription(),
-                foundListingEntity.getPerfectFlatmateDescription());
-    }
-
-    @Test
-    void getListingsById_unknownInput_expectEmpty() {
-        MockitoAnnotations.openMocks(this);
-
-        ProfileEntity testProfileEntity;
-
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
-
-        ListingEntity testListingEntity = new ListingEntity();
-
-        testListingEntity.setId(UUID.randomUUID());
-        testListingEntity.setLister(testProfileEntity);
-        testListingEntity.setTitle("Top tier apartment");
-        testListingEntity.setDescription("A very nice place to live.");
-        testListingEntity.setStreetName("Ahornweg");
-        testListingEntity.setStreetNumber("27b");
-        testListingEntity.setZipCode(4500);
-        testListingEntity.setCityName("Solothurn");
-        testListingEntity.setPricePerMonth(765.85f);
-        testListingEntity.setImagesJson("");
-        testListingEntity.setPerfectFlatmateDescription("Some nice person.");
-
-        Mockito.when(listingRepository.findById(Mockito.any()))
-                .thenReturn(Optional.empty());
-
-        UUID randomUUID = UUID.randomUUID();
-        assertThrows(ResponseStatusException.class, () -> listingService.getListingById(randomUUID));
-    }
+                UUID randomUUID = UUID.randomUUID();
+                assertThrows(ResponseStatusException.class, () -> listingService.getListingById(randomUUID));
+        }
 }

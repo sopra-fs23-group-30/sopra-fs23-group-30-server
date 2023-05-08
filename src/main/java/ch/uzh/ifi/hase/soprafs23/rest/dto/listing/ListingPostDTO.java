@@ -6,14 +6,73 @@ public class ListingPostDTO {
 
     private String title;
     private String description;
-    private String streetName;
-    private String streetNumber;
-    private int zipCode;
-    private String cityName;
+    private String address;
+    private float lattitude;
+    private float longitude;   
     private float pricePerMonth;
     private String perfectFlatmateDescription;
     private UUID listerId;
     private String imagesJson;
+    private int flatmateCapacity;
+    private boolean petsAllowed;
+    private boolean elevator;
+    private boolean dishwasher;
+    
+    public int getFlatmateCapacity() {
+        return flatmateCapacity;
+    }
+
+    public void setFlatmateCapacity(int flatmateCapacity) {
+        this.flatmateCapacity = flatmateCapacity;
+    }
+
+    public boolean getPetsAllowed() {
+        return petsAllowed;
+    }
+
+    public void setPetsAllowed(boolean petsAllowed) {
+        this.petsAllowed = petsAllowed;
+    }
+
+    public boolean getElevator() {
+        return elevator;
+    }
+
+    public void setElevator(boolean elevator) {
+        this.elevator = elevator;
+    }
+
+    public boolean getDishwasher() {
+        return dishwasher;
+    }
+
+    public void setDishwasher(boolean dishwasher) {
+        this.dishwasher = dishwasher;
+    }
+
+    public String getAddress() {
+        return address;
+    }    
+
+    public void setAddress(String address) {
+        this.address = address;
+    }    
+
+    public float getLattitude() {
+        return lattitude;
+    }    
+
+    public void setLattitude(float lattitude) {
+        this.lattitude = lattitude;
+    }    
+
+    public float getLongitude() {
+        return longitude;
+    }    
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }    
 
     public String getTitle() {
         return title;
@@ -29,38 +88,6 @@ public class ListingPostDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public String getStreetNumber() {
-        return streetNumber;
-    }
-
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
     }
 
     public float getPricePerMonth() {
