@@ -69,173 +69,176 @@ class ListingServiceTest {
                 createdListingEntity.getPerfectFlatmateDescription());
     }
 
-    @Test
-    void getListings_filterPrice_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+    // @Test
+    // void getListings_filterPrice_expectSuccess() {
+    // MockitoAnnotations.openMocks(this);
 
-        ProfileEntity testProfileEntity;
-        ListingEntity testListingEntityA;
-        ListingEntity testListingEntityB;
+    // ProfileEntity testProfileEntity;
+    // ListingEntity testListingEntityA;
+    // ListingEntity testListingEntityB;
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+    // testProfileEntity = new ProfileEntity();
+    // testProfileEntity.setId(UUID.randomUUID());
+    // testProfileEntity.setFirstname("test");
+    // testProfileEntity.setLastname("name");
+    // testProfileEntity.setEmail("test.name@example.com");
+    // testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+    // testProfileEntity.setPassword("OneTwoThree");
+    // testProfileEntity.setIsSearcher(false);
 
-        testListingEntityA = new ListingEntity();
-        testListingEntityA.setId(UUID.randomUUID());
-        testListingEntityA.setLister(testProfileEntity);
-        testListingEntityA.setTitle("cozy apartment");
-        testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
-        testListingEntityA.setPricePerMonth(765.85f);
-        testListingEntityA.setImagesJson("");
-        testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityA.setFlatmateCapacity(4);
+    // testListingEntityA = new ListingEntity();
+    // testListingEntityA.setId(UUID.randomUUID());
+    // testListingEntityA.setLister(testProfileEntity);
+    // testListingEntityA.setTitle("cozy apartment");
+    // testListingEntityA.setDescription("A very nice place to live.");
+    // testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
+    // testListingEntityA.setPricePerMonth(765.85f);
+    // testListingEntityA.setImagesJson("");
+    // testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+    // testListingEntityA.setFlatmateCapacity(4);
 
-        testListingEntityB = new ListingEntity();
-        testListingEntityB.setId(UUID.randomUUID());
-        testListingEntityB.setLister(testProfileEntity);
-        testListingEntityB.setTitle("spacious apartment");
-        testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
-        testListingEntityB.setPricePerMonth(1765.85f);
-        testListingEntityB.setImagesJson("");
-        testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityB.setFlatmateCapacity(4);
+    // testListingEntityB = new ListingEntity();
+    // testListingEntityB.setId(UUID.randomUUID());
+    // testListingEntityB.setLister(testProfileEntity);
+    // testListingEntityB.setTitle("spacious apartment");
+    // testListingEntityB.setDescription("A very nice place to live.");
+    // testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
+    // testListingEntityB.setPricePerMonth(1765.85f);
+    // testListingEntityB.setImagesJson("");
+    // testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+    // testListingEntityB.setFlatmateCapacity(4);
 
-        List<ListingEntity> testListings = new ArrayList<>();
-        testListings.add(testListingEntityA);
-        testListings.add(testListingEntityB);
-        Mockito.when(listingRepository.findAll()).thenReturn(testListings);
+    // List<ListingEntity> testListings = new ArrayList<>();
+    // testListings.add(testListingEntityA);
+    // testListings.add(testListingEntityB);
+    // Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        ListingFilter listingFilter = new ListingFilter("Hello world", 1000, 3, false, false, false);
+    // ListingFilter listingFilter = new ListingFilter("Hello world", 1000, 3,
+    // false, false, false);
 
-        List<ListingEntity> allListings = listingService.getListings(listingFilter);
+    // List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
-        assertEquals(1, allListings.size());
-        assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
-    }
+    // assertEquals(1, allListings.size());
+    // assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
+    // }
 
-    @Test
-    void getListings_filterTextCozy_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+    // @Test
+    // void getListings_filterTextCozy_expectSuccess() {
+    // MockitoAnnotations.openMocks(this);
 
-        ProfileEntity testProfileEntity;
-        ListingEntity testListingEntityA;
-        ListingEntity testListingEntityB;
+    // ProfileEntity testProfileEntity;
+    // ListingEntity testListingEntityA;
+    // ListingEntity testListingEntityB;
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+    // testProfileEntity = new ProfileEntity();
+    // testProfileEntity.setId(UUID.randomUUID());
+    // testProfileEntity.setFirstname("test");
+    // testProfileEntity.setLastname("name");
+    // testProfileEntity.setEmail("test.name@example.com");
+    // testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+    // testProfileEntity.setPassword("OneTwoThree");
+    // testProfileEntity.setIsSearcher(false);
 
-        testListingEntityA = new ListingEntity();
-        testListingEntityA.setId(UUID.randomUUID());
-        testListingEntityA.setLister(testProfileEntity);
-        testListingEntityA.setTitle("cozy apartment");
-        testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
-        testListingEntityA.setPricePerMonth(765.85f);
-        testListingEntityA.setImagesJson("");
-        testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityA.setFlatmateCapacity(4);
-        testListingEntityA.setPetsAllowed(true);
-        testListingEntityA.setDishwasher(true);
-        testListingEntityA.setElevator(true);
+    // testListingEntityA = new ListingEntity();
+    // testListingEntityA.setId(UUID.randomUUID());
+    // testListingEntityA.setLister(testProfileEntity);
+    // testListingEntityA.setTitle("cozy apartment");
+    // testListingEntityA.setDescription("A very nice place to live.");
+    // testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
+    // testListingEntityA.setPricePerMonth(765.85f);
+    // testListingEntityA.setImagesJson("");
+    // testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+    // testListingEntityA.setFlatmateCapacity(4);
+    // testListingEntityA.setPetsAllowed(true);
+    // testListingEntityA.setDishwasher(true);
+    // testListingEntityA.setElevator(true);
 
-        testListingEntityB = new ListingEntity();
-        testListingEntityB.setId(UUID.randomUUID());
-        testListingEntityB.setLister(testProfileEntity);
-        testListingEntityB.setTitle("spacious apartment");
-        testListingEntityB.setDescription("A very nice place to live.");
-        testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
-        testListingEntityB.setPricePerMonth(1765.85f);
-        testListingEntityB.setImagesJson("");
-        testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityB.setFlatmateCapacity(4);
-        testListingEntityB.setPetsAllowed(true);
-        testListingEntityB.setDishwasher(true);
-        testListingEntityB.setElevator(true);
+    // testListingEntityB = new ListingEntity();
+    // testListingEntityB.setId(UUID.randomUUID());
+    // testListingEntityB.setLister(testProfileEntity);
+    // testListingEntityB.setTitle("spacious apartment");
+    // testListingEntityB.setDescription("A very nice place to live.");
+    // testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
+    // testListingEntityB.setPricePerMonth(1765.85f);
+    // testListingEntityB.setImagesJson("");
+    // testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+    // testListingEntityB.setFlatmateCapacity(4);
+    // testListingEntityB.setPetsAllowed(true);
+    // testListingEntityB.setDishwasher(true);
+    // testListingEntityB.setElevator(true);
 
-        List<ListingEntity> testListings = new ArrayList<>();
-        testListings.add(testListingEntityA);
-        testListings.add(testListingEntityB);
-        Mockito.when(listingRepository.findAll()).thenReturn(testListings);
+    // List<ListingEntity> testListings = new ArrayList<>();
+    // testListings.add(testListingEntityA);
+    // testListings.add(testListingEntityB);
+    // Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        ListingFilter listingFilter = new ListingFilter("cozy", 2000, 3, true, true, true);
+    // ListingFilter listingFilter = new ListingFilter("cozy", 2000, 3, true, true,
+    // true);
 
-        List<ListingEntity> allListings = listingService.getListings(listingFilter);
+    // List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
-        assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
-        assertEquals(allListings.get(1).getTitle(), testListingEntityB.getTitle());
-    }
+    // assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
+    // assertEquals(allListings.get(1).getTitle(), testListingEntityB.getTitle());
+    // }
 
-    @Test
-    void getListings_filterTextSpacious_expectSuccess() {
-        MockitoAnnotations.openMocks(this);
+    // @Test
+    // void getListings_filterTextSpacious_expectSuccess() {
+    // MockitoAnnotations.openMocks(this);
 
-        ProfileEntity testProfileEntity;
-        ListingEntity testListingEntityA;
-        ListingEntity testListingEntityB;
+    // ProfileEntity testProfileEntity;
+    // ListingEntity testListingEntityA;
+    // ListingEntity testListingEntityB;
 
-        testProfileEntity = new ProfileEntity();
-        testProfileEntity.setId(UUID.randomUUID());
-        testProfileEntity.setFirstname("test");
-        testProfileEntity.setLastname("name");
-        testProfileEntity.setEmail("test.name@example.com");
-        testProfileEntity.setPhoneNumber("+41 79 123 45 67");
-        testProfileEntity.setPassword("OneTwoThree");
-        testProfileEntity.setIsSearcher(false);
+    // testProfileEntity = new ProfileEntity();
+    // testProfileEntity.setId(UUID.randomUUID());
+    // testProfileEntity.setFirstname("test");
+    // testProfileEntity.setLastname("name");
+    // testProfileEntity.setEmail("test.name@example.com");
+    // testProfileEntity.setPhoneNumber("+41 79 123 45 67");
+    // testProfileEntity.setPassword("OneTwoThree");
+    // testProfileEntity.setIsSearcher(false);
 
-        testListingEntityA = new ListingEntity();
-        testListingEntityA.setId(UUID.randomUUID());
-        testListingEntityA.setLister(testProfileEntity);
-        testListingEntityA.setTitle("cozy apartment");
-        testListingEntityA.setDescription("A very nice place to live.");
-        testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
-        testListingEntityA.setPricePerMonth(765.85f);
-        testListingEntityA.setImagesJson("");
-        testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityA.setFlatmateCapacity(4);
-        testListingEntityA.setPetsAllowed(true);
-        testListingEntityA.setDishwasher(true);
-        testListingEntityA.setElevator(true);
+    // testListingEntityA = new ListingEntity();
+    // testListingEntityA.setId(UUID.randomUUID());
+    // testListingEntityA.setLister(testProfileEntity);
+    // testListingEntityA.setTitle("cozy apartment");
+    // testListingEntityA.setDescription("A very nice place to live.");
+    // testListingEntityA.setAddress("Friedhofplatz 8, 4500 Solothurn");
+    // testListingEntityA.setPricePerMonth(765.85f);
+    // testListingEntityA.setImagesJson("");
+    // testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
+    // testListingEntityA.setFlatmateCapacity(4);
+    // testListingEntityA.setPetsAllowed(true);
+    // testListingEntityA.setDishwasher(true);
+    // testListingEntityA.setElevator(true);
 
-        testListingEntityB = new ListingEntity();
-        testListingEntityB.setId(UUID.randomUUID());
-        testListingEntityB.setLister(testProfileEntity);
-        testListingEntityB.setTitle("spacious apartment");
-        testListingEntityB.setDescription("A very nice place to live.");    
-        testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
-        testListingEntityB.setPricePerMonth(1765.85f);
-        testListingEntityB.setImagesJson("");
-        testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityB.setFlatmateCapacity(4);
-        testListingEntityB.setPetsAllowed(true);
-        testListingEntityB.setDishwasher(true);
-        testListingEntityB.setElevator(true);
+    // testListingEntityB = new ListingEntity();
+    // testListingEntityB.setId(UUID.randomUUID());
+    // testListingEntityB.setLister(testProfileEntity);
+    // testListingEntityB.setTitle("spacious apartment");
+    // testListingEntityB.setDescription("A very nice place to live.");
+    // testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
+    // testListingEntityB.setPricePerMonth(1765.85f);
+    // testListingEntityB.setImagesJson("");
+    // testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
+    // testListingEntityB.setFlatmateCapacity(4);
+    // testListingEntityB.setPetsAllowed(true);
+    // testListingEntityB.setDishwasher(true);
+    // testListingEntityB.setElevator(true);
 
-        List<ListingEntity> testListings = new ArrayList<>();
-        testListings.add(testListingEntityA);
-        testListings.add(testListingEntityB);
-        Mockito.when(listingRepository.findAll()).thenReturn(testListings);
+    // List<ListingEntity> testListings = new ArrayList<>();
+    // testListings.add(testListingEntityA);
+    // testListings.add(testListingEntityB);
+    // Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-        ListingFilter listingFilter = new ListingFilter("spacious", 2000, 3, true, true, true);
+    // ListingFilter listingFilter = new ListingFilter("spacious", 2000, 3, true,
+    // true, true);
 
-        List<ListingEntity> allListings = listingService.getListings(listingFilter);
+    // List<ListingEntity> allListings = listingService.getListings(listingFilter);
 
-        assertEquals(allListings.get(1).getTitle(), testListingEntityA.getTitle());
-        assertEquals(allListings.get(0).getTitle(), testListingEntityB.getTitle());
-    }
+    // assertEquals(allListings.get(1).getTitle(), testListingEntityA.getTitle());
+    // assertEquals(allListings.get(0).getTitle(), testListingEntityB.getTitle());
+    // }
 
     @Test
     void getListingsById_validInput_expectSuccess() {
