@@ -210,7 +210,7 @@ class ListingServiceTest {
                 testListingEntityB.setTitle("spacious apartment");
                 testListingEntityB.setDescription("A very nice place to live.");
                 testListingEntityB.setAddress("Friedhofplatz 8, 4500 Solothurn");
-                testListingEntityB.setPricePerMonth(1765.85f);
+                testListingEntityB.setPricePerMonth(765.85f);
                 testListingEntityB.setImagesJson("");
                 testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
                 testListingEntityB.setFlatmateCapacity(4);
