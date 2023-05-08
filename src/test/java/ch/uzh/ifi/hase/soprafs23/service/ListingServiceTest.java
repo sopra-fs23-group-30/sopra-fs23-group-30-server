@@ -95,7 +95,7 @@ class ListingServiceTest {
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityA.setRooms(4);
+        testListingEntityA.setFlatmateCapacity(4);
 
         testListingEntityB = new ListingEntity();
         testListingEntityB.setId(UUID.randomUUID());
@@ -106,7 +106,7 @@ class ListingServiceTest {
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityB.setRooms(4);
+        testListingEntityB.setFlatmateCapacity(4);
 
         List<ListingEntity> testListings = new ArrayList<>();
         testListings.add(testListingEntityA);
@@ -147,7 +147,7 @@ class ListingServiceTest {
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityA.setRooms(4);
+        testListingEntityA.setFlatmateCapacity(4);
         testListingEntityA.setPetsAllowed(true);
         testListingEntityA.setDishwasher(true);
         testListingEntityA.setElevator(true);
@@ -161,7 +161,7 @@ class ListingServiceTest {
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityB.setRooms(4);
+        testListingEntityB.setFlatmateCapacity(4);
         testListingEntityB.setPetsAllowed(true);
         testListingEntityB.setDishwasher(true);
         testListingEntityB.setElevator(true);
@@ -205,7 +205,7 @@ class ListingServiceTest {
         testListingEntityA.setPricePerMonth(765.85f);
         testListingEntityA.setImagesJson("");
         testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityA.setRooms(4);
+        testListingEntityA.setFlatmateCapacity(4);
         testListingEntityA.setPetsAllowed(true);
         testListingEntityA.setDishwasher(true);
         testListingEntityA.setElevator(true);
@@ -219,7 +219,7 @@ class ListingServiceTest {
         testListingEntityB.setPricePerMonth(1765.85f);
         testListingEntityB.setImagesJson("");
         testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-        testListingEntityB.setRooms(4);
+        testListingEntityB.setFlatmateCapacity(4);
         testListingEntityB.setPetsAllowed(true);
         testListingEntityB.setDishwasher(true);
         testListingEntityB.setElevator(true);

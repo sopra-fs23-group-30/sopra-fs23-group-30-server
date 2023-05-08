@@ -13,17 +13,17 @@ public class ListingPostDTO {
     private String perfectFlatmateDescription;
     private UUID listerId;
     private String imagesJson;
-    private int rooms;
+    private int flatmateCapacity;
     private boolean petsAllowed;
     private boolean elevator;
     private boolean dishwasher;
     
-    public int getRooms() {
-        return rooms;
+    public int getFlatmateCapacity() {
+        return flatmateCapacity;
     }
 
-    public void setRooms(int rooms) {
-        this.rooms = rooms;
+    public void setFlatmateCapacity(int flatmateCapacity) {
+        this.flatmateCapacity = flatmateCapacity;
     }
 
     public boolean getPetsAllowed() {

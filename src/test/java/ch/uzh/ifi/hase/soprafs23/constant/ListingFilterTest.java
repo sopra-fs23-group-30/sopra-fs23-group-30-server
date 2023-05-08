@@ -17,7 +17,7 @@ class ListingFilterTest {
         listingEntity.setDescription("Hello");
         listingEntity.setPerfectFlatmateDescription("World, I say: hello!");
         listingEntity.setAddress("Friedhofsplatz 8, 4500 Solothurn");
-        listingEntity.setRooms(4);
+        listingEntity.setFlatmateCapacity(4);
         listingEntity.setPetsAllowed(true);
         listingEntity.setElevator(true);
         listingEntity.setDishwasher(true);

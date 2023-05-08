@@ -60,7 +60,7 @@ public class ListingEntity implements Serializable {
     private LocalDateTime creationDate;
 
     @Column(updatable = false)
-    private int rooms;
+    private int flatmateCapacity;
 
     @Column(nullable = false)
     private boolean petsAllowed;
@@ -95,12 +95,12 @@ public class ListingEntity implements Serializable {
         this.dishwasher = dishwasher;
     }
 
-    public int getRooms() {
-        return rooms;
+    public int getFlatmateCapacity() {
+        return flatmateCapacity;
     }
 
-    public void setRooms(int rooms) {
-        this.rooms = rooms;
+    public void setFlatmateCapacity(int flatmateCapacity) {
+        this.flatmateCapacity = flatmateCapacity;
     }
 
     public UUID getId() {

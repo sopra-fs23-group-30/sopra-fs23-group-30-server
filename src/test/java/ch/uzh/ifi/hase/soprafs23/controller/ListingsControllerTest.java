@@ -124,7 +124,7 @@ class ListingsControllerTest {
     void getListings_validInput_thenSuccess() throws Exception {
         String searchText = "apartment";
         Float maxRentPerMonth = 2000.0f;
-        Integer rooms = 10;
+        Integer flatmateCapacity = 10;
         Boolean petsAllowed = true;
         Boolean elevator = true;
         Boolean dishwasher = true;
@@ -132,7 +132,7 @@ class ListingsControllerTest {
         MockHttpServletRequestBuilder getRequest = get("/listings")
                 .param("searchText", searchText)
                 .param("maxRentPerMonth", maxRentPerMonth.toString())
-                .param("rooms", rooms.toString())
+                .param("flatmateCapacity", flatmateCapacity.toString())
                 .param("petsAllowed", petsAllowed.toString())
                 .param("elevator", elevator.toString())
                 .param("dishwasher", dishwasher.toString());

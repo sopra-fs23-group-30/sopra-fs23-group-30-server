@@ -68,11 +68,11 @@ public class ListingsController {
     public ResponseEntity<List<ListingGetDTO>> getListing(
             @RequestParam String searchText,
             @RequestParam Float maxRentPerMonth,
-            @RequestParam int rooms,
+            @RequestParam int flatmateCapacity,
             @RequestParam boolean petsAllowed,
             @RequestParam boolean elevator,
             @RequestParam boolean dishwasher) {
-        ListingFilter listingFilter = new ListingFilter(searchText, maxRentPerMonth, rooms, petsAllowed, elevator, dishwasher);
+        ListingFilter listingFilter = new ListingFilter(searchText, maxRentPerMonth, flatmateCapacity, petsAllowed, elevator, dishwasher);
         
         List<ListingEntity> listingEntities = listingService.getListings(listingFilter);
         List<ListingGetDTO> listingDTOs = new ArrayList<>();
