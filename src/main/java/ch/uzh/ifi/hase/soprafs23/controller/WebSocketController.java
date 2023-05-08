@@ -6,13 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ch.uzh.ifi.hase.soprafs23.rest.dto.inventory.InventoryItemGetDTO;
 import ch.uzh.ifi.hase.soprafs23.service.WebSocketService;
 
 @Controller
-@CrossOrigin
 public class WebSocketController {
 
     private final Logger log = LoggerFactory.getLogger(WebSocketController.class);
