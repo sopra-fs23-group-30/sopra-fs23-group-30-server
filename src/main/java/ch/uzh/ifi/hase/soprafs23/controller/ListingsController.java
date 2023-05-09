@@ -107,8 +107,7 @@ public class ListingsController {
     @PutMapping(value = "/listings/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id,
-            @RequestPart("body") String updatedListing,
-            @RequestPart("files") MultipartFile[] files) throws IOException {
+            @RequestPart("body") String updatedListing) throws IOException {
 
         ListingPutDTO updateListing = new ListingPutDTO();
         try {
@@ -124,14 +123,14 @@ public class ListingsController {
         List<String> toDeleteImages = new ArrayList<>(existingImagesInDb);
         toDeleteImages.removeAll(updatedImages);
 
-        try {
-            List<String> blobURLs = blobUploaderService.uploadImages(files, id.toString(), toDeleteImages);
-            blobURLs.addAll(updatedImages);
-            String jsonString = getJsonString(blobURLs);
-            updateListing.setImagesJson(jsonString);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+        // try {
+        //     List<String> blobURLs = blobUploaderService.uploadImages(files, id.toString(), toDeleteImages);
+        //     blobURLs.addAll(updatedImages);
+        //     String jsonString = getJsonString(blobURLs);
+        //     updateListing.setImagesJson(jsonString);
+        // } catch (Exception ex) {
+        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        // }
 
         ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(updateListing);
 
