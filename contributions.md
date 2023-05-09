@@ -110,8 +110,8 @@ Rafael:
     - [x] #84 BE
     - [x] #85 BE
 - Week 2
-    - [x] #36 FE
-    - [x] #66 BE FE
+    - [x] #97 FE
+    - [ ] #66 BE FE
 - Week 3
     - [ ] #46 FE
     - [ ] #102 BE
