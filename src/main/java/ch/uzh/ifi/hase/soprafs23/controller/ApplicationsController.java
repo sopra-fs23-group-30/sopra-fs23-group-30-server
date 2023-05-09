@@ -27,12 +27,14 @@ public class ApplicationsController {
         private final ApplicationService applicationService;
         private ProfileService profileService;
         private ListingService listingService;
+        private WebSocketController webSocketController;
 
         ApplicationsController(ApplicationService applicationService, ProfileService profileService,
-                        ListingService listingService) {
+                        ListingService listingService, WebSocketController webSocketController) {
                 this.applicationService = applicationService;
                 this.profileService = profileService;
                 this.listingService = listingService;
+                this.webSocketController = webSocketController;
         }
 
         @PostMapping("/applications")
@@ -51,17 +53,19 @@ public class ApplicationsController {
         }
 
         @PutMapping("/applications/{id}")
-        public ResponseEntity<Object> updateApplication(@PathVariable UUID id,
+        public ResponseEntity<Object> updateApplicationState(@PathVariable UUID id,
                         @RequestBody ApplicationPutDTO applicationDTO) {
                 ApplicationEntity applicationEntity = applicationService.getApplicationById(id);
 
-                applicationService.updateApplication(applicationEntity,
-                                applicationDTO.getNewState());
+                ApplicationEntity updatedApplication = applicationService.updateApplication(applicationEntity, applicationDTO.getNewState());
 
                 if (applicationDTO.getNewState() == ApplicationState.ACCEPTED) {
                         applicationService.declineAllOtherApplicationsByListingId(
                                         applicationEntity.getListing().getId(), applicationEntity.getId());
                 }
+
+                webSocketController.applicationStateUpdatedToUser(updatedApplication.getApplicant().getId(), updatedApplication);
+                webSocketController.applicationStateUpdatedToUser(updatedApplication.getListing().getLister().getId(), updatedApplication);
 
                 return ResponseEntity
                                 .status(HttpStatus.NO_CONTENT)

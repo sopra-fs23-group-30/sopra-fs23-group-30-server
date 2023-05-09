@@ -53,7 +53,7 @@ public class ApplicationService {
         return foundApplication.get();
     }
 
-    public void updateApplication(ApplicationEntity applicationEntity, ApplicationState newState) {
+    public ApplicationEntity updateApplication(ApplicationEntity applicationEntity, ApplicationState newState) {
         if (!applicationEntity.getState().isTransitionValid(newState)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     String.format("Updating a %s state into a %s state is not allowed.",
@@ -63,7 +63,7 @@ public class ApplicationService {
         if (newState == ApplicationState.MOVEIN) {
             applicationEntity.setInventoryId(UUID.randomUUID());
         }
-        this.applicationRepository.save(applicationEntity);
+        return this.applicationRepository.save(applicationEntity);
     }
 
     public List<ApplicationEntity> getAllApplicationsByProfileId(UUID id) {

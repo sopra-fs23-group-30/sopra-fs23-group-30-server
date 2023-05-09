@@ -1,6 +1,5 @@
 package ch.uzh.ifi.hase.soprafs23.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 import ch.uzh.ifi.hase.soprafs23.entity.InventoryItemEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.InventoryItemRepository;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.inventory.InventoryItemGetDTO;
-import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
 
 @Service
 @Primary
