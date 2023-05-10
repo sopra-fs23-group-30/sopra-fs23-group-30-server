@@ -56,8 +56,7 @@ class ListingsControllerTest {
         @BeforeEach
         void setup() {
                 mockMvc = MockMvcBuilders
-                                .standaloneSetup(new ListingsController(listingService, profileService,
-                                                blobUploaderService))
+                                .standaloneSetup(new ListingsController(listingService, profileService))
                                 .build();
 
                 testProfileEntity = new ProfileEntity();
