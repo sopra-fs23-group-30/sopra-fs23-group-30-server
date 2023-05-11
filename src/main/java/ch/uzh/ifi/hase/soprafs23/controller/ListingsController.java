@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,6 +35,7 @@ import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingGetDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPostDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.listing.ListingPutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
+import ch.uzh.ifi.hase.soprafs23.service.BlobUploaderService;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
 import ch.uzh.ifi.hase.soprafs23.service.ProfileService;
 
@@ -40,16 +45,39 @@ public class ListingsController {
 
     private final ListingService listingService;
     private ProfileService profileService;
+    private BlobUploaderService blobUploaderService;
 
-    ListingsController(ListingService listingService, ProfileService profileService) {
+    ListingsController(ListingService listingService, ProfileService profileService,
+            BlobUploaderService blobUploaderService) {
         this.listingService = listingService;
         this.profileService = profileService;
+        this.blobUploaderService = blobUploaderService;
     }
 
-    @PostMapping("/listings")
-    public ResponseEntity<Object> createListing(@RequestBody ListingPostDTO listingDTO) {
-        ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(listingDTO);
-        listingEntity.setLister(profileService.getProfileById(listingDTO.getListerId()));
+    @PostMapping(value = "/listings", consumes = { MediaType.APPLICATION_JSON_VALUE,
+        MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<Object> createListing(
+            @RequestPart("body") String listingString,
+            @RequestPart("files") MultipartFile[] files) {
+
+        ListingPostDTO listingPostDTO = new ListingPostDTO();
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            listingPostDTO = objectMapper.readValue(listingString, ListingPostDTO.class);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        try {
+            List<String> blobURLs = blobUploaderService.uploadImages(files, listingPostDTO.getListerId().toString(), new ArrayList<String>());
+            String jsonString = getJsonString(blobURLs);
+            listingPostDTO.setImagesJson(jsonString);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+
+        ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(listingPostDTO);
+        listingEntity.setLister(profileService.getProfileById(listingPostDTO.getListerId()));
         ListingEntity createdListing = listingService.createListing(listingEntity);
 
         return ResponseEntity
@@ -115,12 +143,33 @@ public class ListingsController {
         List<String> toDeleteImages = new ArrayList<>(existingImagesInDb);
         toDeleteImages.removeAll(updatedImages);
 
+        // try {
+        //     List<String> blobURLs = blobUploaderService.uploadImages(files, id.toString(), toDeleteImages);
+        //     blobURLs.addAll(updatedImages);
+        //     String jsonString = getJsonString(blobURLs);
+        //     updateListing.setImagesJson(jsonString);
+        // } catch (Exception ex) {
+        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        // }
+
         ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(updateListing);
 
         listingService.updateListing(id, listingEntity);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .body(null);
+    }
+
+    private String getJsonString(List<String> blobURLs) throws JSONException {
+        JSONArray jsonArray = new JSONArray();
+
+        for (String blobURL : blobURLs) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("imageURL", blobURL);
+            jsonArray.put(jsonObject);
+        }
+
+        return jsonArray.toString();
     }
 
     private List<String> getListOfStrings(String jsonString) throws com.fasterxml.jackson.core.JsonProcessingException {
