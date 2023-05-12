@@ -14,10 +14,9 @@ public class ListingDetailsGetDTO {
     private float pricePerMonth;
     private String perfectFlatmateDescription;
     private LocalDateTime creationDate;
-    private int flatmateCapacity;
     private boolean petsAllowed;
     private boolean elevator;
-    private boolean dishwasher;   
+    private boolean dishwasher;
     private String listerFirstname;
     private String listerLastname;
     private String listerDescription;
@@ -26,14 +25,6 @@ public class ListingDetailsGetDTO {
 
     private UUID listerId;
     private String imagesJson;
-
-    public int getFlatmateCapacity() {
-        return flatmateCapacity;
-    }
-
-    public void setFlatmateCapacity(int flatmateCapacity) {
-        this.flatmateCapacity = flatmateCapacity;
-    }
 
     public boolean getPetsAllowed() {
         return petsAllowed;
@@ -90,7 +81,7 @@ public class ListingDetailsGetDTO {
     public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
-    
+
     public String getListerFirstname() {
         return listerFirstname;
     }

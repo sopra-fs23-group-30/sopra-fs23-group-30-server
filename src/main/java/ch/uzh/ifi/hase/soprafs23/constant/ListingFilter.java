@@ -7,7 +7,6 @@ import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 
 public class ListingFilter {
     private float maxRentPerMonth;
-    private int flatmateCapacity;
     private SortBy sortBy;
     private boolean petsAllowed;
     private boolean elevator;
@@ -17,12 +16,11 @@ public class ListingFilter {
 
     private final int PRIORITIZED_SORT_VALUE_FACTOR = 10000;
 
-    public ListingFilter(String searchText, float maxRentPerMonth, int flatmateCapacity, boolean petsAllowed,
+    public ListingFilter(String searchText, float maxRentPerMonth, boolean petsAllowed,
             boolean elevator, boolean dishwasher, SortBy sortBy) {
         this.keywords = Arrays.asList(searchText.split(" "));
         this.sortBy = sortBy;
         this.maxRentPerMonth = maxRentPerMonth;
-        this.flatmateCapacity = flatmateCapacity;
         this.petsAllowed = petsAllowed;
         this.elevator = elevator;
         this.dishwasher = dishwasher;
@@ -48,7 +46,6 @@ public class ListingFilter {
 
     private boolean listingIsApplicable(ListingEntity listingEntity) {
         return listingEntity.getPricePerMonth() <= maxRentPerMonth
-                && listingEntity.getFlatmateCapacity() <= flatmateCapacity
                 && (listingEntity.getPetsAllowed() || !petsAllowed)
                 && (listingEntity.getElevator() || !elevator)
                 && (listingEntity.getDishwasher() || !dishwasher);

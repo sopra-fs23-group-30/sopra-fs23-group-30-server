@@ -94,7 +94,6 @@ class ListingServiceTest {
                 testListingEntityA.setPricePerMonth(765.85f);
                 testListingEntityA.setImagesJson("");
                 testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-                testListingEntityA.setFlatmateCapacity(4);
 
                 testListingEntityB = new ListingEntity();
                 testListingEntityB.setId(UUID.randomUUID());
@@ -105,13 +104,12 @@ class ListingServiceTest {
                 testListingEntityB.setPricePerMonth(1765.85f);
                 testListingEntityB.setImagesJson("");
                 testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-                testListingEntityB.setFlatmateCapacity(4);
                 List<ListingEntity> testListings = new ArrayList<>();
                 testListings.add(testListingEntityA);
                 testListings.add(testListingEntityB);
                 Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-                ListingFilter listingFilter = new ListingFilter("Hello world", 1000, 5, false, false, false,
+                ListingFilter listingFilter = new ListingFilter("Hello world", 1000, false, false, false,
                                 SortBy.PRICE_ASCENDING);
                 List<ListingEntity> allListings = listingService.getListings(listingFilter);
                 assertEquals(1, allListings.size());
@@ -143,7 +141,6 @@ class ListingServiceTest {
                 testListingEntityA.setPricePerMonth(765.85f);
                 testListingEntityA.setImagesJson("");
                 testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-                testListingEntityA.setFlatmateCapacity(4);
                 testListingEntityA.setPetsAllowed(true);
                 testListingEntityA.setDishwasher(true);
                 testListingEntityA.setElevator(true);
@@ -157,7 +154,6 @@ class ListingServiceTest {
                 testListingEntityB.setPricePerMonth(1765.85f);
                 testListingEntityB.setImagesJson("");
                 testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-                testListingEntityB.setFlatmateCapacity(4);
                 testListingEntityB.setPetsAllowed(true);
                 testListingEntityB.setDishwasher(true);
                 testListingEntityB.setElevator(true);
@@ -167,7 +163,7 @@ class ListingServiceTest {
                 testListings.add(testListingEntityB);
                 Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-                ListingFilter listingFilter = new ListingFilter("cozy", 2000, 5, true, true, true,
+                ListingFilter listingFilter = new ListingFilter("cozy", 2000, true, true, true,
                                 SortBy.PRICE_ASCENDING);
                 List<ListingEntity> allListings = listingService.getListings(listingFilter);
                 assertEquals(allListings.get(0).getTitle(), testListingEntityA.getTitle());
@@ -199,7 +195,6 @@ class ListingServiceTest {
                 testListingEntityA.setPricePerMonth(765.85f);
                 testListingEntityA.setImagesJson("");
                 testListingEntityA.setPerfectFlatmateDescription("Some nice person.");
-                testListingEntityA.setFlatmateCapacity(4);
                 testListingEntityA.setPetsAllowed(true);
                 testListingEntityA.setDishwasher(true);
                 testListingEntityA.setElevator(true);
@@ -213,7 +208,6 @@ class ListingServiceTest {
                 testListingEntityB.setPricePerMonth(765.85f);
                 testListingEntityB.setImagesJson("");
                 testListingEntityB.setPerfectFlatmateDescription("Some nice person.");
-                testListingEntityB.setFlatmateCapacity(4);
                 testListingEntityB.setPetsAllowed(true);
                 testListingEntityB.setDishwasher(true);
                 testListingEntityB.setElevator(true);
@@ -223,7 +217,7 @@ class ListingServiceTest {
                 testListings.add(testListingEntityB);
                 Mockito.when(listingRepository.findAll()).thenReturn(testListings);
 
-                ListingFilter listingFilter = new ListingFilter("spacious", 2000, 5, true, true, true,
+                ListingFilter listingFilter = new ListingFilter("spacious", 2000, true, true, true,
                                 SortBy.PRICE_ASCENDING);
                 List<ListingEntity> allListings = listingService.getListings(listingFilter);
                 assertEquals(allListings.get(1).getTitle(), testListingEntityA.getTitle());

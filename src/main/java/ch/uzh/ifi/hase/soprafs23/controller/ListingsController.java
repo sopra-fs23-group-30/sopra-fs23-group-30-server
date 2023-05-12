@@ -54,7 +54,7 @@ public class ListingsController {
     }
 
     @PostMapping(value = "/listings", consumes = { MediaType.APPLICATION_JSON_VALUE,
-        MediaType.MULTIPART_FORM_DATA_VALUE })
+            MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Object> createListing(
             @RequestPart("body") String listingString,
             @RequestPart(value = "files", required = false) MultipartFile[] files) {
@@ -69,7 +69,8 @@ public class ListingsController {
 
         try {
             if (files != null) {
-                List<String> blobURLs = blobUploaderService.uploadImages(files, listingPostDTO.getListerId().toString(), new ArrayList<String>());
+                List<String> blobURLs = blobUploaderService.uploadImages(files, listingPostDTO.getListerId().toString(),
+                        new ArrayList<String>());
                 String jsonString = getJsonString(blobURLs);
                 listingPostDTO.setImagesJson(jsonString);
             }
@@ -90,12 +91,11 @@ public class ListingsController {
     public ResponseEntity<List<ListingGetDTO>> getListing(
             @RequestParam String searchText,
             @RequestParam Float maxRentPerMonth,
-            @RequestParam int flatmateCapacity,
             @RequestParam SortBy sortBy,
             @RequestParam boolean petsAllowed,
             @RequestParam boolean elevator,
             @RequestParam boolean dishwasher) {
-        ListingFilter listingFilter = new ListingFilter(searchText, maxRentPerMonth, flatmateCapacity, petsAllowed,
+        ListingFilter listingFilter = new ListingFilter(searchText, maxRentPerMonth, petsAllowed,
                 elevator, dishwasher, sortBy);
 
         List<ListingEntity> listingEntities = listingService.getListings(listingFilter);

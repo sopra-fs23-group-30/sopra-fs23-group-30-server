@@ -9,7 +9,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 class ListingFilterTest {
         @Test
         void sortValue_validInput_4expected() {
-                ListingFilter listingFilter = new ListingFilter("Hello world", 2000, 3, true, true, true,
+                ListingFilter listingFilter = new ListingFilter("Hello world", 2000, true, true, true,
                                 SortBy.PRICE_ASCENDING);
 
                 ListingEntity listingEntity = new ListingEntity();
@@ -18,7 +18,6 @@ class ListingFilterTest {
                 listingEntity.setDescription("Hello");
                 listingEntity.setPerfectFlatmateDescription("World, I say: hello!");
                 listingEntity.setAddress("Friedhofsplatz 8, 4500 Solothurn");
-                listingEntity.setFlatmateCapacity(2);
                 listingEntity.setPetsAllowed(true);
                 listingEntity.setElevator(true);
                 listingEntity.setDishwasher(true);
@@ -29,7 +28,7 @@ class ListingFilterTest {
 
         @Test
         void sortValue_validInput_minValueExpected() {
-                ListingFilter listingFilter = new ListingFilter("Hello world", 2000, 3, true, true, true,
+                ListingFilter listingFilter = new ListingFilter("Hello world", 2000, true, true, true,
                                 SortBy.PRICE_ASCENDING);
 
                 ListingEntity listingEntity = new ListingEntity();

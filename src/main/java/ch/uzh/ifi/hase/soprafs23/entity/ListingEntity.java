@@ -59,15 +59,12 @@ public class ListingEntity implements Serializable {
     @CreationTimestamp
     private LocalDateTime creationDate;
 
-    @Column(updatable = false)
-    private int flatmateCapacity;
-
     @Column(nullable = false)
     private boolean petsAllowed;
-    
+
     @Column(nullable = false)
-    private boolean elevator; //Wheechair friendly?
-    
+    private boolean elevator; // Wheechair friendly?
+
     @Column(nullable = false)
     private boolean dishwasher;
 
@@ -93,14 +90,6 @@ public class ListingEntity implements Serializable {
 
     public void setDishwasher(boolean dishwasher) {
         this.dishwasher = dishwasher;
-    }
-
-    public int getFlatmateCapacity() {
-        return flatmateCapacity;
-    }
-
-    public void setFlatmateCapacity(int flatmateCapacity) {
-        this.flatmateCapacity = flatmateCapacity;
     }
 
     public UUID getId() {

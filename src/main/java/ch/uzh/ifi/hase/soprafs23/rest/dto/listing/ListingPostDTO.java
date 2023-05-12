@@ -13,18 +13,9 @@ public class ListingPostDTO {
     private String perfectFlatmateDescription;
     private UUID listerId;
     private String imagesJson;
-    private int flatmateCapacity;
     private boolean petsAllowed;
     private boolean elevator;
     private boolean dishwasher;
-    
-    public int getFlatmateCapacity() {
-        return flatmateCapacity;
-    }
-
-    public void setFlatmateCapacity(int flatmateCapacity) {
-        this.flatmateCapacity = flatmateCapacity;
-    }
 
     public boolean getPetsAllowed() {
         return petsAllowed;
@@ -52,27 +43,27 @@ public class ListingPostDTO {
 
     public String getAddress() {
         return address;
-    }    
+    }
 
     public void setAddress(String address) {
         this.address = address;
-    }    
+    }
 
     public float getLattitude() {
         return lattitude;
-    }    
+    }
 
     public void setLattitude(float lattitude) {
         this.lattitude = lattitude;
-    }    
+    }
 
     public float getLongitude() {
         return longitude;
-    }    
+    }
 
     public void setLongitude(float longitude) {
         this.longitude = longitude;
-    }    
+    }
 
     public String getTitle() {
         return title;
