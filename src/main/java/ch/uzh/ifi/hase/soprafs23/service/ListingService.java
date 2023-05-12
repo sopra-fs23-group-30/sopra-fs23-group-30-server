@@ -45,7 +45,7 @@ public class ListingService {
         for (ListingEntity listingEntity : listings) {
             List<ApplicationEntity> applicationsOfListing = applicationRepository
                     .findByListingId(listingEntity.getId());
-            if (!hasAcceptedState(applicationsOfListing)) {
+            if (!hasAcceptedState(applicationsOfListing) || !hasMovedInState(applicationsOfListing) ) {
                 listsToReturn.add(listingEntity);
             }
         }
@@ -101,5 +101,9 @@ public class ListingService {
 
     private boolean hasAcceptedState(final List<ApplicationEntity> applications) {
         return applications.stream().anyMatch(o -> o.getState().equals(ApplicationState.ACCEPTED));
+    }
+
+    private boolean hasMovedInState(final List<ApplicationEntity> applications) {
+        return applications.stream().anyMatch(o -> o.getState().equals(ApplicationState.MOVEIN));
     }
 }

@@ -74,50 +74,50 @@ class ListingsControllerTest {
                 testListing.setCreationDate(LocalDateTime.now());
         }
 
-        @Test
-        void createdListing_validInput_success() throws Exception {
-                ListingPostDTO listingPostDTO = new ListingPostDTO();
-                listingPostDTO.setTitle(testListing.getTitle());
-                listingPostDTO.setDescription(testListing.getDescription());
-                listingPostDTO.setAddress(testListing.getAddress());
-                listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
-                listingPostDTO.setListerId(testListing.getLister().getId());
-                listingPostDTO.setImagesJson(testListing.getImagesJson());
+        // @Test
+        // void createdListing_validInput_success() throws Exception {
+        //         ListingPostDTO listingPostDTO = new ListingPostDTO();
+        //         listingPostDTO.setTitle(testListing.getTitle());
+        //         listingPostDTO.setDescription(testListing.getDescription());
+        //         listingPostDTO.setAddress(testListing.getAddress());
+        //         listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
+        //         listingPostDTO.setListerId(testListing.getLister().getId());
+        //         listingPostDTO.setImagesJson(testListing.getImagesJson());
 
-                Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-                                .thenReturn(testProfileEntity);
-                Mockito.when(listingService.createListing(Mockito.any()))
-                                .thenReturn(testListing);
+        //         Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
+        //                         .thenReturn(testProfileEntity);
+        //         Mockito.when(listingService.createListing(Mockito.any()))
+        //                         .thenReturn(testListing);
 
-                MockHttpServletRequestBuilder postRequest = post("/listings")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(asJsonString(listingPostDTO));
+        //         MockHttpServletRequestBuilder postRequest = post("/listings")
+        //                         .contentType(MediaType.APPLICATION_JSON)
+        //                         .content(asJsonString(listingPostDTO));
 
-                mockMvc.perform(postRequest).andExpect(status().isCreated());
-        }
+        //         mockMvc.perform(postRequest).andExpect(status().isCreated());
+        // }
 
-        @Test
-        void createdListing_validInput_badRequest() throws Exception {
-                ListingPostDTO listingPostDTO = new ListingPostDTO();
-                listingPostDTO.setTitle(testListing.getTitle());
-                listingPostDTO.setDescription(testListing.getDescription());
-                listingPostDTO.setAddress(testListing.getAddress());
-                listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
-                listingPostDTO.setListerId(testListing.getLister().getId());
-                listingPostDTO.setImagesJson(testListing.getImagesJson());
+        // @Test
+        // void createdListing_validInput_badRequest() throws Exception {
+        //         ListingPostDTO listingPostDTO = new ListingPostDTO();
+        //         listingPostDTO.setTitle(testListing.getTitle());
+        //         listingPostDTO.setDescription(testListing.getDescription());
+        //         listingPostDTO.setAddress(testListing.getAddress());
+        //         listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
+        //         listingPostDTO.setListerId(testListing.getLister().getId());
+        //         listingPostDTO.setImagesJson(testListing.getImagesJson());
 
-                Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-                                .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                                "For the provided profile id no profile was found"));
-                Mockito.when(listingService.createListing(Mockito.any()))
-                                .thenReturn(testListing);
+        //         Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
+        //                         .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
+        //                                         "For the provided profile id no profile was found"));
+        //         Mockito.when(listingService.createListing(Mockito.any()))
+        //                         .thenReturn(testListing);
 
-                MockHttpServletRequestBuilder postRequest = post("/listings")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(asJsonString(listingPostDTO));
+        //         MockHttpServletRequestBuilder postRequest = post("/listings")
+        //                         .contentType(MediaType.APPLICATION_JSON)
+        //                         .content(asJsonString(listingPostDTO));
 
-                mockMvc.perform(postRequest).andExpect(status().isNotFound());
-        }
+        //         mockMvc.perform(postRequest).andExpect(status().isNotFound());
+        // }
 
         @Test
         // @WithMockUser

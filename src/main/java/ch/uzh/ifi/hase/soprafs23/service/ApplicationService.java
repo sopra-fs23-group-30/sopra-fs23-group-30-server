@@ -27,13 +27,26 @@ public class ApplicationService {
     }
 
     public ApplicationEntity createApplication(ApplicationEntity newApplication) {
+
+        List<ApplicationEntity> applicationsOfSearcher = getAllApplicationsByProfileId(
+            newApplication.getApplicant().getId());
+
+        Boolean isInMoveIn = applicationsOfSearcher
+                .stream()
+                .anyMatch(application -> application.getState() == ApplicationState.MOVEIN);
+
+        if (isInMoveIn) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "You've already decided to move-in to a listing");
+        }
+
         List<ApplicationEntity> applicationsByListing = applicationRepository
                 .findByListingId(newApplication.getListing().getId());
 
         applicationsByListing.forEach(application -> {
             if (application.getApplicant().getId() == newApplication.getApplicant().getId()) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT,
-                        "For the provided listing and user id there allready exists an application.");
+                        "You've already applied for this listing");
             }
         });
 
