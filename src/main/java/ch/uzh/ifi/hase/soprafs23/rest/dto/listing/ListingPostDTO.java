@@ -8,7 +8,7 @@ public class ListingPostDTO {
     private String description;
     private String address;
     private float lattitude;
-    private float longitude;   
+    private float longitude;
     private float pricePerMonth;
     private String perfectFlatmateDescription;
     private UUID listerId;

@@ -3,6 +3,7 @@ package ch.uzh.ifi.hase.soprafs23.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -67,11 +69,17 @@ class ListingsControllerTest {
                 testListing.setTitle("Nice Listing");
                 testListing.setDescription("Nice Listing with description");
                 testListing.setAddress("Kronengasse 1, 4500 Solothurn");
+                testListing.setLattitude(47);
+                testListing.setLongitude(7);
                 testListing.setPricePerMonth(500);
                 testListing.setPerfectFlatmateDescription("A person, preferably alive");
                 testListing.setLister(testProfileEntity);
                 testListing.setImagesJson("");
                 testListing.setCreationDate(LocalDateTime.now());
+                testListing.setFlatmateCapacity(5);
+                testListing.setPetsAllowed(true);
+                testListing.setElevator(true);
+                testListing.setDishwasher(true);
         }
 
         // @Test
@@ -80,16 +88,30 @@ class ListingsControllerTest {
         //         listingPostDTO.setTitle(testListing.getTitle());
         //         listingPostDTO.setDescription(testListing.getDescription());
         //         listingPostDTO.setAddress(testListing.getAddress());
+        //         listingPostDTO.setLattitude(testListing.getLattitude());
+        //         listingPostDTO.setLongitude(testListing.getLongitude());
         //         listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
         //         listingPostDTO.setListerId(testListing.getLister().getId());
         //         listingPostDTO.setImagesJson(testListing.getImagesJson());
+        //         listingPostDTO.setFlatmateCapacity(testListing.getFlatmateCapacity());
+        //         listingPostDTO.setPetsAllowed(testListing.getPetsAllowed());
+        //         listingPostDTO.setElevator(testListing.getElevator());
+        //         listingPostDTO.setDishwasher(testListing.getDishwasher());
 
-        //         Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-        //                         .thenReturn(testProfileEntity);
-        //         Mockito.when(listingService.createListing(Mockito.any()))
-        //                         .thenReturn(testListing);
+        //         // Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
+        //         //                 .thenReturn(testProfileEntity);
+        //         // Mockito.when(listingService.createListing(Mockito.any()))
+        //         //                 .thenReturn(testListing);
 
-        //         MockHttpServletRequestBuilder postRequest = post("/listings")
+        //         MockMultipartFile file = new MockMultipartFile(
+        //                 "files",
+        //                 "test-image.jpg",
+        //                 MediaType.IMAGE_JPEG_VALUE,
+        //                 "test-image.jpg".getBytes()
+        //         );
+
+        //         MockHttpServletRequestBuilder postRequest = multipart("/listings")
+        //                         .file(file)
         //                         .contentType(MediaType.APPLICATION_JSON)
         //                         .content(asJsonString(listingPostDTO));
 
@@ -102,9 +124,15 @@ class ListingsControllerTest {
         //         listingPostDTO.setTitle(testListing.getTitle());
         //         listingPostDTO.setDescription(testListing.getDescription());
         //         listingPostDTO.setAddress(testListing.getAddress());
+        //         listingPostDTO.setLattitude(testListing.getLattitude());
+        //         listingPostDTO.setLongitude(testListing.getLongitude());
         //         listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
         //         listingPostDTO.setListerId(testListing.getLister().getId());
         //         listingPostDTO.setImagesJson(testListing.getImagesJson());
+        //         listingPostDTO.setFlatmateCapacity(testListing.getFlatmateCapacity());
+        //         listingPostDTO.setPetsAllowed(testListing.getPetsAllowed());
+        //         listingPostDTO.setElevator(testListing.getElevator());
+        //         listingPostDTO.setDishwasher(testListing.getDishwasher());
 
         //         Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
         //                         .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,

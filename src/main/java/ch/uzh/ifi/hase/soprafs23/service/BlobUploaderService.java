@@ -76,6 +76,13 @@ public class BlobUploaderService {
         return imageUrls;
     }
 
+    public void deleteImages(List<String> urlsToDelete)
+            throws URISyntaxException, NullPointerException {
+        for (String urlToDeleteString : urlsToDelete) {
+            deleteBlobByUrl(urlToDeleteString);
+        }
+    }
+
     public CloudBlobClient getOrCreateContainer(String containerName)
             throws URISyntaxException, java.security.InvalidKeyException, StorageException {
 

@@ -57,7 +57,7 @@ public class ListingsController {
         MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Object> createListing(
             @RequestPart("body") String listingString,
-            @RequestPart("files") MultipartFile[] files) {
+            @RequestPart(value = "files", required = false) MultipartFile[] files) {
 
         ListingPostDTO listingPostDTO = new ListingPostDTO();
         try {
@@ -68,9 +68,11 @@ public class ListingsController {
         }
 
         try {
-            List<String> blobURLs = blobUploaderService.uploadImages(files, listingPostDTO.getListerId().toString(), new ArrayList<String>());
-            String jsonString = getJsonString(blobURLs);
-            listingPostDTO.setImagesJson(jsonString);
+            if (files != null) {
+                List<String> blobURLs = blobUploaderService.uploadImages(files, listingPostDTO.getListerId().toString(), new ArrayList<String>());
+                String jsonString = getJsonString(blobURLs);
+                listingPostDTO.setImagesJson(jsonString);
+            }
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
@@ -126,7 +128,8 @@ public class ListingsController {
     @PutMapping(value = "/listings/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id,
-            @RequestPart("body") String updatedListing) throws IOException {
+            @RequestPart("body") String updatedListing,
+            @RequestPart(value = "files", required = false) MultipartFile[] files) throws IOException {
 
         ListingPutDTO updateListing = new ListingPutDTO();
         try {
@@ -142,14 +145,18 @@ public class ListingsController {
         List<String> toDeleteImages = new ArrayList<>(existingImagesInDb);
         toDeleteImages.removeAll(updatedImages);
 
-        // try {
-        //     List<String> blobURLs = blobUploaderService.uploadImages(files, id.toString(), toDeleteImages);
-        //     blobURLs.addAll(updatedImages);
-        //     String jsonString = getJsonString(blobURLs);
-        //     updateListing.setImagesJson(jsonString);
-        // } catch (Exception ex) {
-        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        // }
+        try {
+            if (files != null) {
+                List<String> blobURLs = blobUploaderService.uploadImages(files, id.toString(), toDeleteImages);
+                blobURLs.addAll(updatedImages);
+                String jsonString = getJsonString(blobURLs);
+                updateListing.setImagesJson(jsonString);
+            } else {
+                blobUploaderService.deleteImages(toDeleteImages);
+            }
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
 
         ListingEntity listingEntity = DTOMapper.INSTANCE.convertListingPostDTOToListingEntity(updateListing);
 
