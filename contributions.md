@@ -102,8 +102,8 @@ Delia Datsomor:
     - [x] #34 FE
     - [x] #39 FE
 - Week 3
-    - [ ] #40 FE
-    - [ ] #41 FE
+    - [x] #40 FE
+    - [x] #41 FE
 
 Rafael:
 - Week 1
@@ -113,7 +113,7 @@ Rafael:
     - [x] #97 FE
     - [x] #66 BE FE
 - Week 3
-    - [ ] #46 FE
+    - [x] #46 FE
     - [ ] #102 BE
     
 Mathias:
@@ -125,8 +125,8 @@ Mathias:
     - [x] #22 BE
     - [x] #33 BE
 - Week 3
-    - [ ] #43 FE
-    - [ ] #103 FE BE
+    - [x] #43 FE
+    - [x] #103 FE BE
 
 Mika:
 - Week 1
@@ -136,8 +136,8 @@ Mika:
     - [x] #65 BE FE
     - [x] #35 FE
 - Week 3
-    - [ ] #42 FE
-    - [ ] #101 BE
+    - [x] #42 FE -> changed to #107 BE
+    - [x] #101 BE
 
 Fatih:
 - Week 1
