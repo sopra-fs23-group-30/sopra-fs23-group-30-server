@@ -58,10 +58,12 @@ public class ApplicationsController {
                 ApplicationEntity applicationEntity = applicationService.getApplicationById(id);
 
                 ApplicationEntity updatedApplication = applicationService.updateApplication(applicationEntity, applicationDTO.getNewState());
-
-                if (applicationDTO.getNewState() == ApplicationState.ACCEPTED) {
+                
+                if(applicationDTO.getNewState() == ApplicationState.MOVEIN) {
                         applicationService.declineAllOtherApplicationsByListingId(
                                         applicationEntity.getListing().getId(), applicationEntity.getId());
+                        applicationService.declineAllOtherApplicationsByProfileId(
+                                        applicationEntity.getApplicant().getId(), applicationEntity.getId());
                 }
 
                 webSocketController.applicationStateUpdatedToUser(updatedApplication.getApplicant().getId(), updatedApplication);

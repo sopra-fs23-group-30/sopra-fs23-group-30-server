@@ -96,4 +96,14 @@ public class ApplicationService {
             }
         }
     }
+
+    public void declineAllOtherApplicationsByProfileId(UUID profileId, UUID idOfMoveIn) {
+        List<ApplicationEntity> entities = this.getAllApplicationsByProfileId(profileId);
+        for (ApplicationEntity applicationEntity : entities) {
+            if (applicationEntity.getId() != idOfMoveIn) {
+                applicationEntity.setState(ApplicationState.DECLINED);
+                this.applicationRepository.save(applicationEntity);
+            }
+        }
+    }
 }
