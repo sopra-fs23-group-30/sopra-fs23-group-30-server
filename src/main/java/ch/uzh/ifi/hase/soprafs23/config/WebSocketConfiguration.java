@@ -18,7 +18,7 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
     
     private static final String ORIGIN_LOCALHOST = "http://localhost:3000";
-    private static final String ORIGIN_PROD = "http://sopra-fs23-group-30-client-new.oa.r.appspot.com";
+    private static final String ORIGIN_PROD = "https://sopra-fs23-group-30-client-new.oa.r.appspot.com";
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
