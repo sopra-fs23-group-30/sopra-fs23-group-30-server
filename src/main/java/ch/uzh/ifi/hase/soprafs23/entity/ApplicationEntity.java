@@ -35,7 +35,7 @@ public class ApplicationEntity implements Serializable {
     private UUID id;
 
 
-    @ManyToOne( fetch = FetchType.LAZY, optional = false)
+    @ManyToOne( fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "listingId", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ListingEntity listing;

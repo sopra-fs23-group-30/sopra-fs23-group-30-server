@@ -66,6 +66,7 @@ public class ApplicationsController {
                                         applicationEntity.getApplicant().getId(), applicationEntity.getId());
                 }
 
+                updatedApplication.setListing(listingService.getListingById(applicationEntity.getListing().getId()));
                 webSocketController.applicationStateUpdatedToUser(updatedApplication.getApplicant().getId(), updatedApplication);
                 webSocketController.applicationStateUpdatedToUser(updatedApplication.getListing().getLister().getId(), updatedApplication);
 
