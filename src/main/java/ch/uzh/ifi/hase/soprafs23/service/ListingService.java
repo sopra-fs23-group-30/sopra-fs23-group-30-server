@@ -45,7 +45,9 @@ public class ListingService {
         for (ListingEntity listingEntity : listings) {
             List<ApplicationEntity> applicationsOfListing = applicationRepository
                     .findByListingId(listingEntity.getId());
-            if (!hasMovedInState(applicationsOfListing) ) {
+
+            if (!hasMovedInState(applicationsOfListing)) {
+
                 listsToReturn.add(listingEntity);
             }
         }
@@ -80,15 +82,23 @@ public class ListingService {
     }
 
     public void deleteListingById(UUID id) {
-
         Optional<ListingEntity> foundListing = this.listingRepository.findById(id);
 
         if (!foundListing.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "For the provided listing id no listing was found");
         }
+        UUID listingId = foundListing.get().getId();
+        List<ApplicationEntity> applications = applicationRepository
+        .findByListingId(listingId);
 
-        listingRepository.delete(foundListing.get());
+        for (ApplicationEntity applicationEntity : applications) {
+            applicationRepository.deleteById(applicationEntity.getId());
+        }
+
+        if (listingRepository.existsById(listingId)) {
+            listingRepository.delete(foundListing.get());
+        }
     }
 
     public void updateListing(UUID id, ListingEntity updatedEntity) {

@@ -27,7 +27,7 @@ public class ListingEntity implements Serializable {
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "listerId", referencedColumnName = "id")
     private ProfileEntity lister;
 

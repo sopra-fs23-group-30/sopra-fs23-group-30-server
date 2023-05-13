@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import ch.uzh.ifi.hase.soprafs23.constant.ApplicationState;
@@ -31,11 +34,13 @@ public class ApplicationEntity implements Serializable {
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne( fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "listingId", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ListingEntity listing;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "applicantId", referencedColumnName = "id")
     private ProfileEntity applicant;
 
