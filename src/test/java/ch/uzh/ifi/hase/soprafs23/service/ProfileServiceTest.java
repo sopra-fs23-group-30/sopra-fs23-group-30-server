@@ -176,5 +176,4 @@ class ProfileServiceTest {
         assertEquals(testProfile.getPassword(), profile.getPassword());
         assertEquals(testProfile.getIsSearcher(), profile.getIsSearcher());
     }
-
 }

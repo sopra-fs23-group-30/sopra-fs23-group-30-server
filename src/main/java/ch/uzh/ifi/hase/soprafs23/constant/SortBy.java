@@ -13,7 +13,7 @@ public enum SortBy {
 
     private final ISortByCalculator sortByCalculator;
     private static final int MAX_VALUE = 10000;
-
+    private static final int VIEWS_VALUE = 0;
     private SortBy(ISortByCalculator sortByCalculator) {
         this.sortByCalculator = sortByCalculator;
     }
@@ -31,7 +31,7 @@ public enum SortBy {
     }
 
     private static int viewsValue(ListingEntity listingEntity) {
-        return 0;
+        return VIEWS_VALUE;
     }
 
     private static int newestValue(ListingEntity listingEntity) {

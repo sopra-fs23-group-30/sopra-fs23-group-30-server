@@ -3,7 +3,6 @@ package ch.uzh.ifi.hase.soprafs23.controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
@@ -18,7 +17,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -97,10 +95,10 @@ class ListingsControllerTest {
         // listingPostDTO.setElevator(testListing.getElevator());
         // listingPostDTO.setDishwasher(testListing.getDishwasher());
 
-        // // Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-        // // .thenReturn(testProfileEntity);
-        // // Mockito.when(listingService.createListing(Mockito.any()))
-        // // .thenReturn(testListing);
+        // Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
+        // .thenReturn(testProfileEntity);
+        // Mockito.when(listingService.createListing(Mockito.any()))
+        // .thenReturn(testListing);
 
         // MockMultipartFile file = new MockMultipartFile(
         // "files",
@@ -117,33 +115,33 @@ class ListingsControllerTest {
         // mockMvc.perform(postRequest).andExpect(status().isCreated());
         // }
 
-        // @Test
-        // void createdListing_validInput_badRequest() throws Exception {
-        // ListingPostDTO listingPostDTO = new ListingPostDTO();
-        // listingPostDTO.setTitle(testListing.getTitle());
-        // listingPostDTO.setDescription(testListing.getDescription());
-        // listingPostDTO.setAddress(testListing.getAddress());
-        // listingPostDTO.setLattitude(testListing.getLattitude());
-        // listingPostDTO.setLongitude(testListing.getLongitude());
-        // listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
-        // listingPostDTO.setListerId(testListing.getLister().getId());
-        // listingPostDTO.setImagesJson(testListing.getImagesJson());
-        // listingPostDTO.setPetsAllowed(testListing.getPetsAllowed());
-        // listingPostDTO.setElevator(testListing.getElevator());
-        // listingPostDTO.setDishwasher(testListing.getDishwasher());
+        @Test
+        void createdListing_validInput_badRequest() throws Exception {
+        ListingPostDTO listingPostDTO = new ListingPostDTO();
+        listingPostDTO.setTitle(testListing.getTitle());
+        listingPostDTO.setDescription(testListing.getDescription());
+        listingPostDTO.setAddress(testListing.getAddress());
+        listingPostDTO.setLattitude(testListing.getLattitude());
+        listingPostDTO.setLongitude(testListing.getLongitude());
+        listingPostDTO.setPricePerMonth(testListing.getPricePerMonth());
+        listingPostDTO.setListerId(testListing.getLister().getId());
+        listingPostDTO.setImagesJson(testListing.getImagesJson());
+        listingPostDTO.setPetsAllowed(testListing.getPetsAllowed());
+        listingPostDTO.setElevator(testListing.getElevator());
+        listingPostDTO.setDishwasher(testListing.getDishwasher());
 
-        // Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
-        // .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
-        // "For the provided profile id no profile was found"));
-        // Mockito.when(listingService.createListing(Mockito.any()))
-        // .thenReturn(testListing);
+        Mockito.when(profileService.getProfileById(listingPostDTO.getListerId()))
+        .thenThrow(new ResponseStatusException(HttpStatus.NOT_FOUND,
+        "For the provided profile id no profile was found"));
+        Mockito.when(listingService.createListing(Mockito.any()))
+        .thenReturn(testListing);
 
-        // MockHttpServletRequestBuilder postRequest = post("/listings")
-        // .contentType(MediaType.APPLICATION_JSON)
-        // .content(asJsonString(listingPostDTO));
+        MockHttpServletRequestBuilder postRequest = post("/listings")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(asJsonString(listingPostDTO));
 
-        // mockMvc.perform(postRequest).andExpect(status().isNotFound());
-        // }
+        mockMvc.perform(postRequest).andExpect(status().isNotFound());
+        }
 
         @Test
         // @WithMockUser

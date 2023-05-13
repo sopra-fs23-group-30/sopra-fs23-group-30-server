@@ -35,7 +35,7 @@ public class ApplicationService {
                 .stream()
                 .anyMatch(application -> application.getState() == ApplicationState.MOVEIN);
 
-        if (isInMoveIn) {
+        if (Boolean.TRUE.equals(isInMoveIn)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "You've already decided to move-in to a listing");
         }

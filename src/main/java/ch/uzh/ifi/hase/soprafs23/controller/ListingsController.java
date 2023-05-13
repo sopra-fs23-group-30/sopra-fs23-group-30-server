@@ -70,7 +70,7 @@ public class ListingsController {
         try {
             if (files != null) {
                 List<String> blobURLs = blobUploaderService.uploadImages(files, listingPostDTO.getListerId().toString(),
-                        new ArrayList<String>());
+                        new ArrayList<>());
                 String jsonString = getJsonString(blobURLs);
                 listingPostDTO.setImagesJson(jsonString);
             }

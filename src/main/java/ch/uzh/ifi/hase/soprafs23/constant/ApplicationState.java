@@ -14,7 +14,6 @@ public enum ApplicationState {
   }
 
   public boolean isTransitionValid(ApplicationState next) {
-    // TODO: Get, whether request comes from the lister or not. 
     return transitionValidator.validate(next, true) ||  transitionValidator.validate(next, false);
   }
 

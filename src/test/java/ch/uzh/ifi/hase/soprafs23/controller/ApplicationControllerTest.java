@@ -107,26 +107,29 @@ class ApplicationControllerTest {
         mockMvc.perform(postRequest).andExpect(status().isCreated());
     }
 
-    // @Test
-    // void updateApplication_validInput_success() throws Exception {
-    //     ApplicationEntity applicationEntity = new ApplicationEntity();
-    //     applicationEntity.setId(UUID.randomUUID());
-    //     applicationEntity.setApplicant(profileEntity);
-    //     applicationEntity.setListing(listingEntity);
-    //     applicationEntity.setCreationDate(LocalDateTime.now());
-    //     applicationEntity.setState(ApplicationState.PENDING);
+    @Test
+    void updateApplication_validInput_success() throws Exception {
+        ApplicationEntity applicationEntity = new ApplicationEntity();
+        applicationEntity.setId(UUID.randomUUID());
+        applicationEntity.setApplicant(profileEntity);
+        applicationEntity.setListing(listingEntity);
+        applicationEntity.setCreationDate(LocalDateTime.now());
+        applicationEntity.setState(ApplicationState.PENDING);
 
-    //     ApplicationPutDTO applicationPutDTO = new ApplicationPutDTO();
-    //     applicationPutDTO.setNewState(ApplicationState.DECLINED);
+        ApplicationPutDTO applicationPutDTO = new ApplicationPutDTO();
+        applicationPutDTO.setNewState(ApplicationState.DECLINED);
 
-    //     Mockito.when(applicationService.getApplicationById(Mockito.any())).thenReturn(applicationEntity);
+        Mockito.when(applicationService.getApplicationById(Mockito.any())).thenReturn(applicationEntity);
+        ApplicationEntity entityWithNewState = applicationEntity;
+        entityWithNewState.setState(ApplicationState.DECLINED);
+        Mockito.when(applicationService.updateApplication(Mockito.any(), Mockito.any())).thenReturn(entityWithNewState);
 
-    //     MockHttpServletRequestBuilder putRequest = put("/applications/" + applicationEntity.getId().toString())
-    //             .contentType(MediaType.APPLICATION_JSON)
-    //             .content(asJsonString(applicationPutDTO));
+        MockHttpServletRequestBuilder putRequest = put("/applications/" + applicationEntity.getId().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(applicationPutDTO));
 
-    //     mockMvc.perform(putRequest).andExpect(status().isNoContent());
-    // }
+        mockMvc.perform(putRequest).andExpect(status().isNoContent());
+    }
 
     private String asJsonString(final Object object) {
         try {

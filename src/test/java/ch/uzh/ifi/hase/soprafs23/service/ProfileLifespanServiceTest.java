@@ -47,7 +47,6 @@ class ProfileLifespanServiceTest {
         testProfile.setIsSearcher(false);
 
         testProfileLifespanEntity = new ProfileLifespanEntity();
-        // testProfileLifespanEntity.setId(UUID.randomUUID());
         testProfileLifespanEntity.setProfile(testProfile);
         testProfileLifespanEntity.setIsExperience(true);
         testProfileLifespanEntity.setText("Truly amazing experiences");
@@ -68,7 +67,6 @@ class ProfileLifespanServiceTest {
         testProfile.setIsSearcher(false);
 
         testProfileLifespanEntity = new ProfileLifespanEntity();
-        // testProfileLifespanEntity.setId(UUID.randomUUID());
         testProfileLifespanEntity.setProfile(testProfile);
         testProfileLifespanEntity.setIsExperience(true);
         testProfileLifespanEntity.setText("Truly amazing experiences");

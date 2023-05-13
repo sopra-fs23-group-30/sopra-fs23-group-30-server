@@ -53,8 +53,10 @@ class ProfileServiceIntegrationTest {
         testProfile.setPhoneNumber("+41 78 123 45 67");
         testProfile.setPassword("OneTwoThreeFour");
         testProfile.setIsSearcher(false);
+        
         // when
         ProfileEntity createdProfile = profileService.createUser(testProfile);
+
         // then
         assertEquals(testProfile.getId(), createdProfile.getId());
         assertEquals(testProfile.getFirstname(), createdProfile.getFirstname());
@@ -75,7 +77,6 @@ class ProfileServiceIntegrationTest {
         testProfile.setPhoneNumber("+41 78 123 45 67");
         testProfile.setPassword("OneTwoThreeFour");
         testProfile.setIsSearcher(false);
-        ProfileEntity createdProfile = profileService.createUser(testProfile);
 
         ProfileEntity testProfile2 = new ProfileEntity();
         testProfile2.setFirstname("testName2");
@@ -98,7 +99,6 @@ class ProfileServiceIntegrationTest {
         testProfile.setPhoneNumber("+41 78 123 45 67");
         testProfile.setPassword("OneTwoThreeFour");
         testProfile.setIsSearcher(false);
-        ProfileEntity createdProfile = profileService.createUser(testProfile);
 
         ProfileLifespanDTO profileLifespanDTO = new ProfileLifespanDTO();
         profileLifespanDTO.setIsExperience(true);

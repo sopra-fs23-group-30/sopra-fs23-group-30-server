@@ -14,7 +14,7 @@ public class ListingFilter {
     private List<String> keywords;
     private KMPStringMatcher stringMatcher = new KMPStringMatcher();
 
-    private final int PRIORITIZED_SORT_VALUE_FACTOR = 10000;
+    private final static int prioritizedSortValueFactor = 10000;
 
     public ListingFilter(String searchText, float maxRentPerMonth, boolean petsAllowed,
             boolean elevator, boolean dishwasher, SortBy sortBy) {
@@ -38,7 +38,7 @@ public class ListingFilter {
                     .countOccurences(listingEntity.getPerfectFlatmateDescription(), keyword);
 
             value += stringMatcher.countOccurences(listingEntity.getAddress(), keyword)
-                    * PRIORITIZED_SORT_VALUE_FACTOR;
+                    * prioritizedSortValueFactor;
         }
         value += sortBy.getValue(listingEntity);
         return value;
