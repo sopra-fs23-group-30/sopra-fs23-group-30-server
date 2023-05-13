@@ -8,9 +8,9 @@ import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.RegisterPostDTO;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DTOMapperTest {
+class DTOMapperTest {
     @Test
-    public void testCreateUser_fromUserPostDTO_toUser_success() {
+    void testCreateUser_fromUserPostDTO_toUser_success() {
         // create UserPostDTO
         RegisterPostDTO registerProfileDTO = new RegisterPostDTO();
         registerProfileDTO.setFirstname("name");
@@ -23,7 +23,7 @@ public class DTOMapperTest {
     }
 
     @Test
-    public void testGetUser_fromUser_toUserGetDTO_success() {
+    void testGetUser_fromUser_toUserGetDTO_success() {
         // create User
         ProfileEntity profile = new ProfileEntity();
         profile.setFirstname("Firstname Lastname");
