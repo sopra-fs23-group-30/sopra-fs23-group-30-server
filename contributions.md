@@ -113,9 +113,14 @@ Rafael:
     - [x] #97 FE
     - [x] #66 BE FE
 - Week 3
+    - [x] #36 FE
     - [x] #46 FE
-    - [ ] #102 BE
-    
+    - [x] #102 BE
+- Week 4
+    - [ ]
+    - [ ]
+
+
 Mathias:
 - Week 1
     - [x] #86 BE
@@ -127,6 +132,9 @@ Mathias:
 - Week 3
     - [x] #43 FE
     - [x] #103 FE BE
+- Week 4
+    - [ ]
+    - [ ]
 
 Mika:
 - Week 1
@@ -138,6 +146,9 @@ Mika:
 - Week 3
     - [x] #42 FE -> changed to #107 BE
     - [x] #101 BE
+- Week 4
+    - [ ]
+    - [ ]
 
 Fatih:
 - Week 1
@@ -147,5 +158,8 @@ Fatih:
     - [x] #37 FE
     - [x] #38 FE
 - Week 3
-    - [ ] #44 FE
-    - [ ] #45 FE
+    - [x] #44 FE
+    - [x] #45 FE
+- Week 4
+    - [ ]
+    - [ ]
