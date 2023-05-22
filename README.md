@@ -9,7 +9,7 @@ Key Features:
 - Enhanced Listing Management: Listers can easily create and manage property listings, eliminating the hassle of repetitive data entry and providing a clear overview of all listings.
 
 ```
-Join us in revolutionizing the flat search experience for students in high-demand locations with upsearch.ch, and contribute to our open-source project to make finding a flat hassle-free and more enjoyable for everyone.
+Join us in revolutionizing the flat search experience for students in high-demand locations with upsearch.ch!
 ```
 
 ## Technologies 
