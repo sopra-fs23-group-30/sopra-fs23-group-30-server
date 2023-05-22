@@ -27,8 +27,22 @@ Join us in revolutionizing the flat search experience for students in high-deman
 4. [WebSocketFactory](https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/blob/main/src/helpers/WebSocketFactory.js) (This factory is a FrontEnd component, which sets up and handles the WebSocket connections we need for our live-feature)  
 
 
-
 ## Launch & Deployment:
+**For Running our Webapp**
+1. Check Out our [Client Repository](https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client.git) & [Server Repository](https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-server.git)
+2. Make sure you've installed [node.js](https://nodejs.org/en), [NugetPackageManager](https://www.npmjs.com/)
+3. Open both projects in your IDE of choice (e.g. [Visual Studio Code](https://code.visualstudio.com/))
+4. For FrontEnd run: 
+```cmd
+npm install
+npm run dev
+```
+6. For BackEnd run:
+```bash
+./gradlew build
+./gradlew bootRun
+```
+
 
 ## Illustrations
 
@@ -73,7 +87,9 @@ More Information about [Gradle Wrapper](https://docs.gradle.org/current/userguid
 ```bash
 ./gradlew build
 ```
-
+```bash
+./gradlew bootRun
+```
 ### Run
 
 ```bash
