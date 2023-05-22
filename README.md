@@ -1,6 +1,40 @@
-# SoPra RESTful Service Template FS23
+# upsearch.ch
+upsearch.ch is an open-source web platform designed to alleviate the tedious and exhausting process that students face when searching for a flat in highly sought-after areas like Zurich. Our project aims to simplify the entire experience for both seekers and listers, eliminating the need for repetitive self-information and providing a streamlined hub for managing applications and listings.
 
-## Getting started with Spring Boot
+Key Features:
+
+- Streamlined Flat Search: We provide an intuitive and user-friendly interface that simplifies the search process, enabling students to find suitable flats quickly and efficiently.
+- Automated Profile Management: Say goodbye to repeatedly entering the same information about yourself. Our platform automates profile creation, saving you time and effort.
+- Centralized Application Hub: Manage all your flat applications in one place, allowing you to track their status, communicate with listers, and stay organized throughout the process.
+- Enhanced Listing Management: Listers can easily create and manage property listings, eliminating the hassle of repetitive data entry and providing a clear overview of all listings.
+
+```
+Join us in revolutionizing the flat search experience for students in high-demand locations with upsearch.ch, and contribute to our open-source project to make finding a flat hassle-free and more enjoyable for everyone.
+```
+
+## Technologies 
+- FrontEnd Framework [React](https://react.dev/).
+- FrontEnd Styling Framework [Tailwind CSS](https://tailwindcss.com/)
+- Backend Framework [JPA](https://tailwindcss.com/](https://spring.io/projects/spring-boot)
+- WebApp Hosting [Google Cloud](https://cloud.google.com/)
+- Database Hosting & Blob Storage [Microsoft Azure](https://azure.microsoft.com/)
+
+
+## High-level components 
+
+
+
+
+## Launch & Deployment:
+
+## Illustrations
+
+## Roadmap
+
+## Authors and acknowledgment
+
+## License
+
 -   Documentation: https://docs.spring.io/spring-boot/docs/current/reference/html/index.html
 -   Guides: http://spring.io/guides
     -   Building a RESTful Web Service: http://spring.io/guides/gs/rest-service/
