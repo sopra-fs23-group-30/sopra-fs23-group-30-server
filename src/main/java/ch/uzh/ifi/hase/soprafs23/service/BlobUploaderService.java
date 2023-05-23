@@ -42,11 +42,9 @@ public class BlobUploaderService {
                     "AccountKey=" + accountKey;
             CloudStorageAccount storageAccount = CloudStorageAccount.parse(connectionString);
 
-            // Create the blob client.
             CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
             CloudBlobContainer container = blobClient.getContainerReference(containerName);
 
-            // Create or overwrite the "myimage.jpg" blob with contents from a local file.
             String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
             CloudBlockBlob blob = container.getBlockBlobReference(fileName + "." + fileExtension);
             blob.upload(file.getInputStream(), file.getSize());
@@ -60,7 +58,7 @@ public class BlobUploaderService {
 
     public List<String> uploadImages(MultipartFile[] files, String listingId, List<String> urlsToDelete)
             throws URISyntaxException, NullPointerException {
-        // delete urls
+
         for (String urlToDeleteString : urlsToDelete) {
             deleteBlobByUrl(urlToDeleteString);
         }
@@ -86,28 +84,21 @@ public class BlobUploaderService {
     public CloudBlobClient getOrCreateContainer(String containerName)
             throws URISyntaxException, java.security.InvalidKeyException, StorageException {
 
-        // Retrieve storage account from connection-string.
         String connectionString = "DefaultEndpointsProtocol=https;" +
                 "AccountName=" + accountName + ";" +
                 "AccountKey=" + accountKey;
         CloudStorageAccount storageAccount = CloudStorageAccount.parse(connectionString);
 
-        // Create the blob client.
         CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-        // Get a reference to a container.
         CloudBlobContainer container = blobClient.getContainerReference(containerName);
 
-        // Create the container if it does not exist.
         container.createIfNotExists();
 
-        // Create a permissions object.
         BlobContainerPermissions containerPermissions = new BlobContainerPermissions();
 
-        // Include public access in the permissions object.
         containerPermissions.setPublicAccess(BlobContainerPublicAccessType.CONTAINER);
 
-        // Set the permissions on the container.
         container.uploadPermissions(containerPermissions);
         return blobClient;
     }

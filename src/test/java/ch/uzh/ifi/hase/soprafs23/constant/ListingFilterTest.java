@@ -22,7 +22,6 @@ class ListingFilterTest {
                 listingEntity.setElevator(true);
                 listingEntity.setDishwasher(true);
 
-                // Expects words + maxValue - rent price
                 assertEquals(4 + 10000 - listingEntity.getPricePerMonth(), listingFilter.sortValue(listingEntity));
         }
 
