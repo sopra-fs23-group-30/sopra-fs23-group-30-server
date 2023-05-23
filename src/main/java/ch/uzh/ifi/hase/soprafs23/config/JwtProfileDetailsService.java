@@ -2,6 +2,8 @@ package ch.uzh.ifi.hase.soprafs23.config;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +18,8 @@ public class JwtProfileDetailsService implements UserDetailsService {
 
     final ProfileRepository profileRepository;
 
-    public JwtProfileDetailsService(ProfileRepository profileRepository) {
+    @Autowired
+    public JwtProfileDetailsService(@Lazy ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
     }
 
