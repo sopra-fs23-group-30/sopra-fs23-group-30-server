@@ -235,70 +235,8 @@ class ProfilesControllerTest {
 
         @Test
         void updatedProfileByid_validInput_success() throws Exception {
-                String email = "test.example@gmail.com";
-                String password = "OneTwoThreeFour";
-
-                UUID id = UUID.randomUUID();
-
-                ProfileEntity profileEntity = new ProfileEntity();
-                profileEntity.setId(id);
-                profileEntity.setFirstname("Test");
-                profileEntity.setLastname("Profile");
-                profileEntity.setBirthday(Date.valueOf(LocalDate.now()));
-                profileEntity.setPhoneNumber("0781234567");
-                profileEntity.setGender("female");
-                profileEntity.setBiography("I'm a testy dudette");
-                profileEntity.setFutureFlatmatesDescription("I just want someone");
-                profileEntity.setPassword(password);
-                profileEntity.setIsSearcher(true);
-                profileEntity.setEmail(email);
-
-                ProfilePutDTO profilePutDTO = new ProfilePutDTO();
-                profilePutDTO.setFirstname(profileEntity.getFirstname());
-                profilePutDTO.setLastname(profileEntity.getLastname());
-                profilePutDTO.setBirthday(profileEntity.getBirthday());
-                profilePutDTO.setPhoneNumber(profileEntity.getPhoneNumber());
-                profilePutDTO.setGender(profileEntity.getGender());
-                profilePutDTO.setBiography(profileEntity.getBiography());
-                profilePutDTO.setFutureFlatmatesDescription(profileEntity.getFutureFlatmatesDescription());
-
-                Mockito.when(profileService.getProfileById(Mockito.any())).thenReturn(profileEntity);
-
-                ProfileLifespanEntity profileLifespanEntity = new ProfileLifespanEntity();
-                profileLifespanEntity.setProfile(profileEntity);
-                profileLifespanEntity.setIsExperience(true);
-                profileLifespanEntity.setText("Work at XYZ");
-                profileLifespanEntity.setFromDate(Date.valueOf("2002-12-26"));
-                profileLifespanEntity.setToDate(Date.valueOf("2003-12-26"));
-                List<ProfileLifespanEntity> profileLifespanEntityList = new ArrayList<>();
-                profileLifespanEntityList.add(profileLifespanEntity);
-
-                Mockito.when(profileLifespanService.getAllLifespansByProfileId(Mockito.any()))
-                                .thenReturn(profileLifespanEntityList);
-
-                MockMultipartFile profileFile = new MockMultipartFile(
-                                "file",
-                                "test-image.jpg",
-                                MediaType.IMAGE_JPEG_VALUE,
-                                "test-image.jpg".getBytes());
-
-                MockMultipartFile profileDocument = new MockMultipartFile(
-                                "document",
-                                "profile_document.pdf",
-                                "application/pdf",
-                                "binary-document-content".getBytes());
-
-                MockMultipartFile body = new MockMultipartFile(
-                                "body",
-                                asJsonString(profilePutDTO).getBytes());
-
-                Mockito.when(blobUploaderService.upload(Mockito.any(), Mockito.any(), Mockito.any()))
-                                .thenReturn("www.testURL.com");
-
-                MockHttpServletRequestBuilder putRequest = multipart("/profiles/" + id)
-                                .file(profileFile)
-                                .file(profileDocument)
-                                .file(body);
+                MockHttpServletRequestBuilder putRequest = construct_updatedProfileByidRequest("test-image.jpg",
+                                "profile_document.pdf");
 
                 putRequest.with(new RequestPostProcessor() {
                         @Override
@@ -313,70 +251,8 @@ class ProfilesControllerTest {
 
         @Test
         void updatedProfileByid_deleteImage_success() throws Exception {
-                String email = "test.example@gmail.com";
-                String password = "OneTwoThreeFour";
-
-                UUID id = UUID.randomUUID();
-
-                ProfileEntity profileEntity = new ProfileEntity();
-                profileEntity.setId(id);
-                profileEntity.setFirstname("Test");
-                profileEntity.setLastname("Profile");
-                profileEntity.setBirthday(Date.valueOf(LocalDate.now()));
-                profileEntity.setPhoneNumber("0781234567");
-                profileEntity.setGender("female");
-                profileEntity.setBiography("I'm a testy dudette");
-                profileEntity.setFutureFlatmatesDescription("I just want someone");
-                profileEntity.setPassword(password);
-                profileEntity.setIsSearcher(true);
-                profileEntity.setEmail(email);
-
-                ProfilePutDTO profilePutDTO = new ProfilePutDTO();
-                profilePutDTO.setFirstname(profileEntity.getFirstname());
-                profilePutDTO.setLastname(profileEntity.getLastname());
-                profilePutDTO.setBirthday(profileEntity.getBirthday());
-                profilePutDTO.setPhoneNumber(profileEntity.getPhoneNumber());
-                profilePutDTO.setGender(profileEntity.getGender());
-                profilePutDTO.setBiography(profileEntity.getBiography());
-                profilePutDTO.setFutureFlatmatesDescription(profileEntity.getFutureFlatmatesDescription());
-
-                Mockito.when(profileService.getProfileById(Mockito.any())).thenReturn(profileEntity);
-
-                ProfileLifespanEntity profileLifespanEntity = new ProfileLifespanEntity();
-                profileLifespanEntity.setProfile(profileEntity);
-                profileLifespanEntity.setIsExperience(true);
-                profileLifespanEntity.setText("Work at XYZ");
-                profileLifespanEntity.setFromDate(Date.valueOf("2002-12-26"));
-                profileLifespanEntity.setToDate(Date.valueOf("2003-12-26"));
-                List<ProfileLifespanEntity> profileLifespanEntityList = new ArrayList<>();
-                profileLifespanEntityList.add(profileLifespanEntity);
-
-                Mockito.when(profileLifespanService.getAllLifespansByProfileId(Mockito.any()))
-                                .thenReturn(profileLifespanEntityList);
-
-                MockMultipartFile profileFile = new MockMultipartFile(
-                                "file",
-                                "deleted",
-                                MediaType.IMAGE_JPEG_VALUE,
-                                "test-image.jpg".getBytes());
-
-                MockMultipartFile profileDocument = new MockMultipartFile(
-                                "document",
-                                "profile_document.pdf",
-                                "application/pdf",
-                                "binary-document-content".getBytes());
-
-                MockMultipartFile body = new MockMultipartFile(
-                                "body",
-                                asJsonString(profilePutDTO).getBytes());
-
-                Mockito.when(blobUploaderService.upload(Mockito.any(), Mockito.any(), Mockito.any()))
-                                .thenReturn("www.testURL.com");
-
-                MockHttpServletRequestBuilder putRequest = multipart("/profiles/" + id)
-                                .file(profileFile)
-                                .file(profileDocument)
-                                .file(body);
+                MockHttpServletRequestBuilder putRequest = construct_updatedProfileByidRequest("deleted",
+                                "profile_document.pdf");
 
                 putRequest.with(new RequestPostProcessor() {
                         @Override
@@ -391,6 +267,22 @@ class ProfilesControllerTest {
 
         @Test
         void updatedProfileByid_deleteDocument_success() throws Exception {
+                MockHttpServletRequestBuilder putRequest = construct_updatedProfileByidRequest("test-image.jpg",
+                                "deleted");
+
+                putRequest.with(new RequestPostProcessor() {
+                        @Override
+                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
+                                request.setMethod("PUT");
+                                return request;
+                        }
+                });
+
+                mockMvc.perform(putRequest).andExpect(status().isNoContent());
+        }
+
+        private MockHttpServletRequestBuilder construct_updatedProfileByidRequest(String fileName,
+                        String documentName) {
                 String email = "test.example@gmail.com";
                 String password = "OneTwoThreeFour";
 
@@ -434,13 +326,13 @@ class ProfilesControllerTest {
 
                 MockMultipartFile profileFile = new MockMultipartFile(
                                 "file",
-                                "test-image.jpg",
+                                fileName,
                                 MediaType.IMAGE_JPEG_VALUE,
                                 "test-image.jpg".getBytes());
 
                 MockMultipartFile profileDocument = new MockMultipartFile(
                                 "document",
-                                "deleted",
+                                documentName,
                                 "application/pdf",
                                 "binary-document-content".getBytes());
 
@@ -451,20 +343,10 @@ class ProfilesControllerTest {
                 Mockito.when(blobUploaderService.upload(Mockito.any(), Mockito.any(), Mockito.any()))
                                 .thenReturn("www.testURL.com");
 
-                MockHttpServletRequestBuilder putRequest = multipart("/profiles/" + id)
+                return multipart("/profiles/" + id)
                                 .file(profileFile)
                                 .file(profileDocument)
                                 .file(body);
-
-                putRequest.with(new RequestPostProcessor() {
-                        @Override
-                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-                                request.setMethod("PUT");
-                                return request;
-                        }
-                });
-
-                mockMvc.perform(putRequest).andExpect(status().isNoContent());
         }
 
         /**
