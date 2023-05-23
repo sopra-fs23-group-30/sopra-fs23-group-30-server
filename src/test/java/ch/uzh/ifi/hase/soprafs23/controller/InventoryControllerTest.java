@@ -35,7 +35,7 @@ import ch.uzh.ifi.hase.soprafs23.service.InventoryItemService;
 @WebMvcTest(InventoryController.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 @ContextConfiguration(classes = InventoryController.class)
-public class InventoryControllerTest {
+class InventoryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

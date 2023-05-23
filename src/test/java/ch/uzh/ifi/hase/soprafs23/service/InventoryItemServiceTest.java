@@ -9,10 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.naming.InvalidNameException;
-import javax.swing.text.html.Option;
-
-import org.hibernate.jpa.spi.IdentifierGeneratorStrategyProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,7 +21,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.InventoryItemEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.InventoryItemRepository;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.inventory.InventoryItemGetDTO;
 
-public class InventoryItemServiceTest {
+class InventoryItemServiceTest {
 
     @Mock
     private InventoryItemRepository inventoryItemRepository;
@@ -81,8 +77,10 @@ public class InventoryItemServiceTest {
         Mockito.when(inventoryItemRepository.findById(Mockito.any()))
                 .thenReturn(Optional.empty());
 
+        UUID id = inventoryItemEntity.getId();
+
         assertThrows(ResponseStatusException.class, () -> InventoryItemService
-                .getByItemId(inventoryItemEntity.getId()));
+                .getByItemId(id));
 
     }
 
