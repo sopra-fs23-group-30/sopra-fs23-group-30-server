@@ -24,6 +24,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
 import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.rest.mapper.DTOMapper;
+import javassist.NotFoundException;
 
 @Service
 @Primary
@@ -49,7 +50,7 @@ public class ProfileService implements UserDetailsService {
         ProfileEntity profile = profileRepository.findByEmail(email);
         if (profile == null) {
             log.error("Profile not found");
-            throw new UsernameNotFoundException("Profile not found");
+            throw new UsernameNotFoundException("Profile not found"); // Custom exception
         } else {
             log.info("Profile found");
         }
