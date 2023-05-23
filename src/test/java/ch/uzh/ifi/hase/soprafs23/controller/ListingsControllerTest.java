@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,10 +19,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -190,6 +194,72 @@ class ListingsControllerTest {
                 MockHttpServletRequestBuilder deleteRequest = delete("/listings/" + testListing.getId().toString());
 
                 mockMvc.perform(deleteRequest)
+                                .andExpect(status().isNoContent());
+        }
+
+        @Test
+        // @WithMockUser
+        void getListingPreviews_validInput_thenSuccess() throws Exception {
+                MockHttpServletRequestBuilder getRequest = get("/listingpreviews");
+
+                mockMvc.perform(getRequest)
+                                .andExpect(status().isOk());
+        }
+
+        @Test
+        void updateProfileByid_validInput_thenSuccess() throws Exception {
+                ListingPostDTO listingPutDTO = new ListingPostDTO();
+                listingPutDTO.setTitle(testListing.getTitle());
+                listingPutDTO.setDescription(testListing.getDescription());
+                listingPutDTO.setAddress(testListing.getAddress());
+                listingPutDTO.setLattitude(testListing.getLattitude());
+                listingPutDTO.setLongitude(testListing.getLongitude());
+                listingPutDTO.setPricePerMonth(testListing.getPricePerMonth());
+                listingPutDTO.setPerfectFlatmateDescription(testListing.getPerfectFlatmateDescription());
+                listingPutDTO.setListerId(testListing.getLister().getId());
+                listingPutDTO.setImagesJson(testListing.getImagesJson());
+                listingPutDTO.setPetsAllowed(testListing.getPetsAllowed());
+                listingPutDTO.setElevator(testListing.getElevator());
+                listingPutDTO.setDishwasher(testListing.getDishwasher());
+
+                MockMultipartFile file1 = new MockMultipartFile(
+                                "files",
+                                "test-image-1.jpg",
+                                MediaType.IMAGE_JPEG_VALUE,
+                                "test-image.jpg".getBytes());
+
+                MockMultipartFile file2 = new MockMultipartFile(
+                                "files",
+                                "test-image-2.jpg",
+                                MediaType.IMAGE_JPEG_VALUE,
+                                "test-image.jpg".getBytes());
+
+                MockMultipartFile body = new MockMultipartFile(
+                                "body",
+                                asJsonString(listingPutDTO).getBytes());
+
+                Mockito.when(listingService.getListingById(Mockito.any())).thenReturn(testListing);
+
+                List<String> blobURLs = new ArrayList<>();
+                blobURLs.add("www.testURL.com");
+
+                Mockito.when(blobUploaderService.uploadImages(Mockito.any(), Mockito.any(), Mockito.any()))
+                                .thenReturn(blobURLs);
+
+                MockHttpServletRequestBuilder putRequest = multipart("/listings/" + testListing.getId())
+                                .file(file1)
+                                .file(file2)
+                                .file(body);
+
+                putRequest.with(new RequestPostProcessor() {
+                        @Override
+                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
+                                request.setMethod("PUT");
+                                return request;
+                        }
+                });
+
+                mockMvc.perform(putRequest)
                                 .andExpect(status().isNoContent());
         }
 

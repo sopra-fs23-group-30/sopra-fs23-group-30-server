@@ -139,7 +139,7 @@ public class ListingsController {
 
     @PutMapping(value = "/listings/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
             MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<Object> updateProfileByid(@PathVariable UUID id,
+    public ResponseEntity<Object> updateListingByid(@PathVariable UUID id,
             @RequestPart("body") String updatedListing,
             @RequestPart(value = "files", required = false) MultipartFile[] files) throws IOException {
 
