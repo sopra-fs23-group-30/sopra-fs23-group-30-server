@@ -88,14 +88,14 @@ public class ProfilesController {
                 }
 
                 try {
-                    String originalFilename = file.getOriginalFilename();
-                    if ("deleted".equals(originalFilename))
-                        updateProfile.setProfilePictureURL(null);
+                        String originalFilename = file.getOriginalFilename();
+                        if ("deleted".equals(originalFilename))
+                                updateProfile.setProfilePictureURL(null);
 
-                    else if (!"unchanged".equals(originalFilename)) {
-                        String blobURL = blobUploaderService.upload(file, "profilepictures", id.toString());
-                        updateProfile.setProfilePictureURL(blobURL);
-                    }
+                        else if (!"unchanged".equals(originalFilename)) {
+                                String blobURL = blobUploaderService.upload(file, "profilepictures", id.toString());
+                                updateProfile.setProfilePictureURL(blobURL);
+                        }
                 } catch (NullPointerException e) {
                         return ResponseEntity
                                         .status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -108,14 +108,15 @@ public class ProfilesController {
                                 updateProfile.setDocumentURL(null);
 
                         else if (!"unchanged".equals(originalDocumentFilename)) {
-                                String blobURL = blobUploaderService.upload(document, "debtcollectionregisters", id.toString());
+                                String blobURL = blobUploaderService.upload(document, "debtcollectionregisters",
+                                                id.toString());
                                 updateProfile.setDocumentURL(blobURL);
                         }
-                        } catch (NullPointerException e) {
-                                return ResponseEntity
-                                                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                                .body(null);
-                        }
+                } catch (NullPointerException e) {
+                        return ResponseEntity
+                                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                        .body(null);
+                }
 
                 profileService.updateProfile(id, updateProfile);
 
