@@ -1,9 +1,11 @@
 package ch.uzh.ifi.hase.soprafs23.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +18,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.uzh.ifi.hase.soprafs23.config.JwtAuthenticationEntryPoint;
 import ch.uzh.ifi.hase.soprafs23.config.JwtRequestFilter;
@@ -29,6 +40,7 @@ import ch.uzh.ifi.hase.soprafs23.entity.ListingEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileEntity;
 import ch.uzh.ifi.hase.soprafs23.entity.ProfileLifespanEntity;
 import ch.uzh.ifi.hase.soprafs23.repository.ProfileRepository;
+import ch.uzh.ifi.hase.soprafs23.rest.dto.profile.ProfilePutDTO;
 import ch.uzh.ifi.hase.soprafs23.service.ApplicationService;
 import ch.uzh.ifi.hase.soprafs23.service.BlobUploaderService;
 import ch.uzh.ifi.hase.soprafs23.service.ListingService;
@@ -91,10 +103,14 @@ class ProfilesControllerTest {
                 profileEntity.setId(UUID.randomUUID());
                 profileEntity.setFirstname("Test");
                 profileEntity.setLastname("Profile");
-                profileEntity.setEmail(email);
+                profileEntity.setBirthday(Date.valueOf(LocalDate.now()));
                 profileEntity.setPhoneNumber("0781234567");
+                profileEntity.setGender("female");
+                profileEntity.setBiography("I'm a testy dudette");
+                profileEntity.setFutureFlatmatesDescription("I just want someone");
                 profileEntity.setPassword(password);
                 profileEntity.setIsSearcher(true);
+                profileEntity.setEmail(email);
 
                 Mockito.when(profileService.getProfileById(Mockito.any())).thenReturn(profileEntity);
 
@@ -113,7 +129,6 @@ class ProfilesControllerTest {
                 MockHttpServletRequestBuilder getRequest = get("/profiles/" + profileEntity.getId().toString());
 
                 mockMvc.perform(getRequest)
-
                                 .andExpect(status().isOk());
                 // .andExpect(jsonPath("$.firstname").value(profileEntity.getFirstname()))
                 // .andExpect(jsonPath("$.lastname").value(profileEntity.getLastname()))
@@ -121,8 +136,9 @@ class ProfilesControllerTest {
                 // .andExpect(jsonPath("$.phoneNumber").value(profileEntity.getPhoneNumber()))
                 // .andExpect(jsonPath("$.gender").value(profileEntity.getGender()))
                 // .andExpect(jsonPath("$.biography").value(profileEntity.getBiography()))
-                // .andExpect(jsonPath("$.futureFlatmatesDescription").value(profileEntity.getFutureFlatmatesDescription()))
-                // .andExpect(jsonPath("$.lifespans[0]").value(profileLifespanEntity));
+                // .andExpect(jsonPath("$.futureFlatmatesDescription")
+                // .value(profileEntity.getFutureFlatmatesDescription()))
+                // .andExpect(jsonPath("$.lifespans[0].text").value(profileLifespanEntity.getText()));
 
                 // .andExpect(jsonPath("$.firstname").value(profileEntity.getFirstname()))
                 // .andExpect(jsonPath("$.lastname").value(profileEntity.getLastname()))
@@ -215,5 +231,96 @@ class ProfilesControllerTest {
                                 "/profiles/" + profileEntity.getId().toString() + "/listings");
 
                 mockMvc.perform(getRequest).andExpect(status().isOk());
+        }
+
+        @Test
+        void updatedProfileByid_validInput_success() throws Exception {
+                String email = "test.example@gmail.com";
+                String password = "OneTwoThreeFour";
+
+                UUID id = UUID.randomUUID();
+
+                ProfileEntity profileEntity = new ProfileEntity();
+                profileEntity.setId(id);
+                profileEntity.setFirstname("Test");
+                profileEntity.setLastname("Profile");
+                profileEntity.setBirthday(Date.valueOf(LocalDate.now()));
+                profileEntity.setPhoneNumber("0781234567");
+                profileEntity.setGender("female");
+                profileEntity.setBiography("I'm a testy dudette");
+                profileEntity.setFutureFlatmatesDescription("I just want someone");
+                profileEntity.setPassword(password);
+                profileEntity.setIsSearcher(true);
+                profileEntity.setEmail(email);
+
+                ProfilePutDTO profilePutDTO = new ProfilePutDTO();
+                profilePutDTO.setFirstname(profileEntity.getFirstname());
+                profilePutDTO.setLastname(profileEntity.getLastname());
+                profilePutDTO.setBirthday(profileEntity.getBirthday());
+                profilePutDTO.setPhoneNumber(profileEntity.getPhoneNumber());
+                profilePutDTO.setGender(profileEntity.getGender());
+                profilePutDTO.setBiography(profileEntity.getBiography());
+                profilePutDTO.setFutureFlatmatesDescription(profileEntity.getFutureFlatmatesDescription());
+
+                Mockito.when(profileService.getProfileById(Mockito.any())).thenReturn(profileEntity);
+
+                ProfileLifespanEntity profileLifespanEntity = new ProfileLifespanEntity();
+                profileLifespanEntity.setProfile(profileEntity);
+                profileLifespanEntity.setIsExperience(true);
+                profileLifespanEntity.setText("Work at XYZ");
+                profileLifespanEntity.setFromDate(Date.valueOf("2002-12-26"));
+                profileLifespanEntity.setToDate(Date.valueOf("2003-12-26"));
+                List<ProfileLifespanEntity> profileLifespanEntityList = new ArrayList<>();
+                profileLifespanEntityList.add(profileLifespanEntity);
+
+                Mockito.when(profileLifespanService.getAllLifespansByProfileId(Mockito.any()))
+                                .thenReturn(profileLifespanEntityList);
+
+                MockMultipartFile profileFile = new MockMultipartFile(
+                                "file",
+                                "test-image.jpg",
+                                MediaType.IMAGE_JPEG_VALUE,
+                                "test-image.jpg".getBytes());
+
+                MockMultipartFile profileDocument = new MockMultipartFile(
+                                "document",
+                                "profile_document.pdf",
+                                "application/pdf",
+                                "binary-document-content".getBytes());
+
+                MockMultipartFile body = new MockMultipartFile(
+                                "body",
+                                asJsonString(profilePutDTO).getBytes());
+
+                Mockito.when(blobUploaderService.upload(Mockito.any(), Mockito.any(), Mockito.any()))
+                                .thenReturn("www.testURL.com");
+
+                MockHttpServletRequestBuilder putRequest = multipart("/profiles/" + id)
+                                .file(profileFile)
+                                .file(profileDocument)
+                                .file(body);
+
+                putRequest.with(new RequestPostProcessor() {
+                        @Override
+                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
+                                request.setMethod("PUT");
+                                return request;
+                        }
+                });
+
+                mockMvc.perform(putRequest).andExpect(status().isNoContent());
+        }
+
+        /**
+         * @param object
+         * @return string
+         */
+        private String asJsonString(final Object object) {
+                try {
+                        return new ObjectMapper().writeValueAsString(object);
+                } catch (JsonProcessingException e) {
+                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                                        String.format("The request body could not be created.%s", e.toString()));
+                }
         }
 }
