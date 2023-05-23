@@ -51,11 +51,6 @@ public class ListingService {
                 listsToReturn.add(listingEntity);
             }
         }
-
-        if(listingFilter == null){
-            return listsToReturn;
-        }
-
         listsToReturn.removeIf(listing -> (listingFilter.sortValue(listing) < threshold));
         listsToReturn
                 .sort((listingA, listingB) -> {

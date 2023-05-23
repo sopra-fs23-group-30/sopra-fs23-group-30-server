@@ -107,18 +107,6 @@ public class ListingsController {
                 .status(HttpStatus.OK)
                 .body(listingDTOs);
     }
-    
-    @GetMapping("/listingpreviews")
-    public ResponseEntity<List<ListingGetDTO>> getListingPreviews() {
-        List<ListingEntity> listingEntities = listingService.getListings(null);
-        List<ListingGetDTO> listingDTOs = new ArrayList<>();
-        listingEntities
-                .forEach(entity -> listingDTOs.add(DTOMapper.INSTANCE.convertListingEntityToListingGetDTO(entity)));
-
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(listingDTOs);
-    }
 
     @GetMapping("/listings/{id}")
     public ResponseEntity<ListingDetailsGetDTO> getListingById(@PathVariable UUID id) {

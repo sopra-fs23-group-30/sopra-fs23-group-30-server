@@ -63,7 +63,7 @@ public class ListingEntity implements Serializable {
     private boolean petsAllowed;
 
     @Column(nullable = false)
-    private boolean elevator;
+    private boolean elevator; // Wheechair friendly?
 
     @Column(nullable = false)
     private boolean dishwasher;

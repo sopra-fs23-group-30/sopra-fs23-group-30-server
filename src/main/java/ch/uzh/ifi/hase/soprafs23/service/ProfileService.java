@@ -49,7 +49,7 @@ public class ProfileService implements UserDetailsService {
         ProfileEntity profile = profileRepository.findByEmail(email);
         if (profile == null) {
             log.error("Profile not found");
-            throw new UsernameNotFoundException("Profile not found"); // Custom exception
+            throw new UsernameNotFoundException("Profile not found");
         } else {
             log.info("Profile found");
         }

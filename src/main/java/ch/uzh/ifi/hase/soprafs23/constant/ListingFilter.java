@@ -49,5 +49,8 @@ public class ListingFilter {
                 && (listingEntity.getPetsAllowed() || !petsAllowed)
                 && (listingEntity.getElevator() || !elevator)
                 && (listingEntity.getDishwasher() || !dishwasher);
+        // The only case where pets, elevator or dishwasher should return false is when:
+        // the lister says false and the searcher says true.
+        // In any other case, they either agree, or the searcher doesn't care.
     }
 }
