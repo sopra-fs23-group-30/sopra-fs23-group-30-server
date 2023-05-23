@@ -61,7 +61,8 @@ class ApplicationControllerTest {
     @BeforeEach
     void setup() {
         mockMvc = MockMvcBuilders
-                .standaloneSetup(new ApplicationsController(applicationService, profileService, listingService, webSocketController))
+                .standaloneSetup(new ApplicationsController(applicationService, profileService, listingService,
+                        webSocketController))
                 .build();
 
         ProfileEntity lister = new ProfileEntity();
@@ -122,6 +123,30 @@ class ApplicationControllerTest {
         Mockito.when(applicationService.getApplicationById(Mockito.any())).thenReturn(applicationEntity);
         ApplicationEntity entityWithNewState = applicationEntity;
         entityWithNewState.setState(ApplicationState.DECLINED);
+        Mockito.when(applicationService.updateApplication(Mockito.any(), Mockito.any())).thenReturn(entityWithNewState);
+
+        MockHttpServletRequestBuilder putRequest = put("/applications/" + applicationEntity.getId().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(applicationPutDTO));
+
+        mockMvc.perform(putRequest).andExpect(status().isNoContent());
+    }
+
+    @Test
+    void updateApplication_moveIn_success() throws Exception {
+        ApplicationEntity applicationEntity = new ApplicationEntity();
+        applicationEntity.setId(UUID.randomUUID());
+        applicationEntity.setApplicant(profileEntity);
+        applicationEntity.setListing(listingEntity);
+        applicationEntity.setCreationDate(LocalDateTime.now());
+        applicationEntity.setState(ApplicationState.ACCEPTED);
+
+        ApplicationPutDTO applicationPutDTO = new ApplicationPutDTO();
+        applicationPutDTO.setNewState(ApplicationState.MOVEIN);
+
+        Mockito.when(applicationService.getApplicationById(Mockito.any())).thenReturn(applicationEntity);
+        ApplicationEntity entityWithNewState = applicationEntity;
+        entityWithNewState.setState(ApplicationState.MOVEIN);
         Mockito.when(applicationService.updateApplication(Mockito.any(), Mockito.any())).thenReturn(entityWithNewState);
 
         MockHttpServletRequestBuilder putRequest = put("/applications/" + applicationEntity.getId().toString())
