@@ -26,14 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
+	@Autowired
 	private UserDetailsService jwtUserDetailsService;
-
-    // Setter method for jwtUserDetailsService
-    @Autowired
-    public void setJwtUserDetailsService(UserDetailsService jwtUserDetailsService) {
-        this.jwtUserDetailsService = jwtUserDetailsService;
-    }
-
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
