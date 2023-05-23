@@ -7,7 +7,9 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,10 +36,13 @@ public class ProfileService implements UserDetailsService {
 
     private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
+
+
     private ProfileLifespanService profileLifespanService;
 
+    @Autowired
     public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository,
-            ProfileLifespanService profileLifespanService,
+            @Lazy ProfileLifespanService profileLifespanService,
             PasswordEncoder passwordEncoder) {
         this.profileRepository = profileRepository;
         this.profileLifespanService = profileLifespanService;
