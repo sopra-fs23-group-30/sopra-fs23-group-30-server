@@ -49,7 +49,7 @@ public class InventoryItemService {
     }
 
     public List<InventoryItemEntity> getItemsByInventoryId(UUID inventoryId) {
-         return  inventoryItemRepository.findByInventoryId(inventoryId);  
+        return inventoryItemRepository.findByInventoryId(inventoryId);
     }
 
     public void deleteById(UUID inventoryItemId) {
