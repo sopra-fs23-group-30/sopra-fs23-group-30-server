@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,7 @@ public class ProfileLifespanService {
     private ProfileRepository profileRepository;
 
     public ProfileLifespanService(
-            @Qualifier("profileLifespanRepository") ProfileLifespanRepository profileLifespanRepository,
+            ProfileLifespanRepository profileLifespanRepository,
             ProfileRepository profileRepository) {
         this.profileLifespanRepository = profileLifespanRepository;
         this.profileRepository = profileRepository;
