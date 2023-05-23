@@ -42,8 +42,8 @@ public class ProfileService implements UserDetailsService {
 
     @Autowired
     public ProfileService(@Qualifier("profileRepository") ProfileRepository profileRepository,
-            @Lazy ProfileLifespanService profileLifespanService,
-            @Lazy PasswordEncoder passwordEncoder) {
+            ProfileLifespanService profileLifespanService,
+            PasswordEncoder passwordEncoder) {
         this.profileRepository = profileRepository;
         this.profileLifespanService = profileLifespanService;
         this.passwordEncoder = passwordEncoder;

@@ -26,15 +26,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-	@Autowired 
 	@Lazy
 	private UserDetailsService jwtUserDetailsService;
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
 
-	@Autowired EncoderConfig encoderConfig;
+	private EncoderConfig encoderConfig;
 
+	@Autowired
+	public void setJwtUserDetailsService(UserDetailsService jwtUserDetailsService) {
+		this.jwtUserDetailsService = jwtUserDetailsService;
+	}
+
+	@Autowired
+	public void setEncoderConfig(EncoderConfig encoderConfig) {
+		this.encoderConfig = encoderConfig;
+	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
-		httpSecurity.csrf().disable().cors().and()		
+		httpSecurity.csrf().disable().cors().and()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers("/").permitAll().and()
 				.authorizeRequests().antMatchers("/login").permitAll().and().authorizeRequests()
