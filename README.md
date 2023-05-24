@@ -13,8 +13,6 @@ Join us in revolutionizing the flat search experience for students in high-deman
 ```
 
 ## Technologies 
-- FrontEnd Framework [React](https://react.dev/).
-- FrontEnd Styling Framework [Tailwind CSS](https://tailwindcss.com/)
 - Backend Framework [JPA](https://tailwindcss.com/](https://spring.io/projects/spring-boot)
 - WebApp Hosting [Google Cloud](https://cloud.google.com/)
 - Database Hosting & Blob Storage [Microsoft Azure](https://azure.microsoft.com/)
@@ -32,12 +30,7 @@ Join us in revolutionizing the flat search experience for students in high-deman
 1. Check Out our [Client Repository](https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client.git) & [Server Repository](https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-server.git)
 2. Make sure you've installed [node.js](https://nodejs.org/en), [NugetPackageManager](https://www.npmjs.com/)
 3. Open both projects in your IDE of choice (e.g. [Visual Studio Code](https://code.visualstudio.com/))
-4. For FrontEnd run: 
-```cmd
-npm install
-npm run dev
-```
-5. For BackEnd run:
+4. For BackEnd run:
 ```bash
 ./gradlew build
 ./gradlew bootRun
@@ -51,29 +44,6 @@ Run the following code in the IDE in our BackEnd repository:
 
 -> we do not have external dependencies that are manually need to be started (Azure Services should run)
 -> Releases are only done by the original contributors listed in this document
-
-
-## Illustrations
-**Create Your Account**
-<img width="1040" alt="image" src="https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/assets/33682680/6be84758-919e-4ccd-bccc-c296737e077c">
-
-**Describe Yourself (Searcher Side)**
-<img width="1040" alt="image" src="https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/assets/91197246/c1a0ebc9-9408-4b3d-9c73-db285d393ae5">
-
-**Search for Listings (Searcher Side)**
-<img width="1040" alt="image" src="https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/assets/91197246/bc15819d-b678-44b8-b18c-6dcb1dcf09bb">
-
-**Apply With One Click (Searcher Side)**
-<img width="1040" alt="image" src="https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/assets/91197246/44e35887-0666-48cb-98d1-3dfc39776a25">
-
-**See the status of your applications**
-<img width="1040" alt="image" src="https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/assets/91197246/18699411-b953-4a00-95e5-5805e67ccb3a">
-
-**See Who Applied at one glance (Lister Side)**
-<img width="1040" alt="image" src="https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/assets/91197246/9751afdc-4f01-44c3-a4e5-2926fa38f329">
-
-**Work Simultaniously (Live) on your inventory list)**
-<img width="1040" alt="image" src="https://github.com/sopra-fs23-group-30/sopra-fs23-group-30-client/assets/91197246/c3a9f018-2dae-473e-85fc-bb264137a100">
 
 
 ## Roadmap
