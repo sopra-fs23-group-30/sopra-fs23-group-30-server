@@ -31,13 +31,13 @@ public class ListingEntity implements Serializable {
     @JoinColumn(name = "listerId", referencedColumnName = "id")
     private ProfileEntity lister;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "varchar(max)", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "varchar(max)", nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "varchar(max)", nullable = false)
     private String address;
 
     @Column(nullable = false)
@@ -52,7 +52,7 @@ public class ListingEntity implements Serializable {
     @Column(columnDefinition = "varchar(max)", nullable = false)
     private String imagesJson;
 
-    @Column(nullable = false)
+    @Column(columnDefinition = "varchar(max)", nullable = false)
     private String perfectFlatmateDescription;
 
     @Column(updatable = false)

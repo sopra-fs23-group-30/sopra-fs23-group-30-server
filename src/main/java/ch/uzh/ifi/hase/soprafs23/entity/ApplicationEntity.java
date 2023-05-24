@@ -34,7 +34,6 @@ public class ApplicationEntity implements Serializable {
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
 
-
     @ManyToOne( fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "listingId", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)

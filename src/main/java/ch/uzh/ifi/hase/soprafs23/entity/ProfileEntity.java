@@ -23,19 +23,19 @@ public class ProfileEntity implements Serializable {
   @Type(type = "org.hibernate.type.UUIDCharType")
   private UUID id;
 
-  @Column(nullable = false)
+  @Column(columnDefinition = "varchar(max)", nullable = false)
   private String firstname;
 
-  @Column(nullable = false)
+  @Column(columnDefinition = "varchar(max)", nullable = false)
   private String lastname;
 
-  @Column(nullable = false, unique = true)
+  @Column(columnDefinition = "varchar(max)", nullable = false, unique = true)
   private String email;
 
-  @Column(nullable = false)
+  @Column(columnDefinition = "varchar(max)", nullable = false)
   private String phoneNumber;
 
-  @Column(nullable = false)
+  @Column(columnDefinition = "varchar(max)", nullable = false)
   private String password;
 
   @Column(nullable = false)
@@ -47,16 +47,16 @@ public class ProfileEntity implements Serializable {
   @Column(nullable = true)
   private String gender;
 
-  @Column(nullable = true)
+  @Column(columnDefinition = "varchar(max)", nullable = true)
   private String biography;
 
-  @Column(nullable = true)
+  @Column(columnDefinition = "varchar(max)", nullable = true)
   private String futureFlatmatesDescription;
 
-  @Column(nullable = true)
+  @Column(columnDefinition = "varchar(max)", nullable = true)
   private String profilePictureURL;
 
-  @Column(nullable = true)
+  @Column(columnDefinition = "varchar(max)", nullable = true)
   private String documentURL;
 
   public UUID getId() {

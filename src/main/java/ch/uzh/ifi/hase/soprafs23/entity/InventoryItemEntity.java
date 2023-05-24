@@ -3,6 +3,7 @@ package ch.uzh.ifi.hase.soprafs23.entity;
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ public class InventoryItemEntity implements Serializable {
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID inventoryId;
 
+    @Column(columnDefinition = "varchar(max)", nullable = true)
     private String text;
 
     private Boolean isSearcher;

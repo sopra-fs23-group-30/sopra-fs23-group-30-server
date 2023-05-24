@@ -33,7 +33,7 @@ public class ProfileLifespanEntity implements Serializable {
   @Column(nullable = false)
   private Boolean isExperience;
 
-  @Column(nullable = false)
+  @Column(columnDefinition = "varchar(max)", nullable = false)
   private String text;
 
   @Column(nullable = false)
