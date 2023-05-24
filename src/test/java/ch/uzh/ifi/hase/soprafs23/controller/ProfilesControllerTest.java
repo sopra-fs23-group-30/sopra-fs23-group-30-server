@@ -10,9 +10,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -232,57 +236,18 @@ class ProfilesControllerTest {
 
                 mockMvc.perform(getRequest).andExpect(status().isOk());
         }
-
-        @Test
-        void updatedProfileByid_validInput_success() throws Exception {
-                MockHttpServletRequestBuilder putRequest = construct_updatedProfileByidRequest("test-image.jpg",
-                                "profile_document.pdf");
-
-                putRequest.with(new RequestPostProcessor() {
-                        @Override
-                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-                                request.setMethod("PUT");
-                                return request;
-                        }
-                });
-
-                mockMvc.perform(putRequest).andExpect(status().isNoContent());
+        
+        static Stream<? extends Arguments> providedArguments() {
+                return Stream.of(
+                        Arguments.of("test-image.jpg", "profile_document.pdf"),
+                        Arguments.of("deleted", "profile_document.pdf"),
+                        Arguments.of("test-image.jpg", "deleted")
+                );
         }
 
-        @Test
-        void updatedProfileByid_deleteImage_success() throws Exception {
-                MockHttpServletRequestBuilder putRequest = construct_updatedProfileByidRequest("deleted",
-                                "profile_document.pdf");
-
-                putRequest.with(new RequestPostProcessor() {
-                        @Override
-                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-                                request.setMethod("PUT");
-                                return request;
-                        }
-                });
-
-                mockMvc.perform(putRequest).andExpect(status().isNoContent());
-        }
-
-        @Test
-        void updatedProfileByid_deleteDocument_success() throws Exception {
-                MockHttpServletRequestBuilder putRequest = construct_updatedProfileByidRequest("test-image.jpg",
-                                "deleted");
-
-                putRequest.with(new RequestPostProcessor() {
-                        @Override
-                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
-                                request.setMethod("PUT");
-                                return request;
-                        }
-                });
-
-                mockMvc.perform(putRequest).andExpect(status().isNoContent());
-        }
-
-        private MockHttpServletRequestBuilder construct_updatedProfileByidRequest(String fileName,
-                        String documentName) {
+        @ParameterizedTest
+        @MethodSource("providedArguments")
+        void updatedProfileByid_parameterized_success(String fileName, String documentName) throws Exception {
                 String email = "test.example@gmail.com";
                 String password = "OneTwoThreeFour";
 
@@ -343,10 +308,20 @@ class ProfilesControllerTest {
                 Mockito.when(blobUploaderService.upload(Mockito.any(), Mockito.any(), Mockito.any()))
                                 .thenReturn("www.testURL.com");
 
-                return multipart("/profiles/" + id)
+                MockHttpServletRequestBuilder putRequest =  multipart("/profiles/" + id)
                                 .file(profileFile)
                                 .file(profileDocument)
                                 .file(body);
+
+                                putRequest.with(new RequestPostProcessor() {
+                                        @Override
+                                        public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
+                                                request.setMethod("PUT");
+                                                return request;
+                                        }
+                                });
+                
+                mockMvc.perform(putRequest).andExpect(status().isNoContent());
         }
 
         /**
