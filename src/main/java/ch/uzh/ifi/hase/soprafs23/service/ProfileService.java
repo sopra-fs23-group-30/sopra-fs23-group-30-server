@@ -105,15 +105,41 @@ public class ProfileService implements UserDetailsService {
     private void validateRegistration(ProfileEntity profileToBeCreated) {
         ProfileEntity profileByEmail = profileRepository.findByEmail(profileToBeCreated.getEmail());
 
+        String errorMessage = "";
+        boolean isRegistrationValid = true;
+
         if (profileByEmail != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "The provided e-mail is not unique. Therefore, the profile could not be registered!");
+            isRegistrationValid = false;
+            errorMessage += "The provided e-mail is not unique. ";
+        }
+        if(profileToBeCreated.getEmail() == null || profileToBeCreated.getEmail().isEmpty()) {
+            errorMessage += "The provided e-mail is empty. ";
         } else if (!isEmailFormatValid(profileToBeCreated.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "The provided e-mail is not valid. Therefore, the profile could not be registered!");
+            isRegistrationValid = false;
+            errorMessage += "The provided e-mail is not valid. ";
+        }
+        if(profileToBeCreated.getPhoneNumber() == null || profileToBeCreated.getPhoneNumber().isEmpty()) {
+            isRegistrationValid = false;
+            errorMessage += "The provided phone number is empty. ";
         } else if (!isPhoneNumberValid(profileToBeCreated.getPhoneNumber())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "The provided phone number is not valid. Therefore, the profile could not be registered!");
+            isRegistrationValid = false;
+            errorMessage += "The provided phone number is not valid. Please enter the phone number exactly in this format: +41 XX XXX XX XX. ";
+        }
+        if(profileToBeCreated.getFirstname() == null || profileToBeCreated.getFirstname().isEmpty()) {
+            isRegistrationValid = false;
+            errorMessage += "The provided firstname is empty. ";
+        }
+        if(profileToBeCreated.getLastname() == null || profileToBeCreated.getLastname().isEmpty()) {
+            isRegistrationValid = false;
+            errorMessage += "The provided lastname is empty. ";
+        }
+        if(profileToBeCreated.getPassword() == null || profileToBeCreated.getPassword().isEmpty()) {
+            isRegistrationValid = false;
+            errorMessage += "The provided password is empty. ";
+        }
+        if(!isRegistrationValid) {
+            errorMessage += "Therefore, the profile could not be created.";
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errorMessage);
         }
     }
 
